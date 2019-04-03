@@ -17,6 +17,12 @@ Hi.
 
 Bye.
 
+```{r}
+
+summary(cars)
+
+```
+
 See you soon! 
 
 Coming soon!!!
