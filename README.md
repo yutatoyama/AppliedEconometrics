@@ -6,7 +6,11 @@ This repo is maintained by Yuta Toyama.
 
 ## Lecture note
 
-[Lecture note](https://yutatoyama.github.io/Applied_Econometrics/) can be found here.
+* [Lecture note](https://yutatoyama.github.io/Applied_Econometrics/) can be found here.
+
+## Syllabus for Spring 2019
+* [Syllabus for Japanese class](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11020043Hd01201911020043Hd11&pLng=jp): Wednesday 2nd 
+* [Syllabus for English class](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11G400118d01201911G400118d11&pLng=jp): Thursday 2nd
 
 
 ## License
