@@ -4,6 +4,11 @@
 This is the git repo for applied econometrics course for undergraduate students at Waseda university. 
 This repo is maintained by Yuta Toyama. 
 
+## Lecture note
+
+[Lecture note](https://yutatoyama.github.io/Applied_Econometrics/) can be found here.
+
+
 ## License
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License 
 
