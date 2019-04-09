@@ -20,12 +20,12 @@ output:
     - `NA` is also considered logical.
 - Character
     - Examples: `"a"`, `"Statistics"`, `"1 plus 2."`
-<!-- >
+<!-- 
 - Integer
     - Examples: `1L`, `2L`, `42L`
 - Complex
     - Example: `4 + 2i`
-<--> 
+--> 
 
 ## Data Structures
 
