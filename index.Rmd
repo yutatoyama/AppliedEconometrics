@@ -8,13 +8,21 @@ output:
   bookdown::gitbook: default
 #  bookdown::pdf_book: default
   bookdown::pdf_book:
-    latex_engine: xelatex
+    latex_engine: pdflatex
 
 
 ---
 
-# Introduction
+# Preface
 
 Welcome to Applied Econometrics using R!
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
+
+## About this 
+
+This lecture note is maintained by Yuta Toyama.
+
+## Acknowledgement (as of April 10, 2019)
+
+- Chapter 2 and 3 are largely based on Applied Statistics with `R`. https://daviddalpiaz.github.io/appliedstats/
