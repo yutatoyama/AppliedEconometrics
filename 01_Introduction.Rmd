@@ -1,6 +1,47 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Introduction
+
+## Introduction of the course
+
+
+### What is econometrics?
+
+1. Estimating economic relationships
+    1. Demand curve $\log(Q_{t})= \alpha_0 + \alpha_1 P_t + \epsilon_t$
+    2. Production function $Y_{it}=A_{it}K_{it}^{\alpha}L_{it}^{\beta}$
+2. Testing economic theory
+    - Does adverse selection exists in insurance markets?
+    - Are consumers rational?
+3. Determine the effect of a given intervention (causal inference)
+    - What is the effect of increasing minimum wage on employment?
+    - Do mergers increase the output price?
+    - Does democracy cause economic growth? (a series of works by Acemoglu, Robinsohn, and their co-authors).
+    - Effects of going to private colleges on your future earnings.
+    - Note: Some questions may have underlying economic models, others may not. 
+4. Describe the data (prediction/forecasting)
+    - How does the distribution of wage look like? 
+    - Relationship between electricity consumption and temperature (possibly nonlinear).
+    - Related to machine learning (ML). 
+
+
+### Why we learn computation 
+
+- Conduct stastitical and empirical analysis using your own data set
+    - 
+
+```{r}
+
+summary(cars)
+
+```
 
 
 
-# Hello World
+See you soon! 
 
-## Test test
+Coming soon!!!

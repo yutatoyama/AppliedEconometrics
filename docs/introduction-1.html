@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>2 Hello World | Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="2 Hello World | Lecture Note for Applied Econometrics">
+  <title>2 Introduction | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="2 Introduction | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="2 Hello World | Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="2 Introduction | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Hello World | Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="2 Introduction | Lecture Note for Applied Econometrics" />
   
   
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="hello-world.html">
+<link rel="prev" href="index.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -99,11 +99,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1</b> Hello World</a><ul>
-<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html#test-test"><i class="fa fa-check"></i><b>1.1</b> Test test</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="hello-world-1.html"><a href="hello-world-1.html"><i class="fa fa-check"></i><b>2</b> Hello World</a><ul>
-<li class="chapter" data-level="2.1" data-path="hello-world-1.html"><a href="hello-world-1.html#test-test-1"><i class="fa fa-check"></i><b>2.1</b> Test test</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-1.html"><a href="introduction-1.html#what-is-econometrics"><i class="fa fa-check"></i><b>2.1</b> What is econometrics?</a></li>
 </ul></li>
 </ul>
 
@@ -122,11 +120,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hello-world-1" class="section level1">
-<h1><span class="header-section-number">2</span> Hello World</h1>
-<div id="test-test-1" class="section level2">
-<h2><span class="header-section-number">2.1</span> Test test</h2>
-<p>Hi.</p>
+<div id="introduction-1" class="section level1">
+<h1><span class="header-section-number">2</span> Introduction</h1>
+<div id="what-is-econometrics" class="section level2">
+<h2><span class="header-section-number">2.1</span> What is econometrics?</h2>
+<ol style="list-style-type: decimal">
+<li>Estimating economic relationships
+<ol style="list-style-type: decimal">
+<li>Demand curve <span class="math inline">\(\log(Q_{t})= \alpha_0 + \alpha_1 P_t + \epsilon_t\)</span></li>
+<li>Production function <span class="math inline">\(Y_{it}=A_{it}K_{it}^{\alpha}L_{it}^{\beta}\)</span></li>
+</ol></li>
+<li>Testing economic theory
+<ul>
+<li>Does adverse selection exists in insurance markets?</li>
+<li>Are consumers rational?</li>
+</ul></li>
+<li>Determine the effect of a given intervention (causal inference)
+<ul>
+<li>What is the effect of increasing minimum wage on employment?</li>
+<li>Do mergers increase the output price?</li>
+<li>Does democracy cause economic growth? (a series of works by Acemoglu, Robinsohn, and their co-authors).</li>
+<li>Effects of going to private colleges on your future earnings.</li>
+<li>Note: Some questions may have underlying economic models, others may not.</li>
+</ul></li>
+<li>Describe the data (prediction/forecasting)
+<ul>
+<li>How does the distribution of wage look like?</li>
+<li>Relationship between electricity consumption and temperature (possibly nonlinear).</li>
+<li>Related to machine learning (ML).</li>
+</ul></li>
+</ol>
 <p>Bye.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cars)</code></pre></div>
 <pre><code>##      speed           dist       
@@ -146,7 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="hello-world.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -184,7 +207,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
@@ -192,6 +215,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

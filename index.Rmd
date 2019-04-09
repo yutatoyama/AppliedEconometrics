@@ -1,31 +1,20 @@
 ---
 title: "Lecture Note for Applied Econometrics"
 author: "Yuta Toyama"
-date: 2.3.2013
+date: "Last updated: `r format(Sys.time(), '%Y/%m/%d')`"
 site: bookdown::bookdown_site
 documentclass: book
 output:
   bookdown::gitbook: default
-  bookdown::pdf_book: default
+#  bookdown::pdf_book: default
+  bookdown::pdf_book:
+    latex_engine: xelatex
+
 
 ---
 
-# Hello World
+# Introduction
 
-## Test test
-
-Hi.
-
-Bye.
-
-```{r}
-
-summary(cars)
-
-```
-
-See you soon! 
-
-Coming soon!!!
+Welcome to Applied Econometrics using R!
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->

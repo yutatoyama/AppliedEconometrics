@@ -1,17 +1,20 @@
-# Lecture Material for Applied Econometrics
+# (Under construction) Lecture Material for Applied Econometrics
 
 ## Introduction
 This is the git repo for applied econometrics course for undergraduate students at Waseda university. 
-This repo is maintained by Yuta Toyama. 
+This repo is maintained by [Yuta Toyama](https://sites.google.com/view/yuta-toyama/home). 
 
 ## Lecture note
 
-* [Lecture note](https://yutatoyama.github.io/Applied_Econometrics/) can be found here.
+* [Lecture note](https://yutatoyama.github.io/AppliedEconometrics/) can be found here.
 
-## Syllabus for Spring 2019
-* [Syllabus for Japanese class](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11020043Hd01201911020043Hd11&pLng=jp): Wednesday 2nd 
-* [Syllabus for English class](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11G400118d01201911G400118d11&pLng=jp): Thursday 2nd
-
+## Syllabus for Spring and Summer 2019
+* Japanese class: Wednesday 2nd
+    * [Online syllabus](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11020043Hd01201911020043Hd11&pLng=jp)
+    * [Detailed syllabus in PDF]()
+* English class: Thursday 2nd
+    * [Online syllabus](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11G400118d01201911G400118d11&pLng=jp)
+    * [Detailed Syllabus in PDF]()
 
 ## License
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License 
