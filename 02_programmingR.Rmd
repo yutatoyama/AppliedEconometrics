@@ -20,6 +20,7 @@ output:
     - `NA` is also considered logical.
 - Character
     - Examples: `"a"`, `"Statistics"`, `"1 plus 2."`
+
 <!-- 
 - Integer
     - Examples: `1L`, `2L`, `42L`
@@ -229,6 +230,12 @@ x[x > 3]
 x[x != 3]
 ```
 
+
+#### Short exercise 
+
+1. Create the vector $z = (1,2,1,2,1,2)$, which has the same length as $x$. 
+2. Pick up the elements of $x$ which corresponds to 1 in the vector $z$. 
+
 <!-- 
 ## More Vectorization
 
@@ -396,6 +403,19 @@ solve(Z) %*% Z
 diag(3)
 all.equal(solve(Z) %*% Z, diag(3))
 ```
+
+
+
+#### Exercise
+
+- Solve the following simultanoues equations using matrix calculation
+\[
+2x_1+3x_2	=10 \\
+5x_1+x_2	=20
+\]
+- Hint: You can write this as $Ax=y$ where A is the 2-times-2 matrix, x and y are vectors with the length of 2. 
+
+
 ### Getting information for matrix
 
 - `R` has a number of matrix specific functions for obtaining dimension and summary information.
