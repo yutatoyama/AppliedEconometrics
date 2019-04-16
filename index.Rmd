@@ -23,6 +23,11 @@ Welcome to Applied Econometrics using R!
 
 This lecture note is maintained by Yuta Toyama.
 
-## Acknowledgement (as of April 10, 2019)
+## Update: April 16, 2019
+* Update chapter 3 (basic programming)
+* Upload chapter 4 (Data frame)
+* Upload chapter 5 (Exercise 1)
 
-- Chapter 2 and 3 are largely based on Applied Statistics with `R`. https://daviddalpiaz.github.io/appliedstats/
+## Acknowledgement (as of April 16, 2019)
+
+- Chapter 2 through 4 are largely based on Applied Statistics with `R`. https://daviddalpiaz.github.io/appliedstats/

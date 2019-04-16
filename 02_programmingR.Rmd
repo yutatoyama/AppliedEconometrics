@@ -655,7 +655,11 @@ x
 
 ## Functions
 
-- To use a function, you simply type its name, followed by an open parenthesis, then specify values of its arguments, then finish with a closing parenthesis. 
+- To use a function, 
+    - you simply type its name, 
+    - followed by an open parenthesis, 
+    - then specify values of its arguments, 
+    - then finish with a closing parenthesis. 
 - An **argument** is a variable which is used in the body of the function. 
 
 ```{r, eval = FALSE}
@@ -664,17 +668,15 @@ function_name(arg1 = 10, arg2 = 20)
 ```
 
 - We can also write our own functions in `R`. 
-- For example, we often like to "standardize" variables, that is, subtracting the sample mean, and dividing by the sample standard deviation.
-
+- Example: "standardize" variables
 \[
 \frac{x - \bar{x}}{s}
 \]
 
-- In `R` we would write a function to do this. 
 - When writing a function, there are three thing you must do.
-  1. Give the function a name. Preferably something that is short, but descriptive.
-  2. Specify the arguments using `function()`
-  3. Write the body of the function within curly braces, `{}`.
+    1. Give the function a name. Preferably something that is short, but descriptive.
+    2. Specify the arguments using `function()`
+    3. Write the body of the function within curly braces, `{}`.
 
 ```{r}
 standardize = function(x) {
@@ -688,14 +690,14 @@ standardize = function(x) {
 - Here the name of the function is `standardize`, 
 - The function has a single argument `x` which is used in the body of function. 
 - Note that the output of the final line of the body is what is returned by the function. 
-- In this case the function returns the vector stored in the variable `result`.
 
 
 - Let's test our function
 - Take a random sample of size `n = 10` from a normal distribution with a mean of `2` and a standard deviation of `5`.
 
 ```{r}
-(test_sample = rnorm(n = 10, mean = 2, sd = 5))
+test_sample = rnorm(n = 10, mean = 2, sd = 5)
+test_sample
 standardize(x = test_sample)
 ```
 
@@ -739,7 +741,7 @@ power_of_num(power = 5)
 
 - To further illustrate a function with a default argument, we will write a function that calculates sample variance two ways.
 
-- By default, is will calculate the unbiased estimate of $\sigma^2$, which we will call $s^2$.
+- By default, the function will calculate the unbiased estimate of $\sigma^2$, which we will call $s^2$.
 
 \[
 s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
@@ -752,20 +754,26 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \]
 
 ```{r}
-get_var = function(x, biased = FALSE) {
-  n = length(x) - 1 * !biased
+get_var = function(x, unbiased = TRUE) {
+
+  if (unbiased == TRUE){
+    n = length(x) - 1
+  } else if (unbiased == FALSE){
+    n = length(x) 
+   }
+
   (1 / n) * sum((x - mean(x)) ^ 2)
 }
 ```
 
 ```{r}
 get_var(test_sample)
-get_var(test_sample, biased = FALSE)
+get_var(test_sample, unbiased = TRUE)
 var(test_sample)
 ```
 
 - We see the function is working as expected, and when returning the unbiased estimate it matches `R`'s built in function `var()`. Finally, let's examine the biased estimate of $\sigma^2$.
 
 ```{r}
-get_var(test_sample, biased = TRUE)
+get_var(test_sample, unbiased = FALSE)
 ```
