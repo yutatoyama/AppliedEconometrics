@@ -147,9 +147,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.4" data-path="data-frame.html"><a href="data-frame.html#subsetting-data"><i class="fa fa-check"></i><b>5.4</b> Subsetting data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>6</b> Exercise 1</a><ul>
-<li class="chapter" data-level="6.1" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>6.1</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>6.1.1</b> How to implement</a></li>
-<li class="chapter" data-level="6.1.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>6.1.2</b> What to submit</a></li>
+<li class="chapter" data-level="6.1" data-path="exercise-1.html"><a href="exercise-1.html#update-as-of-10am-april-18th"><i class="fa fa-check"></i><b>6.1</b> Update (as of 10am, April 18th)</a></li>
+<li class="chapter" data-level="6.2" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>6.2</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>6.2.1</b> How to implement</a></li>
+<li class="chapter" data-level="6.2.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>6.2.2</b> What to submit</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1303,11 +1304,11 @@ x</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_sample =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)
 test_sample</code></pre></div>
-<pre><code>##  [1]  8.576666 -8.026514  4.659938  3.176752  1.988782  3.993179 -1.912487
-##  [8]  5.172534  6.364942 -0.631410</code></pre>
+<pre><code>##  [1]  3.0281398  5.9398348 -1.1276948  1.4360693  3.2627880 -0.8903357
+##  [7]  6.5013067  8.4919878 -3.9639766  0.7837433</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  1.30299731 -2.16373590  0.48518694  0.17549867 -0.07254861
-##  [6]  0.34596810 -0.88713107  0.59221677  0.84119077 -0.61964297</code></pre>
+<pre><code>##  [1]  0.1761540  0.9282679 -0.8973310 -0.2350904  0.2367655 -0.8360193
+##  [7]  1.0733005  1.5875093 -1.6299651 -0.4035914</code></pre>
 <ul>
 <li>The same function can be written more simply.</li>
 </ul>
@@ -1364,16 +1365,16 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.93727</code></pre>
+<pre><code>## [1] 14.98734</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 22.93727</code></pre>
+<pre><code>## [1] 14.98734</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.93727</code></pre>
+<pre><code>## [1] 14.98734</code></pre>
 <ul>
 <li>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 20.64354</code></pre>
+<pre><code>## [1] 13.48861</code></pre>
 
 </div>
 </div>
@@ -1420,7 +1421,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "subsection"
 }

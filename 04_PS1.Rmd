@@ -6,6 +6,7 @@ output:
 
 # Exercise 1 
 
+
 * Due date: April 22th (Monday) 11pm
 
 **Rules for Problem Sets**
@@ -17,6 +18,12 @@ output:
     - `Rmarkdown` introduction in Japanese: https://kazutan.github.io/kazutanR/Rmd_intro.html
     - `Rmarkdown` introduction in English: https://rmarkdown.rstudio.com/articles_intro.html
 - I might cover `Rmarkdown` in the course later. 
+
+## Update (as of 10am, April 18th)
+
+- Please calculate the standard deviation, not the variance in your simulation. The parameter you set when drawing the random number is the mean $\mu$ and the standard deviation $\sigma$ in normal distribution.
+- Use `seq` function to create the sequence of the sample sizes that you use in the simulation.
+
 
 ## Question: Examine the law of large numbers through numerical simulations
 
@@ -34,6 +41,8 @@ Similary, the sample variance also converges to the population variance in proba
 \frac{1}{N}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}\overset{p}{\longrightarrow}V[X]
 \]
 
+**(Note on 4/18) This implies that the sample standard deviation also converges to the population standard deviation** 
+
 (This is an application of the law of large numbers, though it is a bit involved to prove this.)
 
 The goal of this problem set is to demonstrate these two properties through numerical simulations. 
@@ -42,7 +51,7 @@ Here is what we are going to do:
 1. For a certain sample size $N$, draw $N$ random numbers from the normal distribution with known mean and standard deviation.
 2. Calculate the sample mean and the sample variance for the "data" you draw. 
 3. Repeat this for many different sample sizes. 
-4. Examine to see whether the sample mean and the variance are getting closer to the true value, which you set when you draw the random numbers, as the sample size gets larger. 
+4. Examine to see whether the sample mean and **standard deviation** are getting closer to the true value, which you set when you draw the random numbers, as the sample size gets larger. 
 
 
 ### How to implement
@@ -82,11 +91,11 @@ I explain how to implement this in `R` step by step below.
 
 ```{r, eval = FALSE}
 
-samplesize_vec = c(100, 200, 300, 400)
+samplesize_vec = seq(from = 100, to = 100000, by = 100)
 
 
 ```
-Here, let's try 100 different sample sizes that ranges from 100 to 50000. (Hint: `rep` function)
+Here, let's try 100 different sample sizes that ranges from 100 to 100000.
 
 3. Prepare two vectors that contain the result in the `forloop` below. Since we are trying 100 different sample sizes, let's create a vector with the length of 100. 
 ```{r, eval=FALSE}
@@ -96,7 +105,7 @@ Here, let's try 100 different sample sizes that ranges from 100 to 50000. (Hint:
 # length( vector) returns the length of `vector`
 
 # result_mean = .... 
-# result_variance = ....
+# result_sd = ....
 
 ```
 
@@ -120,7 +129,7 @@ for (i in 1:length(samplesize_vec)){
   
   # Calculate the mean using the function you construct. 
   
-  # Calculate the variance using the function you construct.
+  # Calculate the standard deviation using the function you construct.
   
 }
 
