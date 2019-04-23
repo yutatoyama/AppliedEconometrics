@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>7 A Review of Statistics | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="7 A Review of Statistics | Lecture Note for Applied Econometrics">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="7 A Review of Statistics | Lecture Note for Applied Econometrics" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 A Review of Statistics | Lecture Note for Applied Econometrics" />
+  
+  
+  
+
+<meta name="author" content="Yuta Toyama">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="exercise-1.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-this"><i class="fa fa-check"></i><b>1.1</b> About this</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#update-april-23-2019"><i class="fa fa-check"></i><b>1.2</b> Update: April 23, 2019</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#update-april-16-2019"><i class="fa fa-check"></i><b>1.3</b> Update: April 16, 2019</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#acknowledgement-as-of-april-16-2019"><i class="fa fa-check"></i><b>1.4</b> Acknowledgement (as of April 16, 2019)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html"><i class="fa fa-check"></i><b>2</b> Introduction to the course</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#what-is-econometrics"><i class="fa fa-check"></i><b>2.1</b> What is econometrics?</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-need-to-learn-computation"><i class="fa fa-check"></i><b>2.2</b> Why do we need to learn computation</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-use-r"><i class="fa fa-check"></i><b>2.3</b> Why do we use R?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html"><i class="fa fa-check"></i><b>3</b> Introduction of <code>R</code> and <code>R studio</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-started"><i class="fa fa-check"></i><b>3.1</b> Getting Started</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#helps"><i class="fa fa-check"></i><b>3.2</b> Helps</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#quick-tour-of-rstudio"><i class="fa fa-check"></i><b>3.3</b> Quick tour of Rstudio</a></li>
+<li class="chapter" data-level="3.4" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#basic-calculations"><i class="fa fa-check"></i><b>3.4</b> Basic Calculations</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-help"><i class="fa fa-check"></i><b>3.5</b> Getting Help</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#installing-packages"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>4</b> Data and Programming</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>4.1</b> Data Types</a></li>
+<li class="chapter" data-level="4.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>4.2</b> Data Structures</a></li>
+<li class="chapter" data-level="4.3" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>4.3</b> Vectors</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics-of-vectors"><i class="fa fa-check"></i><b>4.3.1</b> Basics of vectors</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#useful-functions-for-creating-vectors"><i class="fa fa-check"></i><b>4.3.2</b> Useful functions for creating vectors</a></li>
+<li class="chapter" data-level="4.3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#subsetting"><i class="fa fa-check"></i><b>4.3.3</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>4.4</b> Vectorization</a></li>
+<li class="chapter" data-level="4.5" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical Operators</a></li>
+<li class="chapter" data-level="4.6" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>4.6</b> Matrices</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics"><i class="fa fa-check"></i><b>4.6.1</b> Basics</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-and-programming.html"><a href="data-and-programming.html#matrix-calculations"><i class="fa fa-check"></i><b>4.6.2</b> Matrix calculations</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-and-programming.html"><a href="data-and-programming.html#getting-information-for-matrix"><i class="fa fa-check"></i><b>4.6.3</b> Getting information for matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>4.7</b> Lists</a></li>
+<li class="chapter" data-level="4.8" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>4.8</b> Data Frames</a></li>
+<li class="chapter" data-level="4.9" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics--control-flow-"><i class="fa fa-check"></i><b>4.9</b> Programming Basics -Control flow-</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="data-and-programming.html"><a href="data-and-programming.html#ifelse"><i class="fa fa-check"></i><b>4.9.1</b> if/else</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="data-and-programming.html"><a href="data-and-programming.html#for-loop"><i class="fa fa-check"></i><b>4.10</b> <code>for</code> loop</a></li>
+<li class="chapter" data-level="4.11" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>4.11</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>5</b> Data frame</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-frame.html"><a href="data-frame.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="data-frame.html"><a href="data-frame.html#load-csv-file"><i class="fa fa-check"></i><b>5.2</b> Load csv file</a></li>
+<li class="chapter" data-level="5.3" data-path="data-frame.html"><a href="data-frame.html#examine-dataframe"><i class="fa fa-check"></i><b>5.3</b> Examine dataframe</a></li>
+<li class="chapter" data-level="5.4" data-path="data-frame.html"><a href="data-frame.html#subsetting-data"><i class="fa fa-check"></i><b>5.4</b> Subsetting data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>6</b> Exercise 1</a><ul>
+<li class="chapter" data-level="6.1" data-path="exercise-1.html"><a href="exercise-1.html#update-as-of-10am-april-18th"><i class="fa fa-check"></i><b>6.1</b> Update (as of 10am, April 18th)</a></li>
+<li class="chapter" data-level="6.2" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>6.2</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>6.2.1</b> How to implement</a></li>
+<li class="chapter" data-level="6.2.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>6.2.2</b> What to submit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html"><i class="fa fa-check"></i><b>7</b> A Review of Statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#estimation"><i class="fa fa-check"></i><b>7.1</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#properties-of-the-estimator"><i class="fa fa-check"></i><b>7.1.1</b> Properties of the estimator</a></li>
+<li class="chapter" data-level="7.1.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#sample-mean-bary-is-unbiased-and-consistent"><i class="fa fa-check"></i><b>7.1.2</b> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>7.2.1</b> Central limit theorem</a></li>
+<li class="chapter" data-level="7.2.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>7.2.2</b> Hypothesis testing</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lecture Note for Applied Econometrics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-review-of-statistics" class="section level1">
+<h1><span class="header-section-number">7</span> A Review of Statistics</h1>
+<p><strong>Acknowledgement:</strong> This chapter is largely based on chapter 3 of “Introduction to Econometrics with R”. <a href="https://www.econometrics-with-r.org/index.html" class="uri">https://www.econometrics-with-r.org/index.html</a></p>
+<p>The goal of this chapter is</p>
+<ol style="list-style-type: decimal">
+<li>Review of important concepts in statistics
+<ol style="list-style-type: decimal">
+<li>Estimation</li>
+<li>Hypothesis testing</li>
+</ol></li>
+<li>Review of tools from probability theory
+<ol style="list-style-type: decimal">
+<li>Law of large numbers</li>
+<li>Central limit theorem</li>
+</ol></li>
+</ol>
+<div id="estimation" class="section level2">
+<h2><span class="header-section-number">7.1</span> Estimation</h2>
+<ul>
+<li>Estimator: A mapping from the sample data drawn from an unknown population to a certain feature in the population</li>
+<li>Example: Consider hourly earnings of college graduates <span class="math inline">\(Y\)</span> .</li>
+<li>You want to estimate the mean of <span class="math inline">\(Y\)</span>, defined as <span class="math inline">\(E[Y] = \mu_y\)</span></li>
+<li>Draw a random sample of <span class="math inline">\(n\)</span> i.i.d. (identically and independently distributed) observations <span class="math inline">\({ Y_1, Y_2, \ldots, Y_N }\)</span></li>
+<li>How to estimate <span class="math inline">\(E[Y]\)</span> from the data?</li>
+<li>Idea 1: Sample mean <span class="math display">\[ 
+  \bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i, 
+\]</span></li>
+<li>Idea 2: Pick the first observation of the sample.</li>
+<li>Question: How can we say which is better?</li>
+</ul>
+<div id="properties-of-the-estimator" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Properties of the estimator</h3>
+<p>Consider the estimator <span class="math inline">\(\hat{\mu}_N\)</span> for the unknown parameter <span class="math inline">\(\mu\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Unbiasdeness: The expectation of the estimator is the same as the true parameter in the population. <span class="math display">\[
+  E[\hat{\mu}_N] = \mu
+\]</span></p></li>
+<li>Consistency: The estimator converges to the true parameter in probability. <span class="math display">\[
+\forall \epsilon &gt;0, \lim_{N \rightarrow \infty} \ Prob(|\hat{\mu}_{N}-\mu|&lt;\epsilon)=1
+\]</span>
+<ul>
+<li>Intuition: As the sample size gets larger, the estimator and the true parameter is close with probability one.</li>
+<li>Note: a bit different from the usual convergence of the sequence.</li>
+</ul></li>
+</ol>
+</div>
+<div id="sample-mean-bary-is-unbiased-and-consistent" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</h3>
+<ul>
+<li>Showing these two properties using mathmaetics is straightforward:
+<ul>
+<li>Unbiasedness: Take expectation.</li>
+<li>Consistency: Law of large numbers.</li>
+</ul></li>
+<li><p>Let’s examine these two properties using R.</p></li>
+<li>Step 1: Prepare a population. Here, I prepare income and age data from PUMS 5% sample of U.S. Census 2000.
+<ul>
+<li>PUMS: Public Use Microdata Sample</li>
+<li><a href="data_pums_2000.csv">Download the example data here as a .csv file.</a> Put this file in the same folder as your R script file.</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;readr&quot; package</span>
+<span class="kw">library</span>(readr)
+pums2000 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_pums_2000.csv&quot;</span>) </code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   AGE = col_double(),
+##   INCTOT = col_double()
+## )</code></pre>
+<ul>
+<li>We treat this dataset as <strong>population</strong>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop &lt;-<span class="st"> </span><span class="kw">as.vector</span>(pums2000<span class="op">$</span>INCTOT)</code></pre></div>
+<ul>
+<li><em>Population</em> mean and standard deviation</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop_mean =<span class="st"> </span><span class="kw">mean</span>(pop)
+pop_sd   =<span class="st"> </span><span class="kw">sd</span>(pop)
+
+<span class="co"># Average income in population</span>
+pop_mean</code></pre></div>
+<pre><code>## [1] 30165.47</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard deviation of income in population</span>
+pop_sd</code></pre></div>
+<pre><code>## [1] 38306.17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># income distribution in population</span>
+<span class="co"># Note that the unit is in USD.</span>
+<span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)
+<span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
+      <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
+      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<ul>
+<li>The distribution has a long tail.</li>
+<li>Let’s plot the distribution in <em>log</em> scale</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># `log` option specifies which axis is represented in log scale.</span>
+<span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
+      <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
+      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>,
+      <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<ul>
+<li>Let’s investigate how close the sample mean constucted from the random sample is to the true population mean.</li>
+<li>Step 1: Draw random sample<em>s</em> from this population and calculate <span class="math inline">\(\bar{Y}\)</span> for each sample.
+<ul>
+<li>Set the sample size <span class="math inline">\(N\)</span>.</li>
+</ul></li>
+<li>Step 2: Repeat 2000 times. You now have 2000 sample means.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number. This is needed to maintaine the reproducibility of the results.</span>
+<span class="kw">set.seed</span>(<span class="dv">123</span>)
+
+<span class="co"># draw random sample of 100 observations from the variable pop</span>
+test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)
+
+<span class="co"># Use loop to repeat 2000 times. </span>
+Nsamples =<span class="st"> </span><span class="dv">2000</span>
+result1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(Nsamples)
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Nsamples ){
+  
+  test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)
+  result1[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(test)
+  
+}
+
+<span class="co"># Simple approach</span>
+result1 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">10</span>)), <span class="dt">n =</span> Nsamples)
+result2 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)), <span class="dt">n =</span> Nsamples)
+result3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">500</span>)), <span class="dt">n =</span> Nsamples)
+
+<span class="co"># Create dataframe</span>
+
+result_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(  <span class="dt">Ybar10 =</span> result1, 
+                            <span class="dt">Ybar100 =</span> result2, 
+                            <span class="dt">Ybar500 =</span> result3)</code></pre></div>
+<ul>
+<li>Step 3: See the distribution of those 2000 sample means.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use reshape library</span>
+<span class="co"># install.packages(&quot;reshape&quot;)</span>
+<span class="kw">library</span>(<span class="st">&quot;reshape&quot;</span>)</code></pre></div>
+<pre><code>## Warning: package &#39;reshape&#39; was built under R version 3.5.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
+data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
+<pre><code>## Using  as id variables</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
+<span class="co"># The variable `fig` contains the information about the figure</span>
+fig &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample mean&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">colour =</span> variable ),   <span class="dt">stat =</span> <span class="st">&quot;density&quot;</span> ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span>pop_mean ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
+
+<span class="co"># Display the figure </span>
+<span class="kw">plot</span>(fig)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<ul>
+<li>Observation 1: Regardless of the sample size, the average of the sample means is close to the population mean. <strong>Unbiasdeness</strong></li>
+<li>Observation 2: As the sample size gets larger, the distribution is concentrated around the population mean. <strong>Consistency (law of large numbers)</strong></li>
+</ul>
+</div>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2><span class="header-section-number">7.2</span> Hypothesis Testing</h2>
+<div id="central-limit-theorem" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Central limit theorem</h3>
+<ul>
+<li><p>Cental limit theorem: Consider the i.i.d. sample of <span class="math inline">\(Y_1,\cdots, Y_N\)</span> drawn from the random variable <span class="math inline">\(Y\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The following <span class="math inline">\(Z\)</span> converges in distribution to the normal distribution. <span class="math display">\[
+Z = \frac{1}{\sqrt{N}} \sum_{i=1}^N \frac{Y_i - \mu}{\sigma } \overset{d}{\rightarrow}N(0,1)
+\]</span> In other words, <span class="math display">\[
+\lim_{N\rightarrow\infty}P\left(Z \leq z\right)=\Phi(z)
+\]</span></p></li>
+<li><p>The central limit theorem implies that if <span class="math inline">\(N\)</span> is large <strong>enough</strong>, we can <strong>approximate</strong> the distribution of <span class="math inline">\(\bar{Y}\)</span> by the standard normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 / N\)</span> <strong>regardless of the underlying distribution of <span class="math inline">\(Y\)</span>.</strong></p></li>
+<li><p>Let’s examine this property through simulation!!</p></li>
+<li>Use the same example as before. Remember that the underlying income distribution is clearly NOT normal.
+<ul>
+<li>Population mean <span class="math inline">\(\mu = 30165.4673315\)</span> and standard deviation <span class="math inline">\(\sigma = 38306.1712336\)</span>. Use these numbers.</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number</span>
+<span class="kw">set.seed</span>(<span class="dv">124</span>)
+
+<span class="co"># define function for simulation </span>
+f_simu_CLT =<span class="st"> </span><span class="cf">function</span>(Nsamples, samplesize, pop, pop_mean, pop_sd ){
+  
+  output =<span class="st"> </span><span class="kw">numeric</span>(Nsamples)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Nsamples ){
+    test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> samplesize)
+    output[i] &lt;-<span class="st"> </span>( <span class="kw">mean</span>(test) <span class="op">-</span><span class="st"> </span>pop_mean ) <span class="op">/</span><span class="st"> </span>(pop_sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(samplesize))
+  }
+  
+  <span class="kw">return</span>(output)
+
+}
+
+<span class="co"># Comment: You can do better without using forloop. Let me know if you come with a good idea.</span>
+
+<span class="co"># Run simulation </span>
+Nsamples =<span class="st"> </span><span class="dv">2000</span>
+result_CLT1 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">10</span>, pop, pop_mean, pop_sd )
+result_CLT2 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">100</span>, pop, pop_mean, pop_sd )
+result_CLT3 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">1000</span>, pop, pop_mean, pop_sd )
+
+<span class="co"># Random draw from standard normal distribution as comparison</span>
+result_stdnorm =<span class="st"> </span><span class="kw">rnorm</span>(Nsamples)
+
+<span class="co"># Create dataframe</span>
+result_CLT_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(  <span class="dt">Ybar_standardized_10 =</span> result_CLT1, 
+                            <span class="dt">Ybar_standardized_100 =</span> result_CLT2, 
+                            <span class="dt">Ybar_standardized_1000 =</span> result_CLT3, 
+                            <span class="dt">Standard_Normal =</span> result_stdnorm)
+
+<span class="co"># Note: If you wanna quicky plot the density, type `plot(density(result1))`. </span></code></pre></div>
+<ul>
+<li>Now take a look at the distribution.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
+data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_CLT_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
+<pre><code>## Using  as id variables</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
+fig &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample mean&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">colour =</span> variable ),   <span class="dt">stat =</span> <span class="st">&quot;density&quot;</span> ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span> ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
+
+<span class="kw">plot</span>(fig)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<ul>
+<li>As the sample size grows, the distribution of <span class="math inline">\(Z\)</span> converges to the standard normal distribution.</li>
+</ul>
+</div>
+<div id="hypothesis-testing-1" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> Hypothesis testing</h3>
+<p>To be added.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exercise-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
