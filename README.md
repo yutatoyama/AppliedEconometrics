@@ -1,4 +1,4 @@
-# (Under construction) Lecture Material for Applied Econometrics
+# Lecture Material for Applied Econometrics
 
 ## Introduction
 This is the git repo for applied econometrics course for undergraduate students at Waseda university. 
