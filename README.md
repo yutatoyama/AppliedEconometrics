@@ -11,10 +11,10 @@ This repo is maintained by [Yuta Toyama](https://sites.google.com/view/yuta-toya
 ## Syllabus for Spring and Summer 2019
 * Japanese class: Wednesday 2nd
     * [Online syllabus](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11020043Hd01201911020043Hd11&pLng=jp)
-    * [Detailed syllabus in PDF]()
+    * [Detailed syllabus in PDF](https://www.dropbox.com/s/i4yrkmmmpgok37e/Syllabus_JPN.pdf?dl=0) 
 * English class: Thursday 2nd
     * [Online syllabus](https://www.wsl.waseda.jp/syllabus/JAA104.php?pKey=11G400118d01201911G400118d11&pLng=jp)
-    * [Detailed Syllabus in PDF]()
+    * [Detailed Syllabus in PDF](https://www.dropbox.com/s/meqngrkl1xxg0gb/Syllabus_English_Thursday.pdf?dl=0)
 
 ## License
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License 
