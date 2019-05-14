@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>6 Exercise 1 | Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="6 Exercise 1 | Lecture Note for Applied Econometrics">
+  <title>8 Linear Regression 1: Theory | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="8 Linear Regression 1: Theory | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="6 Exercise 1 | Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="8 Linear Regression 1: Theory | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Exercise 1 | Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="8 Linear Regression 1: Theory | Lecture Note for Applied Econometrics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="data-frame.html">
-<link rel="next" href="a-review-of-statistics.html">
+<link rel="prev" href="a-review-of-statistics.html">
+<link rel="next" href="linear-regression-2-implementation-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -239,137 +239,376 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-1" class="section level1">
-<h1><span class="header-section-number">6</span> Exercise 1</h1>
+<div id="linear-regression-1-theory" class="section level1">
+<h1><span class="header-section-number">8</span> Linear Regression 1: Theory</h1>
+<div id="regression-framework" class="section level2">
+<h2><span class="header-section-number">8.1</span> Regression framework</h2>
 <ul>
-<li>Due date: April 22th (Monday) 11pm</li>
-</ul>
-<p><strong>Rules for Problem Sets</strong></p>
+<li>Let <span class="math inline">\(Y_i\)</span> be the dependent variable and <span class="math inline">\(X_{ik}\)</span> be k-th explanatory variable.
 <ul>
-<li>If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can use both Japanese and English to write your answer.</li>
-<li>Submit your solution through <code>CourseN@vi</code>.</li>
-<li>Submit both your answer and R script.</li>
-<li>Using <code>Rmarkdown</code> would be appreciated, though not mandatory.
-<ul>
-<li><code>Rmarkdown</code> introduction in Japanese: <a href="https://kazutan.github.io/kazutanR/Rmd_intro.html" class="uri">https://kazutan.github.io/kazutanR/Rmd_intro.html</a></li>
-<li><code>Rmarkdown</code> introduction in English: <a href="https://rmarkdown.rstudio.com/articles_intro.html" class="uri">https://rmarkdown.rstudio.com/articles_intro.html</a></li>
+<li>We have <span class="math inline">\(K\)</span> explantory variables (along with constant term)</li>
+<li><span class="math inline">\(i\)</span> is an index for observations. <span class="math inline">\(i = 1,\cdots, N\)</span>.</li>
+<li>Data (sample): <span class="math inline">\(\{ Y_i , X_{i1}, \ldots, X_{iK} \}_{i=1}^N\)</span></li>
 </ul></li>
-<li>I might cover <code>Rmarkdown</code> in the course later.</li>
-</ul>
-<div id="update-as-of-10am-april-18th" class="section level2">
-<h2><span class="header-section-number">6.1</span> Update (as of 10am, April 18th)</h2>
+<li><strong>Linear regression model</strong> is defined as
+<span class="math display">\[ Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} \]</span>
 <ul>
-<li>Please calculate the standard deviation, not the variance in your simulation. The parameter you set when drawing the random number is the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span> in normal distribution.</li>
-<li>Use <code>seq</code> function to create the sequence of the sample sizes that you use in the simulation.</li>
+<li><span class="math inline">\(\epsilon_i\)</span>: error term (unobserved)</li>
+<li><span class="math inline">\(\beta\)</span>: coefficients</li>
+</ul></li>
+<li><strong>Assumptions for Ordinaly Least Squares (OLS) estimation</strong>
+<ol style="list-style-type: decimal">
+<li>Random sample: <span class="math inline">\(\{ Y_i , X_{i1}, \ldots, X_{iK} \}\)</span> is i.i.d. drawn sample
+<ul>
+<li>i.i.d.: identically and independently distributed</li>
+</ul></li>
+<li><span class="math inline">\(\epsilon_i\)</span> has zero conditional mean
+<span class="math display">\[
+    E[ \epsilon_i | X_{i1}, \ldots, X_{iK}] = 0
+    \]</span></li>
+<li>Large outliers are unlikely: The random variable <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_{ik}\)</span> have finite fourth moments.</li>
+<li>No perfect multicollinearity: There is no linear relationship betwen explanatory variables.</li>
+</ol></li>
+<li>OLS estimators are the minimizers of the sum of squared residuals:
+<span class="math display">\[
+ \min_{\beta_0, \cdots, \beta_K} \frac{1}{N} \sum_{i=1}^N (Y_i - (\beta_0 + \beta_1 X_{i1} + \cdots + \beta_K X_{iK}))^2
+ \]</span></li>
+<li>Using matrix notation, we have the following analytical formula for the OLS estimator
+<span class="math display">\[
+  \hat{\beta} = (X&#39;X)^{-1} X&#39;Y
+  \]</span>
+where
+<span class="math display">\[
+\underbrace{X}_{N\times (K+1)}=\left(\begin{array}{cccc}
+1 &amp; X_{11} &amp; \cdots &amp; X_{1K}\\
+\vdots &amp; \vdots &amp;  &amp; \vdots\\
+1 &amp; X_{N1} &amp; \cdots &amp; X_{NK}
+\end{array}\right),\underbrace{Y}_{N\times 1}=\left(\begin{array}{c}
+Y_{1}\\
+\vdots\\
+Y_{N}
+\end{array}\right),\underbrace{\beta}_{(K+1)\times 1}=\left(\begin{array}{c}
+\beta_{0}\\
+\beta_{1}\\
+\vdots\\
+\beta_{K}
+\end{array}\right)            
+\]</span></li>
 </ul>
 </div>
-<div id="question-examine-the-law-of-large-numbers-through-numerical-simulations" class="section level2">
-<h2><span class="header-section-number">6.2</span> Question: Examine the law of large numbers through numerical simulations</h2>
-<p>Consider the random sample of <span class="math inline">\(\{x_{i}\}_{i=1}^{N}\)</span> drawn from the random variable <span class="math inline">\(X\)</span>. The law of large numbers implies that</p>
-<p><span class="math display">\[
-\frac{1}{N}\sum_{i=1}^{N}x_{i}\overset{p}{\longrightarrow}E[X]
-\]</span></p>
-<p>In other words, the sample mean converges to the population mean in probability as the sample size goes to infinity (i.e., <span class="math inline">\(N \rightarrow \infty\)</span>).</p>
-<p>Similary, the sample variance also converges to the population variance in probability</p>
-<p><span class="math display">\[
-\frac{1}{N}\sum_{i=1}^{N}(x_{i}-\bar{x})^{2}\overset{p}{\longrightarrow}V[X]
-\]</span></p>
-<p><strong>(Note on 4/18) This implies that the sample standard deviation also converges to the population standard deviation</strong></p>
-<p>(This is an application of the law of large numbers, though it is a bit involved to prove this.)</p>
-<p>The goal of this problem set is to demonstrate these two properties through numerical simulations.
-Here is what we are going to do:</p>
+<div id="theoretical-properties-of-ols-estimator" class="section level2">
+<h2><span class="header-section-number">8.2</span> Theoretical Properties of OLS estimator</h2>
+<ul>
+<li>We briefly review theoretical properties of OLS estimator.</li>
+</ul>
 <ol style="list-style-type: decimal">
-<li>For a certain sample size <span class="math inline">\(N\)</span>, draw <span class="math inline">\(N\)</span> random numbers from the normal distribution with known mean and standard deviation.</li>
-<li>Calculate the sample mean and the sample variance for the “data” you draw.</li>
-<li>Repeat this for many different sample sizes.</li>
-<li>Examine to see whether the sample mean and <strong>standard deviation</strong> are getting closer to the true value, which you set when you draw the random numbers, as the sample size gets larger.</li>
-</ol>
-<div id="how-to-implement" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> How to implement</h3>
-<p>I explain how to implement this in <code>R</code> step by step below.</p>
-<ol style="list-style-type: decimal">
-<li>Prepare a function like this
-<ol style="list-style-type: decimal">
-<li>There are two inputs: (1) a vector that contains the data <span class="math inline">\(\{x_{i}\}_{i=1}^{N}\)</span> and (2) the indicator of whether you calculate the mean or the standard deviation.</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r">fun_something =<span class="st"> </span><span class="cf">function</span>(firstinput, secondinput){
-
-  <span class="co"># Two inputs: firstinput, secondinput</span>
-  <span class="co"># One output: output</span>
-
-  <span class="co"># Do something.</span>
-
-  <span class="kw">return</span>(output)
-
-}</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Use if/else sentence. Example:</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># &quot;secondinput&quot; is the name of the input variable in your function</span>
-<span class="cf">if</span> ( secondinput <span class="op">==</span><span class="st"> &quot;mean&quot;</span>){
-  <span class="co"># calculate mean of the data (firstinput)</span>
-
-} <span class="cf">else</span> <span class="cf">if</span> ( secondinput <span class="op">==</span><span class="st"> &quot;sd&quot;</span>){
-  <span class="co"># Calculate standard deviation of the data (firstinput) </span>
-}    </code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Use <code>return</code> function to define the output of the function.</li>
-</ol></li>
-<li>Construct a vector that contains the sample size you want to use in your simulation. For example:</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r">samplesize_vec =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">100</span>, <span class="dt">to =</span> <span class="dv">100000</span>, <span class="dt">by =</span> <span class="dv">100</span>)</code></pre>
-<p>Here, let’s try 100 different sample sizes that ranges from 100 to 100000.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Prepare two vectors that contain the result in the <code>forloop</code> below. Since we are trying 100 different sample sizes, let’s create a vector with the length of 100.</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Hint:</span>
-<span class="co"># numeric(k) returns a zero vector with the length of k </span>
-<span class="co"># length( vector) returns the length of `vector`</span>
-
-<span class="co"># result_mean = .... </span>
-<span class="co"># result_sd = ....</span></code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>To create the random draw from the normal distribution, use below</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can choose the mean and the standard deviation as you like.</span>
-<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Use <code>forloop</code> to calculate both mean and the standard deviation for each sample size. For example:</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(samplesize_vec)){
-  
-  <span class="co"># Draw the random number</span>
-  
-  <span class="co"># Calculate the mean using the function you construct. </span>
-  
-  <span class="co"># Calculate the standard deviation using the function you construct.</span>
-  
-}</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Plot the result with <code>ggplot2</code>.
-<ol style="list-style-type: decimal">
-<li>Install the package if you have not done it yet.</li>
-<li>Load <code>ggplot2</code> by <code>library(ggplot2)</code></li>
-<li>Use <code>qplot</code> command to make a figure</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create plot and save it as the variable `plot1`</span>
-plot1 &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">x =</span> samplesize_vec, <span class="dt">y =</span> yourresult, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)
-
-<span class="co"># print &quot;plot1&quot;</span>
-<span class="kw">print</span>(plot1)
-
-<span class="co"># save the plot as PNG file</span>
-<span class="kw">ggsave</span>(<span class="dt">file =</span> <span class="st">&quot;filename.png&quot;</span>, <span class="dt">plot =</span> plot1)</code></pre></li>
+<li><strong>Unbiasdness</strong>: Conditional on the explantory variables <span class="math inline">\(X\)</span>, the expectation of the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> is equal to the true value <span class="math inline">\(\beta\)</span>.
+<span class="math display">\[
+ E[\hat{\beta} | X] = \beta
+ \]</span></li>
+<li><strong>Consistency</strong>: As the sample size <span class="math inline">\(N\)</span> goes to infinity, the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> converges to <span class="math inline">\(\beta\)</span> in probability
+<span class="math display">\[
+ \hat{\beta}\overset{p}{\longrightarrow}\beta
+ \]</span></li>
+<li><strong>Asymptotic normality</strong>: Will talk this <a href="#Statistical-Inference">later</a></li>
 </ol>
 </div>
-<div id="what-to-submit" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> What to submit</h3>
-<p>Your answer should include</p>
-<ol style="list-style-type: decimal">
-<li>The true value of mean and variance you choose in your simulation.</li>
-<li>The plot that describes the relationship between the sample mean (variance) and the sample size.</li>
-<li>Explain what the plots from your simulation indicate.</li>
-</ol>
+<div id="interpretation-and-specifications-of-linear-regression-model" class="section level2">
+<h2><span class="header-section-number">8.3</span> Interpretation and Specifications of Linear Regression Model</h2>
+<ul>
+<li>Remember that
+<span class="math display">\[ 
+  Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} 
+  \]</span></li>
+<li>The coefficient <span class="math inline">\(\beta_k\)</span> captures the effect of <span class="math inline">\(X_k\)</span> on <span class="math inline">\(Y\)</span> <strong>ceteris paribus (all things being equal)</strong></li>
+<li>Equivalently,
+<span class="math display">\[
+  \frac{\partial Y}{\partial X_k} = \beta_k 
+      \]</span>
+if <span class="math inline">\(X_k\)</span> is continuous random variable.</li>
+<li>If we can estimate <span class="math inline">\(\beta_k\)</span> without bias, we can obtain <strong>causal effect</strong> of <span class="math inline">\(X_k\)</span> on <span class="math inline">\(Y\)</span>.
+<ul>
+<li>This is of course very difficult task. We will see this more later.</li>
+</ul></li>
+<li>We will see several specifications that are frequently used in empirical analysis.
+1. Nonlinear term
+1. log specification
+2. dummy (categorical) variables
+3. interaction terms</li>
+</ul>
+<div id="nonlinear-term" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Nonlinear term</h3>
+<ul>
+<li>We can capture non-linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> in a linearly additive form
+<span class="math display">\[
+  Y_i = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 + \beta_3 X_i^3 + \epsilon_i
+  \]</span></li>
+<li>As long as the error term <span class="math inline">\(\epsilon_i\)</span> appreas in a additively linear way, we can estimate the coefficients by OLS.
+<ul>
+<li>Multicollinarity could be an issue if we have many polynomials (see later).</li>
+<li>You can use other non-linear variables such as <span class="math inline">\(log(x)\)</span> and <span class="math inline">\(\sqrt{x}\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="log-specification" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> log specification</h3>
+<ul>
+<li>We often use <code>log</code> variables in both dependent and independent variables.</li>
+<li>Using <code>log</code> changes the interpretation of the coefficient <span class="math inline">\(\beta\)</span> in terms of scales.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Dependent variable</th>
+<th align="left">Explanatory variable</th>
+<th align="left">interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y\)</span></td>
+<td align="left"><span class="math inline">\(X\)</span></td>
+<td align="left">1 unit increase in <span class="math inline">\(X\)</span> causes <span class="math inline">\(\beta\)</span> units change in Y</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\log Y\)</span></td>
+<td align="left"><span class="math inline">\(X\)</span></td>
+<td align="left">1 unit increase in <span class="math inline">\(X\)</span> causes <span class="math inline">\(100 \beta \%\)</span> incchangerease in <span class="math inline">\(Y\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(Y\)</span></td>
+<td align="left"><span class="math inline">\(\log X\)</span></td>
+<td align="left"><span class="math inline">\(1\%\)</span> increase in <span class="math inline">\(X\)</span> causes <span class="math inline">\(\beta / 100\)</span> unit change in <span class="math inline">\(Y\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\log Y\)</span></td>
+<td align="left"><span class="math inline">\(\log X\)</span></td>
+<td align="left"><span class="math inline">\(1\%\)</span> increase in <span class="math inline">\(X\)</span> causes <span class="math inline">\(\beta \%\)</span> change in <span class="math inline">\(Y\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dummy-variable" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Dummy variable</h3>
+<ul>
+<li>A dummy variable takes only 1 or 0. This is used to express qualititative information</li>
+<li>Example: Dummy variable for race
+<span class="math display">\[
+white_{i}=\begin{cases}
+1 &amp; if\ white\\
+0 &amp; otherwise
+\end{cases} 
+ \]</span></li>
+<li>The coefficient on a dummy variable captures the difference of the outcome <span class="math inline">\(Y\)</span> between categories</li>
+<li>Consider the linear regression
+<span class="math display">\[
+  Y_i = \beta_0 + \beta_1 white_i + \epsilon_i
+  \]</span>
+The coefficient <span class="math inline">\(\beta_1\)</span> captures the difference of <span class="math inline">\(Y\)</span> between white and non-white people.</li>
+</ul>
+</div>
+<div id="interaction-term" class="section level3">
+<h3><span class="header-section-number">8.3.4</span> Interaction term</h3>
+<ul>
+<li>You can add the interaction of two explanatory variables in the regression model.</li>
+<li>For example:
+<span class="math display">\[
+  wage_i = \beta_0 + \beta_1 educ_i + \beta_2 educ_i \times white_i + \epsilon_i
+  \]</span>
+where <span class="math inline">\(wage_i\)</span> is the earnings of person <span class="math inline">\(i\)</span> and <span class="math inline">\(educ_i\)</span> is the years of schooling for person <span class="math inline">\(i\)</span>.</li>
+<li>The effect of <span class="math inline">\(educ_i\)</span> is
+<span class="math display">\[
+  \frac{\partial wage_i}{\partial educ_i} = \beta_1 + \beta_2 white_i,
+\]</span></li>
+<li>This allows for heterogenous effects of education across races.</li>
+</ul>
+</div>
+</div>
+<div id="measures-of-fit" class="section level2">
+<h2><span class="header-section-number">8.4</span> Measures of Fit</h2>
+<ul>
+<li>We often use <span class="math inline">\(R^2\)</span> as a measure of the model fit.</li>
+<li>Denote <strong>the fitted value</strong> as <span class="math inline">\(\hat{y}_i\)</span>
+<span class="math display">\[
+ \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_K X_{iK}
+\]</span>
+<ul>
+<li>Also called prediction from the OLS regression.</li>
+</ul></li>
+<li><span class="math inline">\(R^2\)</span> is defined as
+<span class="math display">\[
+  R^2 = \frac{SSE}{TSS},
+  \]</span>
+where
+<span class="math display">\[ 
+   \  SSE = \sum_i (\hat{y}_i - \bar{y})^2, \ TSS = \sum_i (y_i - \bar{y})^2
+  \]</span></li>
+<li><span class="math inline">\(R^2\)</span> captures the fraction of the variation of <span class="math inline">\(Y\)</span> explained by the regression model.</li>
+<li>Adding variables always (weakly) increases <span class="math inline">\(R^2\)</span>.</li>
+<li>In a regression model with multiple explanatory variables, we often use <strong>adjusted</strong> <span class="math inline">\(R^2\)</span> that adjusts the number of explanatory variables
+<span class="math display">\[
+  \bar{R}^2 = 1 - \frac{N-1}{N-(K+1)} \frac{SSR}{TSS}
+\]</span>
+where
+<span class="math display">\[
+  SSR = \sum_i (\hat{y}_i - y_i)^2 (= \sum_i \hat{u}_i^2 ),
+  \]</span></li>
+</ul>
+</div>
+<div id="statistical-inference" class="section level2">
+<h2><span class="header-section-number">8.5</span> Statistical Inference</h2>
+<ul>
+<li>Notice that the OLS estimators are <strong>random variables</strong>. They depend on the data, which are random variables drawn from some population distribution.</li>
+<li>We can conduct statistical inferences regarding those OLS estimators:
+1. Hypothesis testing
+2. Constructing confidence interval</li>
+<li>I first explain the sampling distribution of the OLS estimators.</li>
+</ul>
+<div id="distribution-of-the-ols-estimators-based-on-asymptotic-theory" class="section level3">
+<h3><span class="header-section-number">8.5.1</span> Distribution of the OLS estimators based on asymptotic theory</h3>
+<ul>
+<li>Deriving the exact (finite-sample) distribution of the OLS estimators is very hard.
+<ul>
+<li>The OLS estimators depend on the data <span class="math inline">\(Y_i, X_i\)</span> in a complex way.</li>
+<li>We typically do not know the distribution of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.</li>
+</ul></li>
+<li>We rely on <strong>asymptotic</strong> argument. We approximate the sampling distribution of the OLS esimator based on the cental limit theorem.</li>
+<li>Under the OLS assumption, the OLS estimator has <strong>asymptotic normality</strong>
+<span class="math display">\[
+\sqrt{N}(\hat{\beta}-\beta)\overset{d}{\rightarrow}N\left(0,V \right)    
+  \]</span>
+where
+<span class="math display">\[
+  \underbrace{V}_{(K+1)\times(K+1)}
+   = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
+  \]</span>
+and
+<span class="math display">\[
+  \underbrace{\mathbf{x}_{i}}_{(K+1)\times1}=\left(\begin{array}{c}
+1\\
+X_{i1}\\
+\vdots\\
+X_{iK}
+\end{array}\right)
+  \]</span></li>
+<li>We can <strong>approximate</strong> the distribution of <span class="math inline">\(\hat{\beta}\)</span> by
+<span class="math display">\[
+  \hat{\beta} \sim N(\beta, V / N)
+  \]</span></li>
+<li>The above is joint distribution. Let <span class="math inline">\(V_{ij}\)</span> be the <span class="math inline">\((i,j)\)</span> element of the matrix <span class="math inline">\(V\)</span>.</li>
+<li>The individual coefficient <span class="math inline">\(\beta_k\)</span> follows
+<span class="math display">\[
+ \hat\beta_k \sim N(\beta_k, V_{kk} / N )
+\]</span></li>
+</ul>
+<div id="estimation-of-asymptotic-variance" class="section level4">
+<h4><span class="header-section-number">8.5.1.1</span> Estimation of Asymptotic Variance</h4>
+<ul>
+<li><span class="math inline">\(V\)</span> is an unknown object. Need to be estimated.</li>
+<li>Consider the estimator <span class="math inline">\(\hat{V}\)</span> for <span class="math inline">\(V\)</span> using sample analogues
+<span class="math display">\[
+  \hat{V}=\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\hat{\epsilon}_{i}^{2}\right)\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}
+\]</span>
+where <span class="math inline">\(\hat{\epsilon}_i = y_i - (\hat{\beta}_0 + \cdots + \hat{\beta}_K X_{iK})\)</span> is the residual.</li>
+<li>Technically speaking, <span class="math inline">\(\hat{V}\)</span> converges to <span class="math inline">\(V\)</span> in probability. (Proof is out of the scope of this course)</li>
+<li>We often use the (asymptotic) <strong>standard error</strong> <span class="math inline">\(SE(\hat{\beta_k}) = \sqrt{\hat{V}_{kk} / N }\)</span>.</li>
+<li>The standard error is an estimator for the standard deviation of the OLS estimator <span class="math inline">\(\hat{\beta_k}\)</span>.</li>
+</ul>
+</div>
+</div>
+<div id="hypothesis-testing-2" class="section level3">
+<h3><span class="header-section-number">8.5.2</span> Hypothesis testing</h3>
+<ul>
+<li>OLS estimator is the random variable.</li>
+<li>You might want to test a particular hypothesis regarding those coefficients.
+<ul>
+<li>Does x really affects y?</li>
+<li>Is the production technology the constant returns to scale?</li>
+</ul></li>
+<li><p>Here I explain how to conduct hypothesis testing.</p></li>
+<li>Step 1: Consider the null hypothesis <span class="math inline">\(H_{0}\)</span> and the alternative hypothesis <span class="math inline">\(H_{1}\)</span>
+<span class="math display">\[
+  H_{0}:\beta_{1}=k,H_{1}:\beta_{1}\neq k
+  \]</span>
+where <span class="math inline">\(k\)</span> is the known number you set by yourself.</li>
+<li><p>Step 2: Define <strong>t-statistic</strong> by
+<span class="math display">\[
+  t_{n}=\frac{\hat{\beta_1}-k}{SE(\hat{\beta_1})}
+  \]</span></p></li>
+<li>Step 3: We reject <span class="math inline">\(H_{0}\)</span> is at <span class="math inline">\(\alpha\)</span>-percent significance level if
+<span class="math display">\[|t_{n}|&gt;C_{\alpha/2} 
+\]</span>
+where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span> percentile of the standard normal distribution.
+<ul>
+<li>We say we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span> if the above does not hold.</li>
+<li>We often say <span class="math inline">\(\hat{\beta}\)</span> is statistically significant from <span class="math inline">\(k\)</span> at <span class="math inline">\(5\%\)</span> significance level if <span class="math inline">\(|t_{n}|&gt;1.96\)</span>.</li>
+</ul></li>
+</ul>
+<div id="caveats-on-hypothesis-testing" class="section level4">
+<h4><span class="header-section-number">8.5.2.1</span> Caveats on Hypothesis Testing</h4>
+<ul>
+<li>Arguing the statistical significance alone is not enough for argument in empirical analysis. Magnitude of the coefficient is also important.</li>
+<li>Case 1: Small but statistically significant coefficient.
+<ul>
+<li>As the sample size <span class="math inline">\(N\)</span> gets large, the <span class="math inline">\(SE\)</span> decreases.</li>
+</ul></li>
+<li>Case 2: Large but statistically insignificant coefficient.
+<ul>
+<li>You may not be able to estimate the effect precisely with the sample at your hand.</li>
+</ul></li>
+</ul>
+</div>
+<div id="f-test" class="section level4">
+<h4><span class="header-section-number">8.5.2.2</span> F test</h4>
+<ul>
+<li>We often test a composite hypothesis that involves multiple parameters such as
+<span class="math display">\[
+ H_{0}:\beta_{1} + \beta_2 = 0,\ H_{1}:\beta_{1} + \beta_2 \neq 0
+  \]</span></li>
+<li>We use <strong>F test</strong> in such a case (to be added).</li>
+</ul>
+</div>
+</div>
+<div id="confidence-interval" class="section level3">
+<h3><span class="header-section-number">8.5.3</span> Confidence interval</h3>
+<ul>
+<li>95% confidence interval
+<span class="math display">\[
+  CI_{n}  =\left\{ k:|\frac{\hat{\beta}_{1}-k}{SE(\hat{\beta}_{1})}|\leq1.96\right\} 
+  =\left[\hat{\beta}_{1}-1.96\times SE(\hat{\beta}_{1}),\hat{\beta_{1}}+1.96\times SE(\hat{\beta}_{1})\right]
+\]</span></li>
+<li>Interpretation: If you draw many samples (dataset) and construct the 95% CI for each sample, 95% of those CIs will include the true parameter.</li>
+<li>Wrong interpretation: The constructed CI contains the true parameter with 95%.
+<ul>
+<li>Notice that the population parameter is <strong>fixed</strong>, not random.</li>
+</ul></li>
+</ul>
+</div>
+<div id="homoskedasticity-vs-heteroskedasticity" class="section level3">
+<h3><span class="header-section-number">8.5.4</span> Homoskedasticity vs Heteroskedasticity</h3>
+<ul>
+<li>So far, we did not put any assumption on the variance of the error term <span class="math inline">\(\epsilon_i\)</span>.</li>
+<li>The error term <span class="math inline">\(\epsilon_{i}\)</span> has <strong>heteroskedasticity</strong> if <span class="math inline">\(Var(u_{i}|X_{i})\)</span> depends on <span class="math inline">\(X_{i}\)</span>.</li>
+<li>If not, we call <span class="math inline">\(\epsilon_{i}\)</span> has <strong>homoskedasticity</strong>.</li>
+<li>This has an important implication on the asymptotic variance.</li>
+<li>Remember the asymptotic variance
+<span class="math display">\[
+  \underbrace{V}_{(K+1)\times(K+1)}
+   = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
+  \]</span>
+Standard errors based on this is called <strong>heteroskedasticity robust standard errors</strong>/</li>
+<li>If homoskedasticity holds, then
+<span class="math display">\[
+  V = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}\sigma^{2}
+  \]</span>
+where <span class="math inline">\(\sigma^2 = V(\epsilon_i)\)</span>.</li>
+<li>In many statistical packages (including R and Stata), the standard errors for the OLS estimators are calcualted under homoskedasticity assumption as a default.</li>
+<li>However, if the error has heteroskedasticity, the standard error under homoskedasticity assumption will be <strong>underestimated</strong>.</li>
+<li>In OLS, <strong>we should always use heteroskedasticity robust standard error.</strong>
+<ul>
+<li>We will see how to fix this in R.</li>
+</ul></li>
+</ul>
 
 </div>
 </div>
@@ -379,8 +618,8 @@ plot1 &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="d
           </div>
         </div>
       </div>
-<a href="data-frame.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-review-of-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-review-of-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression-2-implementation-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

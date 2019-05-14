@@ -1,0 +1,295 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Linear Regression 2: Implementation in R
+
+## Implementation in R 
+
+
+### Preliminary: packages
+
+- We use the following packages:
+    - `AER` : 
+    - `dplyr` : data manipulation
+    - `stargazer` : output of regression results
+
+``` {r}
+
+# Install package if you have not done so 
+# install.packages("AER")
+# install.packages("dplyr")
+# install.packages("stargazer")
+# install.packages("lmtest")
+
+# load packages
+library("AER")
+library("dplyr")
+library("stargazer")
+library("lmtest")
+
+
+````
+
+### Empirical setting: Data from California School
+
+- Question: How does the student-teacher ratio affects test scores?
+- We use data from California school, which is included in `AER` package. 
+
+```{r}
+# load the the data set in the workspace
+data(CASchools)
+```
+
+- Use `class()` function to see `CASchools` is `data.frame` object.
+```{r}
+class(CASchools)
+```
+
+- We take 2 steps for the analysis.
+    - Step 1: Look at data (descriptive analysis) 
+    - Step 2: Run regression
+    
+### Step 1: Descriptive analysis
+
+- It is always important to grasp your data before running regression. 
+- `head()` function give you a first overview of the data.
+
+```{r}
+head(CASchools)
+
+```
+
+- Alternatively, you can use `browse()` to see the entire dataset in browser window.
+
+#### Create variables
+
+- Create several variables that are needed for the analysis.
+- We use `dplyr` for this purpose.
+
+```{r}
+CASchools %>% 
+  mutate( STR = students / teachers ) %>% 
+  mutate( score = (read + math) / 2 ) -> CASchools 
+
+```
+
+
+#### Descriptive statistics
+
+- There are several ways to show descriptive statistics
+- The standard one is to use `summary()` function
+
+```{r}
+summary(CASchools)
+
+```
+
+- This returns the desriptive statistics for all the variables in dataframe.
+- You can combine this with `dplyr::select` 
+
+```{r}
+CASchools %>% 
+  select(STR, score) %>%
+  summary()
+
+```
+
+- You can do a bit lengthly thing manually like this.
+
+```{r}
+# compute sample averages of STR and score
+avg_STR <- mean(CASchools$STR) 
+avg_score <- mean(CASchools$score)
+
+# compute sample standard deviations of STR and score
+sd_STR <- sd(CASchools$STR) 
+sd_score <- sd(CASchools$score)
+
+# set up a vector of percentiles and compute the quantiles 
+quantiles <- c(0.10, 0.25, 0.4, 0.5, 0.6, 0.75, 0.9)
+quant_STR <- quantile(CASchools$STR, quantiles)
+quant_score <- quantile(CASchools$score, quantiles)
+
+# gather everything in a data.frame 
+DistributionSummary <- data.frame(Average = c(avg_STR, avg_score), 
+                                  StandardDeviation = c(sd_STR, sd_score), 
+                                  quantile = rbind(quant_STR, quant_score))
+
+# print the summary to the console
+DistributionSummary
+```
+
+- My personal favorite is to use `stargazer` function.
+
+```{r}
+
+stargazer(CASchools, type = "text")
+
+```
+
+- You can choose summary statistics you want to report.
+
+```{r}
+
+CASchools %>% 
+  stargazer( type = "text", summary.stat = c("n", "p75", "sd") ) 
+
+```
+
+- See https://www.jakeruss.com/cheatsheets/stargazer/#the-default-summary-statistics-table for the details.
+- We will use `stargazer` to report regression results.
+
+
+#### Scatter plot
+
+- Let's see how test score and student-teacher-ratio is correlated. 
+
+```{r}
+
+plot(score ~ STR, 
+     data = CASchools,
+     main = "Scatterplot of TestScore and STR", 
+     xlab = "STR (X)",
+     ylab = "Test Score (Y)")
+
+
+```
+
+- Use `cor()` to compute the correlation between two numeric vectors.
+```{r}
+cor(CASchools$STR, CASchools$score)
+``` 
+
+### Step 2: Run regression
+
+#### Simple linear regression
+
+- We use `lm()` function to run linear regression
+- First, consider the simple linear regression 
+\[
+score_i = \beta_0 + \beta_1 size_i + \epsilon_i
+\]
+where $size_i$ is the class size (student-teacher-ratio).
+    - From now on we call student-teacher-ratio (STR) class size.
+- To run this regression, we use `lm`
+
+```{r}
+# First, we rename the variable `STR`
+CASchools %>% 
+  dplyr::rename( size = STR) -> CASchools
+
+# Run regression and save results in the varaiable `model1_summary`
+model1_summary <- lm( score ~ size, data = CASchools)
+
+# See the results
+summary(model1_summary)
+
+```
+
+- Interpretations
+    - An increase of one student per teacher leads to 2.2 point decrease in test scores. 
+    - p value is very small. The effect of the class size on test score is significant.
+        Note: Be careful. These standard errors are NOT heteroskedasiticity robust. We will come back to this point soon.
+    - $R^2 = 0.051$, implying that 5.1% of the variance of the dependent variable is explained by the model.
+    
+- You can add more variable in the regression (will see this soon)
+
+#### Correction of Robust standard error
+
+- We use `vcovHC()` function, a partof the package `sandwich`, to obtain the robust standard errors.
+    - The package `sandwich` is automatically loaded if you load `AER` package.
+
+```{r}
+
+# compute heteroskedasticity-robust standard errors
+vcov <- vcovHC(model1_summary, type = "HC1")
+
+# get standard error: the square root of the diagonal element in vcov
+robust_se <- sqrt(diag(vcov))
+robust_se
+
+```
+
+- Notice that robust standard errors are larger than the one we obtained from `lm`!
+- How to combine the robust standard errors with the original summary? Use `coeftest()` from the package `lmtest`
+
+```{r}
+
+# load `lmtest`
+library(lmtest)
+
+# Combine robust standard errors
+coeftest(model1_summary, vcov. = vcov)
+
+```
+
+#### Report by Stargazer
+
+- `stargazer` is useful to show the regression result. 
+
+```{r}
+
+# load
+library(stargazer)
+
+# Create output by stargazer
+stargazer::stargazer(model1_summary, type ="text")
+
+```
+
+- Use robust standard errors in stargazer output
+
+```{r}
+
+# Prepare robust standard errors in list
+rob_se <- list( sqrt(diag(vcovHC(model1_summary, type = "HC1") ) ) ) 
+
+# generate regression table. 
+
+stargazer( model1_summary, 
+           se = rob_se, 
+           type = "text")
+
+
+```
+
+
+#### Full results
+
+Taken from https://www.econometrics-with-r.org/7-6-analysis-of-the-test-score-data-set.html
+
+```{r}
+
+# load the stargazer library
+
+# estimate different model specifications
+spec1 <- lm(score ~ size, data = CASchools)
+spec2 <- lm(score ~ size + english, data = CASchools)
+spec3 <- lm(score ~ size + english + lunch, data = CASchools)
+spec4 <- lm(score ~ size + english + calworks, data = CASchools)
+spec5 <- lm(score ~ size + english + lunch + calworks, data = CASchools)
+
+# gather robust standard errors in a list
+rob_se <- list(sqrt(diag(vcovHC(spec1, type = "HC1"))),
+               sqrt(diag(vcovHC(spec2, type = "HC1"))),
+               sqrt(diag(vcovHC(spec3, type = "HC1"))),
+               sqrt(diag(vcovHC(spec4, type = "HC1"))),
+               sqrt(diag(vcovHC(spec5, type = "HC1"))))
+
+# generate a LaTeX table using stargazer
+stargazer(spec1, spec2, spec3, spec4, spec5,
+          se = rob_se,
+          digits = 3,
+          header = F,
+          column.labels = c("(I)", "(II)", "(III)", "(IV)", "(V)"),
+          type ="text", 
+          keep.stat = c("N", "adj.rsq"))
+
+```
+
+- The coefficient on the class size decreases as we add more explantory variables. Can you explain why? (Hint: omitted variable bias)
+
+

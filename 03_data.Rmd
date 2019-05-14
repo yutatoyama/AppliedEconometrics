@@ -54,8 +54,9 @@ dim(example_data)
 
 ```{r, message = FALSE, warning = FALSE}
 # install.packages("readr") 
-library(readr)
-example_data_from_csv = read_csv("example-data.csv")
+#library(readr)
+#example_data_from_csv = read_csv("example-data.csv")
+example_data_from_csv = read.csv("example-data.csv")
 ```
 
 - Note: This particular line of code assumes that the file `example_data.csv` exists in your current working directory.

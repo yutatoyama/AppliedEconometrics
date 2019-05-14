@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="exercise-1.html">
-
+<link rel="next" href="linear-regression-1-theory.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,41 +50,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -100,7 +126,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Applied Econometrics</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
@@ -168,6 +194,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>7.2.2</b> Hypothesis testing</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html"><i class="fa fa-check"></i><b>8</b> Linear Regression 1: Theory</a><ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#regression-framework"><i class="fa fa-check"></i><b>8.1</b> Regression framework</a></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#theoretical-properties-of-ols-estimator"><i class="fa fa-check"></i><b>8.2</b> Theoretical Properties of OLS estimator</a></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interpretation-and-specifications-of-linear-regression-model"><i class="fa fa-check"></i><b>8.3</b> Interpretation and Specifications of Linear Regression Model</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#nonlinear-term"><i class="fa fa-check"></i><b>8.3.1</b> Nonlinear term</a></li>
+<li class="chapter" data-level="8.3.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#log-specification"><i class="fa fa-check"></i><b>8.3.2</b> log specification</a></li>
+<li class="chapter" data-level="8.3.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#dummy-variable"><i class="fa fa-check"></i><b>8.3.3</b> Dummy variable</a></li>
+<li class="chapter" data-level="8.3.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interaction-term"><i class="fa fa-check"></i><b>8.3.4</b> Interaction term</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#measures-of-fit"><i class="fa fa-check"></i><b>8.4</b> Measures of Fit</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#statistical-inference"><i class="fa fa-check"></i><b>8.5</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#distribution-of-the-ols-estimators-based-on-asymptotic-theory"><i class="fa fa-check"></i><b>8.5.1</b> Distribution of the OLS estimators based on asymptotic theory</a></li>
+<li class="chapter" data-level="8.5.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#hypothesis-testing-2"><i class="fa fa-check"></i><b>8.5.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="8.5.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#confidence-interval"><i class="fa fa-check"></i><b>8.5.3</b> Confidence interval</a></li>
+<li class="chapter" data-level="8.5.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#homoskedasticity-vs-heteroskedasticity"><i class="fa fa-check"></i><b>8.5.4</b> Homoskedasticity vs Heteroskedasticity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html"><i class="fa fa-check"></i><b>9</b> Linear Regression 2: Implementation in R</a><ul>
+<li class="chapter" data-level="9.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#implementation-in-r"><i class="fa fa-check"></i><b>9.1</b> Implementation in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#preliminary-packages"><i class="fa fa-check"></i><b>9.1.1</b> Preliminary: packages</a></li>
+<li class="chapter" data-level="9.1.2" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#empirical-setting-data-from-california-school"><i class="fa fa-check"></i><b>9.1.2</b> Empirical setting: Data from California School</a></li>
+<li class="chapter" data-level="9.1.3" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-1-descriptive-analysis"><i class="fa fa-check"></i><b>9.1.3</b> Step 1: Descriptive analysis</a></li>
+<li class="chapter" data-level="9.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Run regression</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -212,8 +263,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>You want to estimate the mean of <span class="math inline">\(Y\)</span>, defined as <span class="math inline">\(E[Y] = \mu_y\)</span></li>
 <li>Draw a random sample of <span class="math inline">\(n\)</span> i.i.d. (identically and independently distributed) observations <span class="math inline">\({ Y_1, Y_2, \ldots, Y_N }\)</span></li>
 <li>How to estimate <span class="math inline">\(E[Y]\)</span> from the data?</li>
-<li>Idea 1: Sample mean <span class="math display">\[ 
-  \bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i, 
+<li>Idea 1: Sample mean
+<span class="math display">\[ 
+\bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i, 
 \]</span></li>
 <li>Idea 2: Pick the first observation of the sample.</li>
 <li>Question: How can we say which is better?</li>
@@ -222,10 +274,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">7.1.1</span> Properties of the estimator</h3>
 <p>Consider the estimator <span class="math inline">\(\hat{\mu}_N\)</span> for the unknown parameter <span class="math inline">\(\mu\)</span>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Unbiasdeness: The expectation of the estimator is the same as the true parameter in the population. <span class="math display">\[
+<li><p>Unbiasdeness: The expectation of the estimator is the same as the true parameter in the population.
+<span class="math display">\[
   E[\hat{\mu}_N] = \mu
 \]</span></p></li>
-<li>Consistency: The estimator converges to the true parameter in probability. <span class="math display">\[
+<li>Consistency: The estimator converges to the true parameter in probability.
+<span class="math display">\[
 \forall \epsilon &gt;0, \lim_{N \rightarrow \infty} \ Prob(|\hat{\mu}_{N}-\mu|&lt;\epsilon)=1
 \]</span>
 <ul>
@@ -249,9 +303,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="data_pums_2000.csv">Download the example data here as a .csv file.</a> Put this file in the same folder as your R script file.</li>
 </ul></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;readr&quot; package</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;readr&quot; package</span>
 <span class="kw">library</span>(readr)
-pums2000 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_pums_2000.csv&quot;</span>) </code></pre></div>
+pums2000 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_pums_2000.csv&quot;</span>) </code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   AGE = col_double(),
@@ -260,35 +314,35 @@ pums2000 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 <ul>
 <li>We treat this dataset as <strong>population</strong>.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop &lt;-<span class="st"> </span><span class="kw">as.vector</span>(pums2000<span class="op">$</span>INCTOT)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">pop &lt;-<span class="st"> </span><span class="kw">as.vector</span>(pums2000<span class="op">$</span>INCTOT)</code></pre>
 <ul>
 <li><em>Population</em> mean and standard deviation</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop_mean =<span class="st"> </span><span class="kw">mean</span>(pop)
+<pre class="sourceCode r"><code class="sourceCode r">pop_mean =<span class="st"> </span><span class="kw">mean</span>(pop)
 pop_sd   =<span class="st"> </span><span class="kw">sd</span>(pop)
 
 <span class="co"># Average income in population</span>
-pop_mean</code></pre></div>
+pop_mean</code></pre>
 <pre><code>## [1] 30165.47</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard deviation of income in population</span>
-pop_sd</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard deviation of income in population</span>
+pop_sd</code></pre>
 <pre><code>## [1] 38306.17</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># income distribution in population</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># income distribution in population</span>
 <span class="co"># Note that the unit is in USD.</span>
 <span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)
 <span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
       <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
-      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>)</code></pre></div>
+      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>)</code></pre>
 <p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <ul>
 <li>The distribution has a long tail.</li>
 <li>Let’s plot the distribution in <em>log</em> scale</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># `log` option specifies which axis is represented in log scale.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># `log` option specifies which axis is represented in log scale.</span>
 <span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
       <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
       <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>,
-      <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>)</code></pre></div>
+      <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>)</code></pre>
 <p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <ul>
 <li>Let’s investigate how close the sample mean constucted from the random sample is to the true population mean.</li>
@@ -298,7 +352,7 @@ pop_sd</code></pre></div>
 </ul></li>
 <li>Step 2: Repeat 2000 times. You now have 2000 sample means.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number. This is needed to maintaine the reproducibility of the results.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number. This is needed to maintaine the reproducibility of the results.</span>
 <span class="kw">set.seed</span>(<span class="dv">123</span>)
 
 <span class="co"># draw random sample of 100 observations from the variable pop</span>
@@ -324,18 +378,18 @@ result3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span cl
 
 result_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(  <span class="dt">Ybar10 =</span> result1, 
                             <span class="dt">Ybar100 =</span> result2, 
-                            <span class="dt">Ybar500 =</span> result3)</code></pre></div>
+                            <span class="dt">Ybar500 =</span> result3)</code></pre>
 <ul>
 <li>Step 3: See the distribution of those 2000 sample means.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use reshape library</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use reshape library</span>
 <span class="co"># install.packages(&quot;reshape&quot;)</span>
-<span class="kw">library</span>(<span class="st">&quot;reshape&quot;</span>)</code></pre></div>
-<pre><code>## Warning: package &#39;reshape&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
-data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
+<span class="kw">library</span>(<span class="st">&quot;reshape&quot;</span>)
+
+<span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
+data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre>
 <pre><code>## Using  as id variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
 <span class="co"># The variable `fig` contains the information about the figure</span>
 fig &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
@@ -344,7 +398,7 @@ fig &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span>pop_mean ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
 
 <span class="co"># Display the figure </span>
-<span class="kw">plot</span>(fig)</code></pre></div>
+<span class="kw">plot</span>(fig)</code></pre>
 <p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <ul>
 <li>Observation 1: Regardless of the sample size, the average of the sample means is close to the population mean. <strong>Unbiasdeness</strong></li>
@@ -357,19 +411,22 @@ fig &lt;-<span class="st"> </span>
 <div id="central-limit-theorem" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Central limit theorem</h3>
 <ul>
-<li><p>Cental limit theorem: Consider the i.i.d. sample of <span class="math inline">\(Y_1,\cdots, Y_N\)</span> drawn from the random variable <span class="math inline">\(Y\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The following <span class="math inline">\(Z\)</span> converges in distribution to the normal distribution. <span class="math display">\[
+<li><p>Cental limit theorem: Consider the i.i.d. sample of <span class="math inline">\(Y_1,\cdots, Y_N\)</span> drawn from the random variable <span class="math inline">\(Y\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The following <span class="math inline">\(Z\)</span> converges in distribution to the normal distribution.
+<span class="math display">\[
 Z = \frac{1}{\sqrt{N}} \sum_{i=1}^N \frac{Y_i - \mu}{\sigma } \overset{d}{\rightarrow}N(0,1)
-\]</span> In other words, <span class="math display">\[
+\]</span>
+In other words,
+<span class="math display">\[
 \lim_{N\rightarrow\infty}P\left(Z \leq z\right)=\Phi(z)
 \]</span></p></li>
 <li><p>The central limit theorem implies that if <span class="math inline">\(N\)</span> is large <strong>enough</strong>, we can <strong>approximate</strong> the distribution of <span class="math inline">\(\bar{Y}\)</span> by the standard normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 / N\)</span> <strong>regardless of the underlying distribution of <span class="math inline">\(Y\)</span>.</strong></p></li>
 <li><p>Let’s examine this property through simulation!!</p></li>
 <li>Use the same example as before. Remember that the underlying income distribution is clearly NOT normal.
 <ul>
-<li>Population mean <span class="math inline">\(\mu = 30165.4673315\)</span> and standard deviation <span class="math inline">\(\sigma = 38306.1712336\)</span>. Use these numbers.</li>
+<li>Population mean <span class="math inline">\(\mu = 3.0165467\times 10^{4}\)</span> and standard deviation <span class="math inline">\(\sigma = 3.8306171\times 10^{4}\)</span>. Use these numbers.</li>
 </ul></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number</span>
 <span class="kw">set.seed</span>(<span class="dv">124</span>)
 
 <span class="co"># define function for simulation </span>
@@ -402,21 +459,21 @@ result_CLT_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>
                             <span class="dt">Ybar_standardized_1000 =</span> result_CLT3, 
                             <span class="dt">Standard_Normal =</span> result_stdnorm)
 
-<span class="co"># Note: If you wanna quicky plot the density, type `plot(density(result1))`. </span></code></pre></div>
+<span class="co"># Note: If you wanna quicky plot the density, type `plot(density(result1))`. </span></code></pre>
 <ul>
 <li>Now take a look at the distribution.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
-data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_CLT_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
+data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_CLT_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre>
 <pre><code>## Using  as id variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
 fig &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample mean&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">colour =</span> variable ),   <span class="dt">stat =</span> <span class="st">&quot;density&quot;</span> ) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span> ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
 
-<span class="kw">plot</span>(fig)</code></pre></div>
+<span class="kw">plot</span>(fig)</code></pre>
 <p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <ul>
 <li>As the sample size grows, the distribution of <span class="math inline">\(Z\)</span> converges to the standard normal distribution.</li>
@@ -434,8 +491,8 @@ fig &lt;-<span class="st"> </span>
           </div>
         </div>
       </div>
-<a href="exercise-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="exercise-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression-1-theory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -465,14 +522,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/05_Statistics.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
 "text": null
 },
-"download": ["Econometrics_using_R.pdf", "Econometrics_using_R.epub"],
+"download": ["Econometrics_using_R.pdf"],
 "toc": {
 "collapse": "subsection"
 }
@@ -485,7 +542,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
