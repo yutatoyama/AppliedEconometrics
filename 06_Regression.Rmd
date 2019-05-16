@@ -241,14 +241,16 @@ where $k$ is the known number you set by yourself.
 \]
  where $C_{\alpha/2}$ is the $\alpha/2$ percentile of the standard normal distribution.
     - We say we **fail to reject** $H_0$ if the above does not hold.
-    - We often say $\hat{\beta}$ is statistically significant from $k$ at $5\%$ significance level if $|t_{n}|>1.96$. 
-
+    
 #### Caveats on Hypothesis Testing
-- Arguing the statistical significance alone is not enough for argument in empirical analysis. Magnitude of the coefficient is also important.
+- We often say $\hat{\beta}$ is **statistically significant** at $5\%$ level if $|t_{n}|>1.96$ when we set $k=0$. 
+- Arguing the statistical significance alone is not enough for argument in empirical analysis. 
+- Magnitude of the coefficient is also important.
 - Case 1: Small but statistically significant coefficient.
     - As the sample size $N$ gets large, the $SE$ decreases. 
 - Case 2: Large but statistically insignificant coefficient.
-    - You may not be able to estimate the effect precisely with the sample at your hand. 
+    - The variable might have an important (economically meaningful) effect. 
+    - But you may not be able to estimate the effect precisely with the sample at your hand. 
 
 #### F test
 
@@ -266,8 +268,6 @@ where $k$ is the known number you set by yourself.
 	=\left[\hat{\beta}_{1}-1.96\times SE(\hat{\beta}_{1}),\hat{\beta_{1}}+1.96\times SE(\hat{\beta}_{1})\right]
 \]
 - Interpretation: If you draw many samples (dataset) and construct the 95% CI for each sample, 95% of those CIs will include the true parameter.
-- Wrong interpretation: The constructed CI contains the true parameter with 95%. 
-    - Notice that the population parameter is **fixed**, not random.
 
 ### Homoskedasticity vs Heteroskedasticity
 

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>8 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="8 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics">
+  <title>9 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="9 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="8 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="9 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="9 Linear Regression 2: Implementation in R | Lecture Note for Applied Econometrics" />
   
   
   
@@ -139,83 +139,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#what-is-econometrics"><i class="fa fa-check"></i><b>2.1</b> What is econometrics?</a></li>
 <li class="chapter" data-level="2.2" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-need-to-learn-computation"><i class="fa fa-check"></i><b>2.2</b> Why do we need to learn computation</a></li>
 <li class="chapter" data-level="2.3" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-use-r"><i class="fa fa-check"></i><b>2.3</b> Why do we use R?</a></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#getting-started"><i class="fa fa-check"></i><b>2.4</b> Getting Started</a></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#helps"><i class="fa fa-check"></i><b>2.5</b> Helps</a></li>
-<li class="chapter" data-level="2.6" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#quick-tour-of-rstudio"><i class="fa fa-check"></i><b>2.6</b> Quick tour of Rstudio</a></li>
-<li class="chapter" data-level="2.7" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#basic-calculations"><i class="fa fa-check"></i><b>2.7</b> Basic Calculations</a></li>
-<li class="chapter" data-level="2.8" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#getting-help"><i class="fa fa-check"></i><b>2.8</b> Getting Help</a></li>
-<li class="chapter" data-level="2.9" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#installing-packages"><i class="fa fa-check"></i><b>2.9</b> Installing Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>3</b> Data and Programming</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>3.1</b> Data Types</a></li>
-<li class="chapter" data-level="3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>3.2</b> Data Structures</a></li>
-<li class="chapter" data-level="3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics-of-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Basics of vectors</a></li>
-<li class="chapter" data-level="3.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#useful-functions-for-creating-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Useful functions for creating vectors</a></li>
-<li class="chapter" data-level="3.3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#subsetting"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting</a></li>
+<li class="chapter" data-level="3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html"><i class="fa fa-check"></i><b>3</b> Introduction of <code>R</code> and <code>R studio</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-started"><i class="fa fa-check"></i><b>3.1</b> Getting Started</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#helps"><i class="fa fa-check"></i><b>3.2</b> Helps</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#quick-tour-of-rstudio"><i class="fa fa-check"></i><b>3.3</b> Quick tour of Rstudio</a></li>
+<li class="chapter" data-level="3.4" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#basic-calculations"><i class="fa fa-check"></i><b>3.4</b> Basic Calculations</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-help"><i class="fa fa-check"></i><b>3.5</b> Getting Help</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#installing-packages"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>3.4</b> Vectorization</a></li>
-<li class="chapter" data-level="3.5" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>3.5</b> Logical Operators</a></li>
-<li class="chapter" data-level="3.6" data-path="data-and-programming.html"><a href="data-and-programming.html#more-vectorization"><i class="fa fa-check"></i><b>3.6</b> More Vectorization</a></li>
-<li class="chapter" data-level="3.7" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>3.7</b> Matrices</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics"><i class="fa fa-check"></i><b>3.7.1</b> Basics</a></li>
-<li class="chapter" data-level="3.7.2" data-path="data-and-programming.html"><a href="data-and-programming.html#matrix-calculations"><i class="fa fa-check"></i><b>3.7.2</b> Matrix calculations</a></li>
-<li class="chapter" data-level="3.7.3" data-path="data-and-programming.html"><a href="data-and-programming.html#getting-information-for-matrix"><i class="fa fa-check"></i><b>3.7.3</b> Getting information for matrix</a></li>
+<li class="chapter" data-level="4" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>4</b> Data and Programming</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>4.1</b> Data Types</a></li>
+<li class="chapter" data-level="4.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>4.2</b> Data Structures</a></li>
+<li class="chapter" data-level="4.3" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>4.3</b> Vectors</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics-of-vectors"><i class="fa fa-check"></i><b>4.3.1</b> Basics of vectors</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#useful-functions-for-creating-vectors"><i class="fa fa-check"></i><b>4.3.2</b> Useful functions for creating vectors</a></li>
+<li class="chapter" data-level="4.3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#subsetting"><i class="fa fa-check"></i><b>4.3.3</b> Subsetting</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>3.8</b> Lists</a></li>
-<li class="chapter" data-level="3.9" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>3.9</b> Data Frames</a></li>
-<li class="chapter" data-level="3.10" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics--control-flow-"><i class="fa fa-check"></i><b>3.10</b> Programming Basics -Control flow-</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="data-and-programming.html"><a href="data-and-programming.html#ifelse"><i class="fa fa-check"></i><b>3.10.1</b> if/else</a></li>
+<li class="chapter" data-level="4.4" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>4.4</b> Vectorization</a></li>
+<li class="chapter" data-level="4.5" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical Operators</a></li>
+<li class="chapter" data-level="4.6" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>4.6</b> Matrices</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics"><i class="fa fa-check"></i><b>4.6.1</b> Basics</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-and-programming.html"><a href="data-and-programming.html#matrix-calculations"><i class="fa fa-check"></i><b>4.6.2</b> Matrix calculations</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-and-programming.html"><a href="data-and-programming.html#getting-information-for-matrix"><i class="fa fa-check"></i><b>4.6.3</b> Getting information for matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="data-and-programming.html"><a href="data-and-programming.html#for-loop"><i class="fa fa-check"></i><b>3.11</b> <code>for</code> loop</a></li>
-<li class="chapter" data-level="3.12" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>3.12</b> Functions</a></li>
+<li class="chapter" data-level="4.7" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>4.7</b> Lists</a></li>
+<li class="chapter" data-level="4.8" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>4.8</b> Data Frames</a></li>
+<li class="chapter" data-level="4.9" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics--control-flow-"><i class="fa fa-check"></i><b>4.9</b> Programming Basics -Control flow-</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="data-and-programming.html"><a href="data-and-programming.html#ifelse"><i class="fa fa-check"></i><b>4.9.1</b> if/else</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>4</b> Data frame</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-frame.html"><a href="data-frame.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="data-frame.html"><a href="data-frame.html#load-csv-file"><i class="fa fa-check"></i><b>4.2</b> Load csv file</a></li>
-<li class="chapter" data-level="4.3" data-path="data-frame.html"><a href="data-frame.html#examine-dataframe"><i class="fa fa-check"></i><b>4.3</b> Examine dataframe</a></li>
-<li class="chapter" data-level="4.4" data-path="data-frame.html"><a href="data-frame.html#subsetting-data"><i class="fa fa-check"></i><b>4.4</b> Subsetting data</a></li>
+<li class="chapter" data-level="4.10" data-path="data-and-programming.html"><a href="data-and-programming.html#for-loop"><i class="fa fa-check"></i><b>4.10</b> <code>for</code> loop</a></li>
+<li class="chapter" data-level="4.11" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>4.11</b> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>5</b> Exercise 1</a><ul>
-<li class="chapter" data-level="5.1" data-path="exercise-1.html"><a href="exercise-1.html#update-as-of-10am-april-18th"><i class="fa fa-check"></i><b>5.1</b> Update (as of 10am, April 18th)</a></li>
-<li class="chapter" data-level="5.2" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>5.2</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>5.2.1</b> How to implement</a></li>
-<li class="chapter" data-level="5.2.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>5.2.2</b> What to submit</a></li>
+<li class="chapter" data-level="5" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>5</b> Data frame</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-frame.html"><a href="data-frame.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="data-frame.html"><a href="data-frame.html#load-csv-file"><i class="fa fa-check"></i><b>5.2</b> Load csv file</a></li>
+<li class="chapter" data-level="5.3" data-path="data-frame.html"><a href="data-frame.html#examine-dataframe"><i class="fa fa-check"></i><b>5.3</b> Examine dataframe</a></li>
+<li class="chapter" data-level="5.4" data-path="data-frame.html"><a href="data-frame.html#subsetting-data"><i class="fa fa-check"></i><b>5.4</b> Subsetting data</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html"><i class="fa fa-check"></i><b>6</b> A Review of Statistics</a><ul>
-<li class="chapter" data-level="6.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#estimation"><i class="fa fa-check"></i><b>6.1</b> Estimation</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#properties-of-the-estimator"><i class="fa fa-check"></i><b>6.1.1</b> Properties of the estimator</a></li>
-<li class="chapter" data-level="6.1.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#sample-mean-bary-is-unbiased-and-consistent"><i class="fa fa-check"></i><b>6.1.2</b> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>6.2</b> Hypothesis Testing</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>6.2.1</b> Central limit theorem</a></li>
-<li class="chapter" data-level="6.2.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>6.2.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="6" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>6</b> Exercise 1</a><ul>
+<li class="chapter" data-level="6.1" data-path="exercise-1.html"><a href="exercise-1.html#update-as-of-10am-april-18th"><i class="fa fa-check"></i><b>6.1</b> Update (as of 10am, April 18th)</a></li>
+<li class="chapter" data-level="6.2" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>6.2</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>6.2.1</b> How to implement</a></li>
+<li class="chapter" data-level="6.2.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>6.2.2</b> What to submit</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html"><i class="fa fa-check"></i><b>7</b> Linear Regression 1: Theory</a><ul>
-<li class="chapter" data-level="7.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#regression-framework"><i class="fa fa-check"></i><b>7.1</b> Regression framework</a></li>
-<li class="chapter" data-level="7.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#theoretical-properties-of-ols-estimator"><i class="fa fa-check"></i><b>7.2</b> Theoretical Properties of OLS estimator</a></li>
-<li class="chapter" data-level="7.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interpretation-and-specifications-of-linear-regression-model"><i class="fa fa-check"></i><b>7.3</b> Interpretation and Specifications of Linear Regression Model</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#nonlinear-term"><i class="fa fa-check"></i><b>7.3.1</b> Nonlinear term</a></li>
-<li class="chapter" data-level="7.3.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#log-specification"><i class="fa fa-check"></i><b>7.3.2</b> log specification</a></li>
-<li class="chapter" data-level="7.3.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#dummy-variable"><i class="fa fa-check"></i><b>7.3.3</b> Dummy variable</a></li>
-<li class="chapter" data-level="7.3.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interaction-term"><i class="fa fa-check"></i><b>7.3.4</b> Interaction term</a></li>
+<li class="chapter" data-level="7" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html"><i class="fa fa-check"></i><b>7</b> A Review of Statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#estimation"><i class="fa fa-check"></i><b>7.1</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#properties-of-the-estimator"><i class="fa fa-check"></i><b>7.1.1</b> Properties of the estimator</a></li>
+<li class="chapter" data-level="7.1.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#sample-mean-bary-is-unbiased-and-consistent"><i class="fa fa-check"></i><b>7.1.2</b> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#measures-of-fit"><i class="fa fa-check"></i><b>7.4</b> Measures of Fit</a></li>
-<li class="chapter" data-level="7.5" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#statistical-inference"><i class="fa fa-check"></i><b>7.5</b> Statistical Inference</a><ul>
-<li class="chapter" data-level="7.5.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#distribution-of-the-ols-estimators-based-on-asymptotic-theory"><i class="fa fa-check"></i><b>7.5.1</b> Distribution of the OLS estimators based on asymptotic theory</a></li>
-<li class="chapter" data-level="7.5.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#hypothesis-testing-2"><i class="fa fa-check"></i><b>7.5.2</b> Hypothesis testing</a></li>
-<li class="chapter" data-level="7.5.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#confidence-interval"><i class="fa fa-check"></i><b>7.5.3</b> Confidence interval</a></li>
-<li class="chapter" data-level="7.5.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#homoskedasticity-vs-heteroskedasticity"><i class="fa fa-check"></i><b>7.5.4</b> Homoskedasticity vs Heteroskedasticity</a></li>
+<li class="chapter" data-level="7.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>7.2.1</b> Central limit theorem</a></li>
+<li class="chapter" data-level="7.2.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>7.2.2</b> Hypothesis testing</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html"><i class="fa fa-check"></i><b>8</b> Linear Regression 2: Implementation in R</a><ul>
-<li class="chapter" data-level="8.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#implementation-in-r"><i class="fa fa-check"></i><b>8.1</b> Implementation in R</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#preliminary-packages"><i class="fa fa-check"></i><b>8.1.1</b> Preliminary: packages</a></li>
-<li class="chapter" data-level="8.1.2" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#empirical-setting-data-from-california-school"><i class="fa fa-check"></i><b>8.1.2</b> Empirical setting: Data from California School</a></li>
-<li class="chapter" data-level="8.1.3" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-1-descriptive-analysis"><i class="fa fa-check"></i><b>8.1.3</b> Step 1: Descriptive analysis</a></li>
-<li class="chapter" data-level="8.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>8.1.4</b> Step 2: Run regression</a></li>
+<li class="chapter" data-level="8" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html"><i class="fa fa-check"></i><b>8</b> Linear Regression 1: Theory</a><ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#regression-framework"><i class="fa fa-check"></i><b>8.1</b> Regression framework</a></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#theoretical-properties-of-ols-estimator"><i class="fa fa-check"></i><b>8.2</b> Theoretical Properties of OLS estimator</a></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interpretation-and-specifications-of-linear-regression-model"><i class="fa fa-check"></i><b>8.3</b> Interpretation and Specifications of Linear Regression Model</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#nonlinear-term"><i class="fa fa-check"></i><b>8.3.1</b> Nonlinear term</a></li>
+<li class="chapter" data-level="8.3.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#log-specification"><i class="fa fa-check"></i><b>8.3.2</b> log specification</a></li>
+<li class="chapter" data-level="8.3.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#dummy-variable"><i class="fa fa-check"></i><b>8.3.3</b> Dummy variable</a></li>
+<li class="chapter" data-level="8.3.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interaction-term"><i class="fa fa-check"></i><b>8.3.4</b> Interaction term</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#measures-of-fit"><i class="fa fa-check"></i><b>8.4</b> Measures of Fit</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#statistical-inference"><i class="fa fa-check"></i><b>8.5</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#distribution-of-the-ols-estimators-based-on-asymptotic-theory"><i class="fa fa-check"></i><b>8.5.1</b> Distribution of the OLS estimators based on asymptotic theory</a></li>
+<li class="chapter" data-level="8.5.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#hypothesis-testing-2"><i class="fa fa-check"></i><b>8.5.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="8.5.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#confidence-interval"><i class="fa fa-check"></i><b>8.5.3</b> Confidence interval</a></li>
+<li class="chapter" data-level="8.5.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#homoskedasticity-vs-heteroskedasticity"><i class="fa fa-check"></i><b>8.5.4</b> Homoskedasticity vs Heteroskedasticity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html"><i class="fa fa-check"></i><b>9</b> Linear Regression 2: Implementation in R</a><ul>
+<li class="chapter" data-level="9.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#implementation-in-r"><i class="fa fa-check"></i><b>9.1</b> Implementation in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#preliminary-packages"><i class="fa fa-check"></i><b>9.1.1</b> Preliminary: packages</a></li>
+<li class="chapter" data-level="9.1.2" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#empirical-setting-data-from-california-school"><i class="fa fa-check"></i><b>9.1.2</b> Empirical setting: Data from California School</a></li>
+<li class="chapter" data-level="9.1.3" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-1-descriptive-analysis"><i class="fa fa-check"></i><b>9.1.3</b> Step 1: Descriptive analysis</a></li>
+<li class="chapter" data-level="9.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Run regression</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -239,11 +240,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="linear-regression-2-implementation-in-r" class="section level1">
-<h1><span class="header-section-number">8</span> Linear Regression 2: Implementation in R</h1>
+<h1><span class="header-section-number">9</span> Linear Regression 2: Implementation in R</h1>
 <div id="implementation-in-r" class="section level2">
-<h2><span class="header-section-number">8.1</span> Implementation in R</h2>
+<h2><span class="header-section-number">9.1</span> Implementation in R</h2>
 <div id="preliminary-packages" class="section level3">
-<h3><span class="header-section-number">8.1.1</span> Preliminary: packages</h3>
+<h3><span class="header-section-number">9.1.1</span> Preliminary: packages</h3>
 <ul>
 <li>We use the following packages:
 <ul>
@@ -277,6 +278,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:car&#39;:
 ## 
 ##     recode</code></pre>
+<pre><code>## The following object is masked from &#39;package:reshape&#39;:
+## 
+##     rename</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     filter, lag</code></pre>
@@ -291,10 +295,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;lmtest&quot;</span>)</code></pre>
 </div>
 <div id="empirical-setting-data-from-california-school" class="section level3">
-<h3><span class="header-section-number">8.1.2</span> Empirical setting: Data from California School</h3>
+<h3><span class="header-section-number">9.1.2</span> Empirical setting: Data from California School</h3>
 <ul>
 <li>Question: How does the student-teacher ratio affects test scores?</li>
-<li>We use data from California school, which is included in <code>AER</code> package.</li>
+<li>We use data from California school, which is included in <code>AER</code> package.
+<ul>
+<li>See here for the details: <a href="https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/CASchools" class="uri">https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/CASchools</a></li>
+</ul></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the the data set in the workspace</span>
 <span class="kw">data</span>(CASchools)</code></pre>
@@ -312,7 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="step-1-descriptive-analysis" class="section level3">
-<h3><span class="header-section-number">8.1.3</span> Step 1: Descriptive analysis</h3>
+<h3><span class="header-section-number">9.1.3</span> Step 1: Descriptive analysis</h3>
 <ul>
 <li>It is always important to grasp your data before running regression.</li>
 <li><code>head()</code> function give you a first overview of the data.</li>
@@ -343,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Alternatively, you can use <code>browse()</code> to see the entire dataset in browser window.</li>
 </ul>
 <div id="create-variables" class="section level4">
-<h4><span class="header-section-number">8.1.3.1</span> Create variables</h4>
+<h4><span class="header-section-number">9.1.3.1</span> Create variables</h4>
 <ul>
 <li>Create several variables that are needed for the analysis.</li>
 <li>We use <code>dplyr</code> for this purpose.</li>
@@ -353,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">mutate</span>( <span class="dt">score =</span> (read <span class="op">+</span><span class="st"> </span>math) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> ) -&gt;<span class="st"> </span>CASchools </code></pre>
 </div>
 <div id="descriptive-statistics" class="section level4">
-<h4><span class="header-section-number">8.1.3.2</span> Descriptive statistics</h4>
+<h4><span class="header-section-number">9.1.3.2</span> Descriptive statistics</h4>
 <ul>
 <li>There are several ways to show descriptive statistics</li>
 <li>The standard one is to use <code>summary()</code> function</li>
@@ -486,7 +493,7 @@ DistributionSummary</code></pre>
 </ul>
 </div>
 <div id="scatter-plot" class="section level4">
-<h4><span class="header-section-number">8.1.3.3</span> Scatter plot</h4>
+<h4><span class="header-section-number">9.1.3.3</span> Scatter plot</h4>
 <ul>
 <li>Let’s see how test score and student-teacher-ratio is correlated.</li>
 </ul>
@@ -495,7 +502,7 @@ DistributionSummary</code></pre>
      <span class="dt">main =</span> <span class="st">&quot;Scatterplot of TestScore and STR&quot;</span>, 
      <span class="dt">xlab =</span> <span class="st">&quot;STR (X)&quot;</span>,
      <span class="dt">ylab =</span> <span class="st">&quot;Test Score (Y)&quot;</span>)</code></pre>
-<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <ul>
 <li>Use <code>cor()</code> to compute the correlation between two numeric vectors.</li>
 </ul>
@@ -504,9 +511,9 @@ DistributionSummary</code></pre>
 </div>
 </div>
 <div id="step-2-run-regression" class="section level3">
-<h3><span class="header-section-number">8.1.4</span> Step 2: Run regression</h3>
+<h3><span class="header-section-number">9.1.4</span> Step 2: Run regression</h3>
 <div id="simple-linear-regression" class="section level4">
-<h4><span class="header-section-number">8.1.4.1</span> Simple linear regression</h4>
+<h4><span class="header-section-number">9.1.4.1</span> Simple linear regression</h4>
 <ul>
 <li>We use <code>lm()</code> function to run linear regression</li>
 <li>First, consider the simple linear regression
@@ -558,7 +565,7 @@ Note: Be careful. These standard errors are NOT heteroskedasiticity robust. We w
 </ul>
 </div>
 <div id="correction-of-robust-standard-error" class="section level4">
-<h4><span class="header-section-number">8.1.4.2</span> Correction of Robust standard error</h4>
+<h4><span class="header-section-number">9.1.4.2</span> Correction of Robust standard error</h4>
 <ul>
 <li>We use <code>vcovHC()</code> function, a partof the package <code>sandwich</code>, to obtain the robust standard errors.
 <ul>
@@ -592,7 +599,7 @@ robust_se</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <div id="report-by-stargazer" class="section level4">
-<h4><span class="header-section-number">8.1.4.3</span> Report by Stargazer</h4>
+<h4><span class="header-section-number">9.1.4.3</span> Report by Stargazer</h4>
 <ul>
 <li><code>stargazer</code> is useful to show the regression result.</li>
 </ul>
@@ -654,7 +661,7 @@ rob_se &lt;-<span class="st"> </span><span class="kw">list</span>( <span class="
 ## Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 <div id="full-results" class="section level4">
-<h4><span class="header-section-number">8.1.4.4</span> Full results</h4>
+<h4><span class="header-section-number">9.1.4.4</span> Full results</h4>
 <p>Taken from <a href="https://www.econometrics-with-r.org/7-6-analysis-of-the-test-score-data-set.html" class="uri">https://www.econometrics-with-r.org/7-6-analysis-of-the-test-score-data-set.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the stargazer library</span>
 

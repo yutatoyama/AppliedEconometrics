@@ -30,13 +30,13 @@ library("dplyr")
 library("stargazer")
 library("lmtest")
 
-
 ````
 
 ### Empirical setting: Data from California School
 
 - Question: How does the student-teacher ratio affects test scores?
 - We use data from California school, which is included in `AER` package. 
+    - See here for the details: https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/CASchools
 
 ```{r}
 # load the the data set in the workspace

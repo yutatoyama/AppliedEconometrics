@@ -541,20 +541,22 @@ where <span class="math inline">\(k\)</span> is the known number you set by your
 where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span> percentile of the standard normal distribution.
 <ul>
 <li>We say we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span> if the above does not hold.</li>
-<li>We often say <span class="math inline">\(\hat{\beta}\)</span> is statistically significant from <span class="math inline">\(k\)</span> at <span class="math inline">\(5\%\)</span> significance level if <span class="math inline">\(|t_{n}|&gt;1.96\)</span>.</li>
 </ul></li>
 </ul>
 <div id="caveats-on-hypothesis-testing" class="section level4">
 <h4><span class="header-section-number">8.5.2.1</span> Caveats on Hypothesis Testing</h4>
 <ul>
-<li>Arguing the statistical significance alone is not enough for argument in empirical analysis. Magnitude of the coefficient is also important.</li>
+<li>We often say <span class="math inline">\(\hat{\beta}\)</span> is <strong>statistically significant</strong> at <span class="math inline">\(5\%\)</span> level if <span class="math inline">\(|t_{n}|&gt;1.96\)</span> when we set <span class="math inline">\(k=0\)</span>.</li>
+<li>Arguing the statistical significance alone is not enough for argument in empirical analysis.</li>
+<li>Magnitude of the coefficient is also important.</li>
 <li>Case 1: Small but statistically significant coefficient.
 <ul>
 <li>As the sample size <span class="math inline">\(N\)</span> gets large, the <span class="math inline">\(SE\)</span> decreases.</li>
 </ul></li>
 <li>Case 2: Large but statistically insignificant coefficient.
 <ul>
-<li>You may not be able to estimate the effect precisely with the sample at your hand.</li>
+<li>The variable might have an important (economically meaningful) effect.</li>
+<li>But you may not be able to estimate the effect precisely with the sample at your hand.</li>
 </ul></li>
 </ul>
 </div>
@@ -578,10 +580,6 @@ where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math
   =\left[\hat{\beta}_{1}-1.96\times SE(\hat{\beta}_{1}),\hat{\beta_{1}}+1.96\times SE(\hat{\beta}_{1})\right]
 \]</span></li>
 <li>Interpretation: If you draw many samples (dataset) and construct the 95% CI for each sample, 95% of those CIs will include the true parameter.</li>
-<li>Wrong interpretation: The constructed CI contains the true parameter with 95%.
-<ul>
-<li>Notice that the population parameter is <strong>fixed</strong>, not random.</li>
-</ul></li>
 </ul>
 </div>
 <div id="homoskedasticity-vs-heteroskedasticity" class="section level3">
