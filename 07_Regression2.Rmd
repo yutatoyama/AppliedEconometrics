@@ -272,7 +272,7 @@ spec3 <- lm(score ~ size + english + lunch, data = CASchools)
 spec4 <- lm(score ~ size + english + calworks, data = CASchools)
 spec5 <- lm(score ~ size + english + lunch + calworks, data = CASchools)
 
-# gather robust standard errors in a list
+# gather robust standard errors in a listh
 rob_se <- list(sqrt(diag(vcovHC(spec1, type = "HC1"))),
                sqrt(diag(vcovHC(spec2, type = "HC1"))),
                sqrt(diag(vcovHC(spec3, type = "HC1"))),

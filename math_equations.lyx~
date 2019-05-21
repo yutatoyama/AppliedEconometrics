@@ -159,5 +159,42 @@ X_{iK}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{V}=\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\hat{\epsilon}_{i}^{2}\right)\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{V}=\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\hat{\epsilon}_{i}^{2}\right)\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}'\mathbf{x}_{i}\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[\mathbf{x}_{i}'\mathbf{x}_{i}]^{-1}\sigma^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+^
+\end_layout
+
 \end_body
 \end_document

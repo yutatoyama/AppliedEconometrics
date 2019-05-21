@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>7 A Review of Statistics | Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="7 A Review of Statistics | Lecture Note for Applied Econometrics">
+  <title>11 Exercise 2 (Problem Set 3) | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="11 Exercise 2 (Problem Set 3) | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="7 A Review of Statistics | Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="11 Exercise 2 (Problem Set 3) | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 A Review of Statistics | Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="11 Exercise 2 (Problem Set 3) | Lecture Note for Applied Econometrics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="exercise-1.html">
-<link rel="next" href="linear-regression-1-theory.html">
+<link rel="prev" href="linear-regression-3-discussions-on-ols-assumptions.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -232,244 +232,186 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-review-of-statistics" class="section level1">
-<h1><span class="header-section-number">7</span> A Review of Statistics</h1>
-<p><strong>Acknowledgement:</strong> This chapter is largely based on chapter 3 of “Introduction to Econometrics with R”. <a href="https://www.econometrics-with-r.org/index.html" class="uri">https://www.econometrics-with-r.org/index.html</a></p>
-<p>The goal of this chapter is</p>
-<ol style="list-style-type: decimal">
-<li>Review of important concepts in statistics
-<ol style="list-style-type: decimal">
-<li>Estimation</li>
-<li>Hypothesis testing</li>
-</ol></li>
-<li>Review of tools from probability theory
-<ol style="list-style-type: decimal">
-<li>Law of large numbers</li>
-<li>Central limit theorem</li>
-</ol></li>
-</ol>
-<div id="estimation" class="section level2">
-<h2><span class="header-section-number">7.1</span> Estimation</h2>
+<div id="exercise-2-problem-set-3" class="section level1">
+<h1><span class="header-section-number">11</span> Exercise 2 (Problem Set 3)</h1>
 <ul>
-<li>Estimator: A mapping from the sample data drawn from an unknown population to a certain feature in the population</li>
-<li>Example: Consider hourly earnings of college graduates <span class="math inline">\(Y\)</span> .</li>
-<li>You want to estimate the mean of <span class="math inline">\(Y\)</span>, defined as <span class="math inline">\(E[Y] = \mu_y\)</span></li>
-<li>Draw a random sample of <span class="math inline">\(n\)</span> i.i.d. (identically and independently distributed) observations <span class="math inline">\({ Y_1, Y_2, \ldots, Y_N }\)</span></li>
-<li>How to estimate <span class="math inline">\(E[Y]\)</span> from the data?</li>
-<li>Idea 1: Sample mean <span class="math display">\[ 
-  \bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i, 
-\]</span></li>
-<li>Idea 2: Pick the first observation of the sample.</li>
-<li>Question: How can we say which is better?</li>
+<li>Due date: June 4th (Tue) 11pm.</li>
 </ul>
-<div id="properties-of-the-estimator" class="section level3">
-<h3><span class="header-section-number">7.1.1</span> Properties of the estimator</h3>
-<p>Consider the estimator <span class="math inline">\(\hat{\mu}_N\)</span> for the unknown parameter <span class="math inline">\(\mu\)</span>.</p>
+<div id="rules" class="section level2">
+<h2><span class="header-section-number">11.1</span> Rules</h2>
+<ul>
+<li>If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can use both Japanese and English to write your answer.</li>
+<li>Submit your solution through <code>CourseN@vi</code>.</li>
+<li><strong>Important:</strong> Submission format</li>
+<li>If you use Rmarkdown, please compile your Rmarkdown file into either “html” or “PDF” file and submit <strong>both</strong> the compiled file and a Rmarkdown file.</li>
+<li>If you do not use Rmarkdown, please submit the document file that contains your answer and R script file (.R file) <strong>separately</strong>, that is, you submit <strong>two files</strong>.</li>
+</ul>
+</div>
+<div id="question-1-omitted-variable-bias" class="section level2">
+<h2><span class="header-section-number">11.2</span> Question 1: Omitted Variable Bias</h2>
+<p>The goal of this question is to investigate the omitted variable bias through Monte Carlo simulations. Consider the following model</p>
+<p><span class="math display">\[
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i
+\]</span></p>
+<p>You compare the sampling distribution of OLS estimates for <span class="math inline">\(\beta_1\)</span> with and without <span class="math inline">\(x_2\)</span> included in the regression. Here is the suggested procedure for this excercise.</p>
 <ol style="list-style-type: decimal">
-<li><p>Unbiasdeness: The expectation of the estimator is the same as the true parameter in the population. <span class="math display">\[
-  E[\hat{\mu}_N] = \mu
-\]</span></p></li>
-<li>Consistency: The estimator converges to the true parameter in probability. <span class="math display">\[
-\forall \epsilon &gt;0, \lim_{N \rightarrow \infty} \ Prob(|\hat{\mu}_{N}-\mu|&lt;\epsilon)=1
+<li>Set the data generating process.
+<ul>
+<li>Set the parameters <span class="math inline">\(\beta_0 = 1, \beta_1 = 2, \beta_2 = 1\)</span></li>
+<li>The explanatory variables <span class="math inline">\((x_1, x_2)\)</span> are i.i.d. drawn from the multivariate normal distribution <span class="math display">\[
+\left(\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array}\right)\sim N\left(\left(\begin{array}{c}
+3\\
+4
+\end{array}\right),\left(\begin{array}{cc}
+2 &amp; 1\\
+1 &amp; 2
+\end{array}\right)\right)
+\]</span></li>
+<li>The error term <span class="math inline">\(\epsilon_it\)</span> is i.i.d. drawn from <span class="math inline">\(N(0, 1)\)</span></li>
+</ul></li>
+<li>Draw the dataset <span class="math inline">\(\{y_i, x_{i1}, x_{i2} \}_{i=1}^N\)</span> with <span class="math inline">\(N = 200\)</span>.</li>
+<li>Using the drawn dataset, regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> with constant term. Obtain the OLS estimate for <span class="math inline">\(\beta_1\)</span>. Let’s call this <span class="math inline">\(\hat\beta_1^{long}\)</span></li>
+<li>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1\)</span> with constant term <strong>by omitting <span class="math inline">\(x_2\)</span></strong> and obtain the OLS estimate for <span class="math inline">\(\beta_1\)</span>. Let’s call this <span class="math inline">\(\hat\beta_1^{short}\)</span><br />
+</li>
+<li>Repeat step 2 to 4 for <span class="math inline">\(500\)</span> times and obtain <span class="math inline">\(\hat\beta_1^{long}\)</span> and <span class="math inline">\(\hat\beta_1^{short}\)</span> for each drawn sample.</li>
+<li>Plot the distribution of <span class="math inline">\(\hat\beta_1^{long}\)</span> and <span class="math inline">\(\hat\beta_1^{short}\)</span> across samples.</li>
+</ol>
+<p>Please answer the following questions using your simulation results.</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Show the sampling distribution for <span class="math inline">\(\hat\beta_1^{long}\)</span> and <span class="math inline">\(\hat\beta_1^{short}\)</span>.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Are these estimates biased? If biased, is the magnitude of bias consistent with theory?</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>We set <span class="math inline">\(Cov(x_1, x_2)=1\)</span> above. Repeat the same simulation with <span class="math inline">\(Cov(x_1, x_2)=0\)</span>. How does the result would change?</li>
+</ol></li>
+</ul>
+</div>
+<div id="question-2-empirical-analysis-using-data-from-washington2008-aer" class="section level2">
+<h2><span class="header-section-number">11.3</span> Question 2: Empirical Analysis using Data from Washington(2008, AER)</h2>
+<p><em>Acknowledgement: This exercise is based on the material from Econ 281 “Introductory Applied Econometrics” in Winter 2017 taught by Daley Kutzman at Northwestern University</em></p>
+<p>This exercise uses the data from Ebonya Washington’s paper, “Female Socialization: How Daughters Affect Their Legislator Father’s Voting on Women’s Issues,” published in <em>American Economic Review</em> in 2008. This paper studies whether having a daughter affects legislator’s voting on women’s issues.</p>
+<div id="preliminary-data-cleaning" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> Preliminary: data cleaning</h3>
+<p>You can find the file <a href="data_PS3_basic.dta">“data_PS3_basic.dta”</a> that is available at the journal <a href="https://www.aeaweb.org/articles?id=10.1257/aer.98.1.311">website</a>. This file is in Stata format. You can use <code>read.dta</code> function included in <code>foreign</code> packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example: </span>
+<span class="kw">library</span>(foreign)
+mydata &lt;-<span class="st"> </span><span class="kw">read.dta</span>(<span class="st">&quot;c:/mydata.dta&quot;</span>)</code></pre></div>
+<p>The original dataset contains data from the 105th to 108th U.S. Congress. We only use the observation from the 105th congress. The variable <code>congress</code> indicates this information. Use <code>filter</code> function in <code>dplyr</code> to subtract observations from the 105th.</p>
+<p>The dataset contains many variables, some of which are not used in this exercise. Keep the following variables in the final dataset (Hint: use <code>select</code> function in <code>dplyr</code>).</p>
+<table style="width:89%;">
+<colgroup>
+<col width="18%" />
+<col width="70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">aauw</td>
+<td align="left">AAUW score</td>
+</tr>
+<tr class="even">
+<td align="left">totchi</td>
+<td align="left">Total number of children</td>
+</tr>
+<tr class="odd">
+<td align="left">ngirls</td>
+<td align="left">Number of daughters</td>
+</tr>
+<tr class="even">
+<td align="left">party</td>
+<td align="left">Political party. Democrats if 1, Republicans if 2, and Independent if 3.</td>
+</tr>
+<tr class="odd">
+<td align="left">famale</td>
+<td align="left">Female dummy variable</td>
+</tr>
+<tr class="even">
+<td align="left">white</td>
+<td align="left">White dummy variable</td>
+</tr>
+<tr class="odd">
+<td align="left">srvlng</td>
+<td align="left">Years of service</td>
+</tr>
+<tr class="even">
+<td align="left">age</td>
+<td align="left">Age</td>
+</tr>
+<tr class="odd">
+<td align="left">demvote</td>
+<td align="left">State democratic vote share in most recent presidential election</td>
+</tr>
+<tr class="even">
+<td align="left">medinc</td>
+<td align="left">District median income</td>
+</tr>
+<tr class="odd">
+<td align="left">perf</td>
+<td align="left">Female proportion of district voting age population</td>
+</tr>
+<tr class="even">
+<td align="left">perw</td>
+<td align="left">White proportion of total district population</td>
+</tr>
+<tr class="odd">
+<td align="left">perhs</td>
+<td align="left">High school graduate proportion of district population age 25</td>
+</tr>
+<tr class="even">
+<td align="left">percol</td>
+<td align="left">College graduate proportion of district population age 25</td>
+</tr>
+<tr class="odd">
+<td align="left">perur</td>
+<td align="left">Urban proportion of total district population</td>
+</tr>
+<tr class="even">
+<td align="left">moredef</td>
+<td align="left">State proportion who favor more defense spending</td>
+</tr>
+<tr class="odd">
+<td align="left">stateabb</td>
+<td align="left">State abbreviation</td>
+</tr>
+<tr class="even">
+<td align="left">district</td>
+<td align="left">id for electoral district</td>
+</tr>
+</tbody>
+</table>
+<p>You can find the detailed description of each variable in the original paper. The main variable in this analysis is <code>AAUW</code>, a score created by the American Association of University Women (AAUW). For each congress, AAUW selects pieces of legislation in the areas of education, equality, and reproductive rights. The AAUW keeps track of how each legislator voted on these pieces of legislation and whether their vote aligned with the AAUW’s position. The legislator’s score is equal to the proportion of these votes made in agreement with the AAUW.</p>
+</div>
+<div id="questions" class="section level3">
+<h3><span class="header-section-number">11.3.2</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Report summary statistics of the following variables in the dataset: political party, age, race, gender, AAUW score, the number of children, and the number of daughters.</li>
+<li>Plot the AAUW score against the number of daughters.</li>
+<li>Estimate the following linear regression models using <code>lm</code> command. Do not forget to correct the standard errors! Report your regression results in a table. <span class="math display">\[
+\begin{aligned}
+aauw_i = \ &amp; \beta_0 + \beta_1 ngirls_i + \epsilon_i \\
+aauw_i = \ &amp; \beta_0 + \beta_1 ngirls_i + \beta_2 totchi + \epsilon_i \\
+aauw_i = \ &amp; \beta_0 + \beta_1 ngirls_i + \beta_2 totchi + \beta_3 famale_i + \beta_4 repub_i + \epsilon_i 
+\end{aligned}
 \]</span>
 <ul>
-<li>Intuition: As the sample size gets larger, the estimator and the true parameter is close with probability one.</li>
-<li>Note: a bit different from the usual convergence of the sequence.</li>
+<li>All the variables used in the above specifications are in the dataset except for <span class="math inline">\(repub_i\)</span>. <span class="math inline">\(repub_i\)</span> takes 1 if the legislator <span class="math inline">\(i\)</span> is affiliated with the Republican party.</li>
+<li><strong>Important</strong> Never put the raw output from <code>lm</code> command shown in R console into your answer! Please prepare a table for regression results as if you write a report or a paper. <strong>If you copy and paste the raw output from <code>lm</code> command, you will get 0 points for the empirical exercise part of this problem set.</strong></li>
 </ul></li>
+<li>Compare the OLS estimates of <span class="math inline">\(\beta_1\)</span> across the above three specifications. Discuss what explains the difference (if any) of the estimate across three specifications?</li>
+<li>Consider the third specification (with 3 controls in addition to <span class="math inline">\(ngirls_i\)</span>). Conditional on the number of children and other variables, do you think <span class="math inline">\(ngrils_i\)</span> is plausibly exogenous (i.e., uncorrelated with the error term)? Discuss.</li>
+<li>It is possible that the effects of having daughters might be different for female and male legislators. Estimate a regression model that allow for heterogenous effects of daughters for male and female. Discuss whether this story is true or not.</li>
 </ol>
-</div>
-<div id="sample-mean-bary-is-unbiased-and-consistent" class="section level3">
-<h3><span class="header-section-number">7.1.2</span> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</h3>
-<ul>
-<li>Showing these two properties using mathmaetics is straightforward:
-<ul>
-<li>Unbiasedness: Take expectation.</li>
-<li>Consistency: Law of large numbers.</li>
-</ul></li>
-<li><p>Let’s examine these two properties using R.</p></li>
-<li>Step 1: Prepare a population. Here, I prepare income and age data from PUMS 5% sample of U.S. Census 2000.
-<ul>
-<li>PUMS: Public Use Microdata Sample</li>
-<li><a href="data_pums_2000.csv">Download the example data here as a .csv file.</a> Put this file in the same folder as your R script file.</li>
-</ul></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;readr&quot; package</span>
-<span class="kw">library</span>(readr)</code></pre></div>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pums2000 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_pums_2000.csv&quot;</span>) </code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   AGE = col_double(),
-##   INCTOT = col_double()
-## )</code></pre>
-<ul>
-<li>We treat this dataset as <strong>population</strong>.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop &lt;-<span class="st"> </span><span class="kw">as.vector</span>(pums2000<span class="op">$</span>INCTOT)</code></pre></div>
-<ul>
-<li><em>Population</em> mean and standard deviation</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop_mean =<span class="st"> </span><span class="kw">mean</span>(pop)
-pop_sd   =<span class="st"> </span><span class="kw">sd</span>(pop)
-
-<span class="co"># Average income in population</span>
-pop_mean</code></pre></div>
-<pre><code>## [1] 30165.47</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard deviation of income in population</span>
-pop_sd</code></pre></div>
-<pre><code>## [1] 38306.17</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># income distribution in population</span>
-<span class="co"># Note that the unit is in USD.</span>
-<span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)
-<span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
-      <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
-      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>)</code></pre></div>
-<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
-<ul>
-<li>The distribution has a long tail.</li>
-<li>Let’s plot the distribution in <em>log</em> scale</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># `log` option specifies which axis is represented in log scale.</span>
-<span class="kw">qplot</span>(pop, <span class="dt">geom =</span> <span class="st">&quot;density&quot;</span>, 
-      <span class="dt">xlab =</span> <span class="st">&quot;Income&quot;</span>,
-      <span class="dt">ylab =</span> <span class="st">&quot;Density&quot;</span>,
-      <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>)</code></pre></div>
-<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
-<ul>
-<li>Let’s investigate how close the sample mean constucted from the random sample is to the true population mean.</li>
-<li>Step 1: Draw random sample<em>s</em> from this population and calculate <span class="math inline">\(\bar{Y}\)</span> for each sample.
-<ul>
-<li>Set the sample size <span class="math inline">\(N\)</span>.</li>
-</ul></li>
-<li>Step 2: Repeat 2000 times. You now have 2000 sample means.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number. This is needed to maintaine the reproducibility of the results.</span>
-<span class="kw">set.seed</span>(<span class="dv">123</span>)
-
-<span class="co"># draw random sample of 100 observations from the variable pop</span>
-test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)
-
-<span class="co"># Use loop to repeat 2000 times. </span>
-Nsamples =<span class="st"> </span><span class="dv">2000</span>
-result1 &lt;-<span class="st"> </span><span class="kw">numeric</span>(Nsamples)
-
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Nsamples ){
-  
-  test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)
-  result1[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(test)
-  
-}
-
-<span class="co"># Simple approach</span>
-result1 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">10</span>)), <span class="dt">n =</span> Nsamples)
-result2 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">100</span>)), <span class="dt">n =</span> Nsamples)
-result3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">expr =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> <span class="dv">500</span>)), <span class="dt">n =</span> Nsamples)
-
-<span class="co"># Create dataframe</span>
-
-result_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(  <span class="dt">Ybar10 =</span> result1, 
-                            <span class="dt">Ybar100 =</span> result2, 
-                            <span class="dt">Ybar500 =</span> result3)</code></pre></div>
-<ul>
-<li>Step 3: See the distribution of those 2000 sample means.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use reshape library</span>
-<span class="co"># install.packages(&quot;reshape&quot;)</span>
-<span class="kw">library</span>(<span class="st">&quot;reshape&quot;</span>)</code></pre></div>
-<pre><code>## Warning: package &#39;reshape&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
-data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
-<pre><code>## Using  as id variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
-<span class="co"># The variable `fig` contains the information about the figure</span>
-fig &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample mean&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">colour =</span> variable ),   <span class="dt">stat =</span> <span class="st">&quot;density&quot;</span> ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span>pop_mean ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
-
-<span class="co"># Display the figure </span>
-<span class="kw">plot</span>(fig)</code></pre></div>
-<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
-<ul>
-<li>Observation 1: Regardless of the sample size, the average of the sample means is close to the population mean. <strong>Unbiasdeness</strong></li>
-<li>Observation 2: As the sample size gets larger, the distribution is concentrated around the population mean. <strong>Consistency (law of large numbers)</strong></li>
-</ul>
-</div>
-</div>
-<div id="hypothesis-testing" class="section level2">
-<h2><span class="header-section-number">7.2</span> Hypothesis Testing</h2>
-<div id="central-limit-theorem" class="section level3">
-<h3><span class="header-section-number">7.2.1</span> Central limit theorem</h3>
-<ul>
-<li><p>Cental limit theorem: Consider the i.i.d. sample of <span class="math inline">\(Y_1,\cdots, Y_N\)</span> drawn from the random variable <span class="math inline">\(Y\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The following <span class="math inline">\(Z\)</span> converges in distribution to the normal distribution. <span class="math display">\[
-Z = \frac{1}{\sqrt{N}} \sum_{i=1}^N \frac{Y_i - \mu}{\sigma } \overset{d}{\rightarrow}N(0,1)
-\]</span> In other words, <span class="math display">\[
-\lim_{N\rightarrow\infty}P\left(Z \leq z\right)=\Phi(z)
-\]</span></p></li>
-<li><p>The central limit theorem implies that if <span class="math inline">\(N\)</span> is large <strong>enough</strong>, we can <strong>approximate</strong> the distribution of <span class="math inline">\(\bar{Y}\)</span> by the standard normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 / N\)</span> <strong>regardless of the underlying distribution of <span class="math inline">\(Y\)</span>.</strong></p></li>
-<li><p>Let’s examine this property through simulation!!</p></li>
-<li>Use the same example as before. Remember that the underlying income distribution is clearly NOT normal.
-<ul>
-<li>Population mean <span class="math inline">\(\mu = 30165.4673315\)</span> and standard deviation <span class="math inline">\(\sigma = 38306.1712336\)</span>. Use these numbers.</li>
-</ul></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the seed for the random number</span>
-<span class="kw">set.seed</span>(<span class="dv">124</span>)
-
-<span class="co"># define function for simulation </span>
-f_simu_CLT =<span class="st"> </span><span class="cf">function</span>(Nsamples, samplesize, pop, pop_mean, pop_sd ){
-  
-  output =<span class="st"> </span><span class="kw">numeric</span>(Nsamples)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>Nsamples ){
-    test &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x =</span> pop, <span class="dt">size =</span> samplesize)
-    output[i] &lt;-<span class="st"> </span>( <span class="kw">mean</span>(test) <span class="op">-</span><span class="st"> </span>pop_mean ) <span class="op">/</span><span class="st"> </span>(pop_sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(samplesize))
-  }
-  
-  <span class="kw">return</span>(output)
-
-}
-
-<span class="co"># Comment: You can do better without using forloop. Let me know if you come with a good idea.</span>
-
-<span class="co"># Run simulation </span>
-Nsamples =<span class="st"> </span><span class="dv">2000</span>
-result_CLT1 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">10</span>, pop, pop_mean, pop_sd )
-result_CLT2 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">100</span>, pop, pop_mean, pop_sd )
-result_CLT3 &lt;-<span class="st"> </span><span class="kw">f_simu_CLT</span>(Nsamples, <span class="dv">1000</span>, pop, pop_mean, pop_sd )
-
-<span class="co"># Random draw from standard normal distribution as comparison</span>
-result_stdnorm =<span class="st"> </span><span class="kw">rnorm</span>(Nsamples)
-
-<span class="co"># Create dataframe</span>
-result_CLT_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(  <span class="dt">Ybar_standardized_10 =</span> result_CLT1, 
-                            <span class="dt">Ybar_standardized_100 =</span> result_CLT2, 
-                            <span class="dt">Ybar_standardized_1000 =</span> result_CLT3, 
-                            <span class="dt">Standard_Normal =</span> result_stdnorm)
-
-<span class="co"># Note: If you wanna quicky plot the density, type `plot(density(result1))`. </span></code></pre></div>
-<ul>
-<li>Now take a look at the distribution.</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;melt&quot; to change the format of result_data</span>
-data_for_plot &lt;-<span class="st"> </span><span class="kw">melt</span>(<span class="dt">data =</span> result_CLT_data, <span class="dt">variable.name =</span> <span class="st">&quot;Variable&quot;</span> )</code></pre></div>
-<pre><code>## Using  as id variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use &quot;ggplot2&quot; to create the figure.</span>
-fig &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data_for_plot) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample mean&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value, <span class="dt">colour =</span> variable ),   <span class="dt">stat =</span> <span class="st">&quot;density&quot;</span> ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span> ,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)
-
-<span class="kw">plot</span>(fig)</code></pre></div>
-<p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
-<ul>
-<li>As the sample size grows, the distribution of <span class="math inline">\(Z\)</span> converges to the standard normal distribution.</li>
-</ul>
-</div>
-<div id="hypothesis-testing-1" class="section level3">
-<h3><span class="header-section-number">7.2.2</span> Hypothesis testing</h3>
-<p>To be added.</p>
 
 </div>
 </div>
@@ -479,8 +421,8 @@ fig &lt;-<span class="st"> </span>
           </div>
         </div>
       </div>
-<a href="exercise-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linear-regression-1-theory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linear-regression-3-discussions-on-ols-assumptions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

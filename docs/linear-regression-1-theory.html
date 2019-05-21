@@ -50,67 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -219,6 +193,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Run regression</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html"><i class="fa fa-check"></i><b>10</b> Linear Regression 3: Discussions on OLS Assumptions</a><ul>
+<li class="chapter" data-level="10.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#endogeneity-problem"><i class="fa fa-check"></i><b>10.2</b> Endogeneity problem</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#omitted-variable-bias"><i class="fa fa-check"></i><b>10.2.1</b> Omitted variable bias</a></li>
+<li class="chapter" data-level="10.2.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#correlation-v.s.-causality"><i class="fa fa-check"></i><b>10.2.2</b> Correlation v.s. Causality</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#multicollinearity-issue"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity issue</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#perfect-multicollinearity"><i class="fa fa-check"></i><b>10.3.1</b> Perfect Multicollinearity</a></li>
+<li class="chapter" data-level="10.3.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#imperfect-multicollinearity."><i class="fa fa-check"></i><b>10.3.2</b> Imperfect multicollinearity.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html"><i class="fa fa-check"></i><b>11</b> Exercise 2 (Problem Set 3)</a><ul>
+<li class="chapter" data-level="11.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#rules"><i class="fa fa-check"></i><b>11.1</b> Rules</a></li>
+<li class="chapter" data-level="11.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-1-omitted-variable-bias"><i class="fa fa-check"></i><b>11.2</b> Question 1: Omitted Variable Bias</a></li>
+<li class="chapter" data-level="11.3" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-2-empirical-analysis-using-data-from-washington2008-aer"><i class="fa fa-check"></i><b>11.3</b> Question 2: Empirical Analysis using Data from Washington(2008, AER)</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#preliminary-data-cleaning"><i class="fa fa-check"></i><b>11.3.1</b> Preliminary: data cleaning</a></li>
+<li class="chapter" data-level="11.3.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#questions"><i class="fa fa-check"></i><b>11.3.2</b> Questions</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -250,8 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(i\)</span> is an index for observations. <span class="math inline">\(i = 1,\cdots, N\)</span>.</li>
 <li>Data (sample): <span class="math inline">\(\{ Y_i , X_{i1}, \ldots, X_{iK} \}_{i=1}^N\)</span></li>
 </ul></li>
-<li><strong>Linear regression model</strong> is defined as
-<span class="math display">\[ Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} \]</span>
+<li><strong>Linear regression model</strong> is defined as <span class="math display">\[ Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} \]</span>
 <ul>
 <li><span class="math inline">\(\epsilon_i\)</span>: error term (unobserved)</li>
 <li><span class="math inline">\(\beta\)</span>: coefficients</li>
@@ -262,23 +254,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>i.i.d.: identically and independently distributed</li>
 </ul></li>
-<li><span class="math inline">\(\epsilon_i\)</span> has zero conditional mean
-<span class="math display">\[
-    E[ \epsilon_i | X_{i1}, \ldots, X_{iK}] = 0
-    \]</span></li>
+<li><span class="math inline">\(\epsilon_i\)</span> has zero conditional mean <span class="math display">\[
+  E[ \epsilon_i | X_{i1}, \ldots, X_{iK}] = 0
+  \]</span></li>
 <li>Large outliers are unlikely: The random variable <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_{ik}\)</span> have finite fourth moments.</li>
 <li>No perfect multicollinearity: There is no linear relationship betwen explanatory variables.</li>
 </ol></li>
-<li>OLS estimators are the minimizers of the sum of squared residuals:
-<span class="math display">\[
- \min_{\beta_0, \cdots, \beta_K} \frac{1}{N} \sum_{i=1}^N (Y_i - (\beta_0 + \beta_1 X_{i1} + \cdots + \beta_K X_{iK}))^2
- \]</span></li>
-<li>Using matrix notation, we have the following analytical formula for the OLS estimator
-<span class="math display">\[
-  \hat{\beta} = (X&#39;X)^{-1} X&#39;Y
-  \]</span>
-where
-<span class="math display">\[
+<li>OLS estimators are the minimizers of the sum of squared residuals: <span class="math display">\[
+\min_{\beta_0, \cdots, \beta_K} \frac{1}{N} \sum_{i=1}^N (Y_i - (\beta_0 + \beta_1 X_{i1} + \cdots + \beta_K X_{iK}))^2
+\]</span></li>
+<li>Using matrix notation, we have the following analytical formula for the OLS estimator <span class="math display">\[
+\hat{\beta} = (X&#39;X)^{-1} X&#39;Y
+\]</span> where <span class="math display">\[
 \underbrace{X}_{N\times (K+1)}=\left(\begin{array}{cccc}
 1 &amp; X_{11} &amp; \cdots &amp; X_{1K}\\
 \vdots &amp; \vdots &amp;  &amp; \vdots\\
@@ -302,47 +289,37 @@ Y_{N}
 <li>We briefly review theoretical properties of OLS estimator.</li>
 </ul>
 <ol style="list-style-type: decimal">
-<li><strong>Unbiasdness</strong>: Conditional on the explantory variables <span class="math inline">\(X\)</span>, the expectation of the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> is equal to the true value <span class="math inline">\(\beta\)</span>.
-<span class="math display">\[
- E[\hat{\beta} | X] = \beta
- \]</span></li>
-<li><strong>Consistency</strong>: As the sample size <span class="math inline">\(N\)</span> goes to infinity, the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> converges to <span class="math inline">\(\beta\)</span> in probability
-<span class="math display">\[
- \hat{\beta}\overset{p}{\longrightarrow}\beta
- \]</span></li>
+<li><strong>Unbiasdness</strong>: Conditional on the explantory variables <span class="math inline">\(X\)</span>, the expectation of the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> is equal to the true value <span class="math inline">\(\beta\)</span>. <span class="math display">\[
+E[\hat{\beta} | X] = \beta
+\]</span></li>
+<li><strong>Consistency</strong>: As the sample size <span class="math inline">\(N\)</span> goes to infinity, the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> converges to <span class="math inline">\(\beta\)</span> in probability <span class="math display">\[
+\hat{\beta}\overset{p}{\longrightarrow}\beta
+\]</span></li>
 <li><strong>Asymptotic normality</strong>: Will talk this <a href="#Statistical-Inference">later</a></li>
 </ol>
 </div>
 <div id="interpretation-and-specifications-of-linear-regression-model" class="section level2">
 <h2><span class="header-section-number">8.3</span> Interpretation and Specifications of Linear Regression Model</h2>
 <ul>
-<li>Remember that
-<span class="math display">\[ 
-  Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} 
-  \]</span></li>
+<li>Remember that <span class="math display">\[ 
+Y_{i}=\beta_{0}+\beta_{1}X_{1i}+\cdots+\beta_{K}X_{Ki}+\epsilon_{i} 
+\]</span></li>
 <li>The coefficient <span class="math inline">\(\beta_k\)</span> captures the effect of <span class="math inline">\(X_k\)</span> on <span class="math inline">\(Y\)</span> <strong>ceteris paribus (all things being equal)</strong></li>
-<li>Equivalently,
-<span class="math display">\[
-  \frac{\partial Y}{\partial X_k} = \beta_k 
-      \]</span>
-if <span class="math inline">\(X_k\)</span> is continuous random variable.</li>
+<li>Equivalently, <span class="math display">\[
+\frac{\partial Y}{\partial X_k} = \beta_k 
+    \]</span> if <span class="math inline">\(X_k\)</span> is continuous random variable.</li>
 <li>If we can estimate <span class="math inline">\(\beta_k\)</span> without bias, we can obtain <strong>causal effect</strong> of <span class="math inline">\(X_k\)</span> on <span class="math inline">\(Y\)</span>.
 <ul>
 <li>This is of course very difficult task. We will see this more later.</li>
 </ul></li>
-<li>We will see several specifications that are frequently used in empirical analysis.
-1. Nonlinear term
-1. log specification
-2. dummy (categorical) variables
-3. interaction terms</li>
+<li>We will see several specifications that are frequently used in empirical analysis. 1. Nonlinear term 1. log specification 2. dummy (categorical) variables 3. interaction terms</li>
 </ul>
 <div id="nonlinear-term" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> Nonlinear term</h3>
 <ul>
-<li>We can capture non-linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> in a linearly additive form
-<span class="math display">\[
-  Y_i = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 + \beta_3 X_i^3 + \epsilon_i
-  \]</span></li>
+<li>We can capture non-linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> in a linearly additive form <span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 + \beta_3 X_i^3 + \epsilon_i
+\]</span></li>
 <li>As long as the error term <span class="math inline">\(\epsilon_i\)</span> appreas in a additively linear way, we can estimate the coefficients by OLS.
 <ul>
 <li>Multicollinarity could be an issue if we have many polynomials (see later).</li>
@@ -392,33 +369,27 @@ if <span class="math inline">\(X_k\)</span> is continuous random variable.</li>
 <h3><span class="header-section-number">8.3.3</span> Dummy variable</h3>
 <ul>
 <li>A dummy variable takes only 1 or 0. This is used to express qualititative information</li>
-<li>Example: Dummy variable for race
-<span class="math display">\[
+<li>Example: Dummy variable for race <span class="math display">\[
 white_{i}=\begin{cases}
 1 &amp; if\ white\\
 0 &amp; otherwise
 \end{cases} 
- \]</span></li>
+   \]</span></li>
 <li>The coefficient on a dummy variable captures the difference of the outcome <span class="math inline">\(Y\)</span> between categories</li>
-<li>Consider the linear regression
-<span class="math display">\[
-  Y_i = \beta_0 + \beta_1 white_i + \epsilon_i
-  \]</span>
-The coefficient <span class="math inline">\(\beta_1\)</span> captures the difference of <span class="math inline">\(Y\)</span> between white and non-white people.</li>
+<li>Consider the linear regression <span class="math display">\[
+Y_i = \beta_0 + \beta_1 white_i + \epsilon_i
+\]</span> The coefficient <span class="math inline">\(\beta_1\)</span> captures the difference of <span class="math inline">\(Y\)</span> between white and non-white people.</li>
 </ul>
 </div>
 <div id="interaction-term" class="section level3">
 <h3><span class="header-section-number">8.3.4</span> Interaction term</h3>
 <ul>
 <li>You can add the interaction of two explanatory variables in the regression model.</li>
-<li>For example:
-<span class="math display">\[
-  wage_i = \beta_0 + \beta_1 educ_i + \beta_2 educ_i \times white_i + \epsilon_i
-  \]</span>
-where <span class="math inline">\(wage_i\)</span> is the earnings of person <span class="math inline">\(i\)</span> and <span class="math inline">\(educ_i\)</span> is the years of schooling for person <span class="math inline">\(i\)</span>.</li>
-<li>The effect of <span class="math inline">\(educ_i\)</span> is
-<span class="math display">\[
-  \frac{\partial wage_i}{\partial educ_i} = \beta_1 + \beta_2 white_i,
+<li>For example: <span class="math display">\[
+wage_i = \beta_0 + \beta_1 educ_i + \beta_2 educ_i \times white_i + \epsilon_i
+\]</span> where <span class="math inline">\(wage_i\)</span> is the earnings of person <span class="math inline">\(i\)</span> and <span class="math inline">\(educ_i\)</span> is the years of schooling for person <span class="math inline">\(i\)</span>.</li>
+<li>The effect of <span class="math inline">\(educ_i\)</span> is <span class="math display">\[
+\frac{\partial wage_i}{\partial educ_i} = \beta_1 + \beta_2 white_i,
 \]</span></li>
 <li>This allows for heterogenous effects of education across races.</li>
 </ul>
@@ -428,40 +399,31 @@ where <span class="math inline">\(wage_i\)</span> is the earnings of person <spa
 <h2><span class="header-section-number">8.4</span> Measures of Fit</h2>
 <ul>
 <li>We often use <span class="math inline">\(R^2\)</span> as a measure of the model fit.</li>
-<li>Denote <strong>the fitted value</strong> as <span class="math inline">\(\hat{y}_i\)</span>
-<span class="math display">\[
+<li>Denote <strong>the fitted value</strong> as <span class="math inline">\(\hat{y}_i\)</span> <span class="math display">\[
  \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_K X_{iK}
 \]</span>
 <ul>
 <li>Also called prediction from the OLS regression.</li>
 </ul></li>
-<li><span class="math inline">\(R^2\)</span> is defined as
-<span class="math display">\[
-  R^2 = \frac{SSE}{TSS},
-  \]</span>
-where
-<span class="math display">\[ 
-   \  SSE = \sum_i (\hat{y}_i - \bar{y})^2, \ TSS = \sum_i (y_i - \bar{y})^2
-  \]</span></li>
+<li><span class="math inline">\(R^2\)</span> is defined as <span class="math display">\[
+R^2 = \frac{SSE}{TSS},
+\]</span> where <span class="math display">\[ 
+ \  SSE = \sum_i (\hat{y}_i - \bar{y})^2, \ TSS = \sum_i (y_i - \bar{y})^2
+\]</span></li>
 <li><span class="math inline">\(R^2\)</span> captures the fraction of the variation of <span class="math inline">\(Y\)</span> explained by the regression model.</li>
 <li>Adding variables always (weakly) increases <span class="math inline">\(R^2\)</span>.</li>
-<li>In a regression model with multiple explanatory variables, we often use <strong>adjusted</strong> <span class="math inline">\(R^2\)</span> that adjusts the number of explanatory variables
-<span class="math display">\[
-  \bar{R}^2 = 1 - \frac{N-1}{N-(K+1)} \frac{SSR}{TSS}
-\]</span>
-where
-<span class="math display">\[
-  SSR = \sum_i (\hat{y}_i - y_i)^2 (= \sum_i \hat{u}_i^2 ),
-  \]</span></li>
+<li>In a regression model with multiple explanatory variables, we often use <strong>adjusted</strong> <span class="math inline">\(R^2\)</span> that adjusts the number of explanatory variables <span class="math display">\[
+\bar{R}^2 = 1 - \frac{N-1}{N-(K+1)} \frac{SSR}{TSS}
+\]</span> where <span class="math display">\[
+SSR = \sum_i (\hat{y}_i - y_i)^2 (= \sum_i \hat{u}_i^2 ),
+\]</span></li>
 </ul>
 </div>
 <div id="statistical-inference" class="section level2">
 <h2><span class="header-section-number">8.5</span> Statistical Inference</h2>
 <ul>
 <li>Notice that the OLS estimators are <strong>random variables</strong>. They depend on the data, which are random variables drawn from some population distribution.</li>
-<li>We can conduct statistical inferences regarding those OLS estimators:
-1. Hypothesis testing
-2. Constructing confidence interval</li>
+<li>We can conduct statistical inferences regarding those OLS estimators: 1. Hypothesis testing 2. Constructing confidence interval</li>
 <li>I first explain the sampling distribution of the OLS estimators.</li>
 </ul>
 <div id="distribution-of-the-ols-estimators-based-on-asymptotic-theory" class="section level3">
@@ -473,31 +435,24 @@ where
 <li>We typically do not know the distribution of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.</li>
 </ul></li>
 <li>We rely on <strong>asymptotic</strong> argument. We approximate the sampling distribution of the OLS esimator based on the cental limit theorem.</li>
-<li>Under the OLS assumption, the OLS estimator has <strong>asymptotic normality</strong>
-<span class="math display">\[
+<li>Under the OLS assumption, the OLS estimator has <strong>asymptotic normality</strong> <span class="math display">\[
 \sqrt{N}(\hat{\beta}-\beta)\overset{d}{\rightarrow}N\left(0,V \right)    
-  \]</span>
-where
-<span class="math display">\[
-  \underbrace{V}_{(K+1)\times(K+1)}
-   = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
-  \]</span>
-and
-<span class="math display">\[
-  \underbrace{\mathbf{x}_{i}}_{(K+1)\times1}=\left(\begin{array}{c}
+\]</span> where <span class="math display">\[
+\underbrace{V}_{(K+1)\times(K+1)}
+ = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
+\]</span> and <span class="math display">\[
+\underbrace{\mathbf{x}_{i}}_{(K+1)\times1}=\left(\begin{array}{c}
 1\\
 X_{i1}\\
 \vdots\\
 X_{iK}
 \end{array}\right)
-  \]</span></li>
-<li>We can <strong>approximate</strong> the distribution of <span class="math inline">\(\hat{\beta}\)</span> by
-<span class="math display">\[
-  \hat{\beta} \sim N(\beta, V / N)
-  \]</span></li>
+\]</span></li>
+<li>We can <strong>approximate</strong> the distribution of <span class="math inline">\(\hat{\beta}\)</span> by <span class="math display">\[
+\hat{\beta} \sim N(\beta, V / N)
+\]</span></li>
 <li>The above is joint distribution. Let <span class="math inline">\(V_{ij}\)</span> be the <span class="math inline">\((i,j)\)</span> element of the matrix <span class="math inline">\(V\)</span>.</li>
-<li>The individual coefficient <span class="math inline">\(\beta_k\)</span> follows
-<span class="math display">\[
+<li>The individual coefficient <span class="math inline">\(\beta_k\)</span> follows <span class="math display">\[
  \hat\beta_k \sim N(\beta_k, V_{kk} / N )
 \]</span></li>
 </ul>
@@ -505,11 +460,9 @@ X_{iK}
 <h4><span class="header-section-number">8.5.1.1</span> Estimation of Asymptotic Variance</h4>
 <ul>
 <li><span class="math inline">\(V\)</span> is an unknown object. Need to be estimated.</li>
-<li>Consider the estimator <span class="math inline">\(\hat{V}\)</span> for <span class="math inline">\(V\)</span> using sample analogues
-<span class="math display">\[
-  \hat{V}=\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\hat{\epsilon}_{i}^{2}\right)\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}
-\]</span>
-where <span class="math inline">\(\hat{\epsilon}_i = y_i - (\hat{\beta}_0 + \cdots + \hat{\beta}_K X_{iK})\)</span> is the residual.</li>
+<li>Consider the estimator <span class="math inline">\(\hat{V}\)</span> for <span class="math inline">\(V\)</span> using sample analogues <span class="math display">\[
+\hat{V}=\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\hat{\epsilon}_{i}^{2}\right)\left(\frac{1}{N}\sum_{i=1}^{N}\mathbf{x}_{i}&#39;\mathbf{x}_{i}\right)^{-1}
+\]</span> where <span class="math inline">\(\hat{\epsilon}_i = y_i - (\hat{\beta}_0 + \cdots + \hat{\beta}_K X_{iK})\)</span> is the residual.</li>
 <li>Technically speaking, <span class="math inline">\(\hat{V}\)</span> converges to <span class="math inline">\(V\)</span> in probability. (Proof is out of the scope of this course)</li>
 <li>We often use the (asymptotic) <strong>standard error</strong> <span class="math inline">\(SE(\hat{\beta_k}) = \sqrt{\hat{V}_{kk} / N }\)</span>.</li>
 <li>The standard error is an estimator for the standard deviation of the OLS estimator <span class="math inline">\(\hat{\beta_k}\)</span>.</li>
@@ -526,19 +479,14 @@ where <span class="math inline">\(\hat{\epsilon}_i = y_i - (\hat{\beta}_0 + \cdo
 <li>Is the production technology the constant returns to scale?</li>
 </ul></li>
 <li><p>Here I explain how to conduct hypothesis testing.</p></li>
-<li>Step 1: Consider the null hypothesis <span class="math inline">\(H_{0}\)</span> and the alternative hypothesis <span class="math inline">\(H_{1}\)</span>
-<span class="math display">\[
-  H_{0}:\beta_{1}=k,H_{1}:\beta_{1}\neq k
-  \]</span>
-where <span class="math inline">\(k\)</span> is the known number you set by yourself.</li>
-<li><p>Step 2: Define <strong>t-statistic</strong> by
-<span class="math display">\[
-  t_{n}=\frac{\hat{\beta_1}-k}{SE(\hat{\beta_1})}
-  \]</span></p></li>
-<li>Step 3: We reject <span class="math inline">\(H_{0}\)</span> is at <span class="math inline">\(\alpha\)</span>-percent significance level if
-<span class="math display">\[|t_{n}|&gt;C_{\alpha/2} 
-\]</span>
-where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span> percentile of the standard normal distribution.
+<li>Step 1: Consider the null hypothesis <span class="math inline">\(H_{0}\)</span> and the alternative hypothesis <span class="math inline">\(H_{1}\)</span> <span class="math display">\[
+H_{0}:\beta_{1}=k,H_{1}:\beta_{1}\neq k
+\]</span> where <span class="math inline">\(k\)</span> is the known number you set by yourself.</li>
+<li><p>Step 2: Define <strong>t-statistic</strong> by <span class="math display">\[
+t_{n}=\frac{\hat{\beta_1}-k}{SE(\hat{\beta_1})}
+\]</span></p></li>
+<li>Step 3: We reject <span class="math inline">\(H_{0}\)</span> is at <span class="math inline">\(\alpha\)</span>-percent significance level if <span class="math display">\[|t_{n}|&gt;C_{\alpha/2} 
+\]</span> where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span> percentile of the standard normal distribution.
 <ul>
 <li>We say we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span> if the above does not hold.</li>
 </ul></li>
@@ -563,10 +511,9 @@ where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math
 <div id="f-test" class="section level4">
 <h4><span class="header-section-number">8.5.2.2</span> F test</h4>
 <ul>
-<li>We often test a composite hypothesis that involves multiple parameters such as
-<span class="math display">\[
+<li>We often test a composite hypothesis that involves multiple parameters such as <span class="math display">\[
  H_{0}:\beta_{1} + \beta_2 = 0,\ H_{1}:\beta_{1} + \beta_2 \neq 0
-  \]</span></li>
+\]</span></li>
 <li>We use <strong>F test</strong> in such a case (to be added).</li>
 </ul>
 </div>
@@ -574,10 +521,9 @@ where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math
 <div id="confidence-interval" class="section level3">
 <h3><span class="header-section-number">8.5.3</span> Confidence interval</h3>
 <ul>
-<li>95% confidence interval
-<span class="math display">\[
-  CI_{n}  =\left\{ k:|\frac{\hat{\beta}_{1}-k}{SE(\hat{\beta}_{1})}|\leq1.96\right\} 
-  =\left[\hat{\beta}_{1}-1.96\times SE(\hat{\beta}_{1}),\hat{\beta_{1}}+1.96\times SE(\hat{\beta}_{1})\right]
+<li>95% confidence interval <span class="math display">\[
+CI_{n}  =\left\{ k:|\frac{\hat{\beta}_{1}-k}{SE(\hat{\beta}_{1})}|\leq1.96\right\} 
+=\left[\hat{\beta}_{1}-1.96\times SE(\hat{\beta}_{1}),\hat{\beta_{1}}+1.96\times SE(\hat{\beta}_{1})\right]
 \]</span></li>
 <li>Interpretation: If you draw many samples (dataset) and construct the 95% CI for each sample, 95% of those CIs will include the true parameter.</li>
 </ul>
@@ -589,17 +535,13 @@ where <span class="math inline">\(C_{\alpha/2}\)</span> is the <span class="math
 <li>The error term <span class="math inline">\(\epsilon_{i}\)</span> has <strong>heteroskedasticity</strong> if <span class="math inline">\(Var(u_{i}|X_{i})\)</span> depends on <span class="math inline">\(X_{i}\)</span>.</li>
 <li>If not, we call <span class="math inline">\(\epsilon_{i}\)</span> has <strong>homoskedasticity</strong>.</li>
 <li>This has an important implication on the asymptotic variance.</li>
-<li>Remember the asymptotic variance
-<span class="math display">\[
-  \underbrace{V}_{(K+1)\times(K+1)}
-   = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
-  \]</span>
-Standard errors based on this is called <strong>heteroskedasticity robust standard errors</strong>/</li>
-<li>If homoskedasticity holds, then
-<span class="math display">\[
-  V = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}\sigma^{2}
-  \]</span>
-where <span class="math inline">\(\sigma^2 = V(\epsilon_i)\)</span>.</li>
+<li>Remember the asymptotic variance <span class="math display">\[
+\underbrace{V}_{(K+1)\times(K+1)}
+ = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}\epsilon_{i}^{2}]E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}
+\]</span> Standard errors based on this is called <strong>heteroskedasticity robust standard errors</strong>/</li>
+<li>If homoskedasticity holds, then <span class="math display">\[
+V = E[\mathbf{x}_{i}&#39;\mathbf{x}_{i}]^{-1}\sigma^{2}
+\]</span> where <span class="math inline">\(\sigma^2 = V(\epsilon_i)\)</span>.</li>
 <li>In many statistical packages (including R and Stata), the standard errors for the OLS estimators are calcualted under homoskedasticity assumption as a default.</li>
 <li>However, if the error has heteroskedasticity, the standard error under homoskedasticity assumption will be <strong>underestimated</strong>.</li>
 <li>In OLS, <strong>we should always use heteroskedasticity robust standard error.</strong>
@@ -667,7 +609,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

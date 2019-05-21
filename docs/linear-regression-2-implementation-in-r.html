@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="linear-regression-1-theory.html">
-
+<link rel="next" href="linear-regression-3-discussions-on-ols-assumptions.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,67 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -219,6 +193,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Run regression</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html"><i class="fa fa-check"></i><b>10</b> Linear Regression 3: Discussions on OLS Assumptions</a><ul>
+<li class="chapter" data-level="10.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#endogeneity-problem"><i class="fa fa-check"></i><b>10.2</b> Endogeneity problem</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#omitted-variable-bias"><i class="fa fa-check"></i><b>10.2.1</b> Omitted variable bias</a></li>
+<li class="chapter" data-level="10.2.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#correlation-v.s.-causality"><i class="fa fa-check"></i><b>10.2.2</b> Correlation v.s. Causality</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#multicollinearity-issue"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity issue</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#perfect-multicollinearity"><i class="fa fa-check"></i><b>10.3.1</b> Perfect Multicollinearity</a></li>
+<li class="chapter" data-level="10.3.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#imperfect-multicollinearity."><i class="fa fa-check"></i><b>10.3.2</b> Imperfect multicollinearity.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html"><i class="fa fa-check"></i><b>11</b> Exercise 2 (Problem Set 3)</a><ul>
+<li class="chapter" data-level="11.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#rules"><i class="fa fa-check"></i><b>11.1</b> Rules</a></li>
+<li class="chapter" data-level="11.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-1-omitted-variable-bias"><i class="fa fa-check"></i><b>11.2</b> Question 1: Omitted Variable Bias</a></li>
+<li class="chapter" data-level="11.3" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-2-empirical-analysis-using-data-from-washington2008-aer"><i class="fa fa-check"></i><b>11.3</b> Question 2: Empirical Analysis using Data from Washington(2008, AER)</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#preliminary-data-cleaning"><i class="fa fa-check"></i><b>11.3.1</b> Preliminary: data cleaning</a></li>
+<li class="chapter" data-level="11.3.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#questions"><i class="fa fa-check"></i><b>11.3.2</b> Questions</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -253,14 +246,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>stargazer</code> : output of regression results</li>
 </ul></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install package if you have not done so </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install package if you have not done so </span>
 <span class="co"># install.packages(&quot;AER&quot;)</span>
 <span class="co"># install.packages(&quot;dplyr&quot;)</span>
 <span class="co"># install.packages(&quot;stargazer&quot;)</span>
 <span class="co"># install.packages(&quot;lmtest&quot;)</span>
 
 <span class="co"># load packages</span>
-<span class="kw">library</span>(<span class="st">&quot;AER&quot;</span>)</code></pre>
+<span class="kw">library</span>(<span class="st">&quot;AER&quot;</span>)</code></pre></div>
 <pre><code>## Loading required package: car</code></pre>
 <pre><code>## Loading required package: carData</code></pre>
 <pre><code>## Loading required package: lmtest</code></pre>
@@ -272,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     as.Date, as.Date.numeric</code></pre>
 <pre><code>## Loading required package: sandwich</code></pre>
 <pre><code>## Loading required package: survival</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:car&#39;:
@@ -287,12 +280,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;stargazer&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;stargazer&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## Please cite as:</code></pre>
 <pre><code>##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
 <pre><code>##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;lmtest&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;lmtest&quot;</span>)</code></pre></div>
 </div>
 <div id="empirical-setting-data-from-california-school" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> Empirical setting: Data from California School</h3>
@@ -303,12 +296,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>See here for the details: <a href="https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/CASchools" class="uri">https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/CASchools</a></li>
 </ul></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the the data set in the workspace</span>
-<span class="kw">data</span>(CASchools)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the the data set in the workspace</span>
+<span class="kw">data</span>(CASchools)</code></pre></div>
 <ul>
 <li>Use <code>class()</code> function to see <code>CASchools</code> is <code>data.frame</code> object.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(CASchools)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(CASchools)</code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <ul>
 <li>We take 2 steps for the analysis.
@@ -324,7 +317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>It is always important to grasp your data before running regression.</li>
 <li><code>head()</code> function give you a first overview of the data.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(CASchools)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(CASchools)</code></pre></div>
 <pre><code>##   district                          school  county grades students
 ## 1    75119              Sunol Glen Unified Alameda  KK-08      195
 ## 2    61499            Manzanita Elementary   Butte  KK-08      240
@@ -355,9 +348,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Create several variables that are needed for the analysis.</li>
 <li>We use <code>dplyr</code> for this purpose.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>( <span class="dt">STR =</span> students <span class="op">/</span><span class="st"> </span>teachers ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">score =</span> (read <span class="op">+</span><span class="st"> </span>math) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> ) -&gt;<span class="st"> </span>CASchools </code></pre>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">score =</span> (read <span class="op">+</span><span class="st"> </span>math) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> ) -&gt;<span class="st"> </span>CASchools </code></pre></div>
 </div>
 <div id="descriptive-statistics" class="section level4">
 <h4><span class="header-section-number">9.1.3.2</span> Descriptive statistics</h4>
@@ -365,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>There are several ways to show descriptive statistics</li>
 <li>The standard one is to use <code>summary()</code> function</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(CASchools)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(CASchools)</code></pre></div>
 <pre><code>##    district            school                  county      grades   
 ##  Length:420         Length:420         Sonoma     : 29   KK-06: 61  
 ##  Class :character   Class :character   Kern       : 27   KK-08:359  
@@ -402,9 +395,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>This returns the desriptive statistics for all the variables in dataframe.</li>
 <li>You can combine this with <code>dplyr::select</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(STR, score) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summary</span>()</code></pre>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre></div>
 <pre><code>##       STR            score      
 ##  Min.   :14.00   Min.   :605.5  
 ##  1st Qu.:18.58   1st Qu.:640.0  
@@ -415,7 +408,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>You can do a bit lengthly thing manually like this.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute sample averages of STR and score</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute sample averages of STR and score</span>
 avg_STR &lt;-<span class="st"> </span><span class="kw">mean</span>(CASchools<span class="op">$</span>STR) 
 avg_score &lt;-<span class="st"> </span><span class="kw">mean</span>(CASchools<span class="op">$</span>score)
 
@@ -434,7 +427,7 @@ DistributionSummary &lt;-<span class="st"> </span><span class="kw">data.frame</s
                                   <span class="dt">quantile =</span> <span class="kw">rbind</span>(quant_STR, quant_score))
 
 <span class="co"># print the summary to the console</span>
-DistributionSummary</code></pre>
+DistributionSummary</code></pre></div>
 <pre><code>##               Average StandardDeviation quantile.10. quantile.25.
 ## quant_STR    19.64043          1.891812      17.3486     18.58236
 ## quant_score 654.15655         19.053347     630.3950    640.05000
@@ -447,7 +440,7 @@ DistributionSummary</code></pre>
 <ul>
 <li>My personal favorite is to use <code>stargazer</code> function.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stargazer</span>(CASchools, <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stargazer</span>(CASchools, <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## ===========================================================================
 ## Statistic    N    Mean    St. Dev.     Min    Pctl(25)  Pctl(75)     Max   
@@ -468,8 +461,8 @@ DistributionSummary</code></pre>
 <ul>
 <li>You can choose summary statistics you want to report.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stargazer</span>( <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">summary.stat =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;p75&quot;</span>, <span class="st">&quot;sd&quot;</span>) ) </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CASchools <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stargazer</span>( <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>, <span class="dt">summary.stat =</span> <span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;p75&quot;</span>, <span class="st">&quot;sd&quot;</span>) ) </code></pre></div>
 <pre><code>## 
 ## ===================================
 ## Statistic    N  Pctl(75)  St. Dev. 
@@ -497,16 +490,16 @@ DistributionSummary</code></pre>
 <ul>
 <li>Let’s see how test score and student-teacher-ratio is correlated.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(score <span class="op">~</span><span class="st"> </span>STR, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(score <span class="op">~</span><span class="st"> </span>STR, 
      <span class="dt">data =</span> CASchools,
      <span class="dt">main =</span> <span class="st">&quot;Scatterplot of TestScore and STR&quot;</span>, 
      <span class="dt">xlab =</span> <span class="st">&quot;STR (X)&quot;</span>,
-     <span class="dt">ylab =</span> <span class="st">&quot;Test Score (Y)&quot;</span>)</code></pre>
+     <span class="dt">ylab =</span> <span class="st">&quot;Test Score (Y)&quot;</span>)</code></pre></div>
 <p><img src="Econometrics_using_R_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <ul>
 <li>Use <code>cor()</code> to compute the correlation between two numeric vectors.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(CASchools<span class="op">$</span>STR, CASchools<span class="op">$</span>score)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(CASchools<span class="op">$</span>STR, CASchools<span class="op">$</span>score)</code></pre></div>
 <pre><code>## [1] -0.2263627</code></pre>
 </div>
 </div>
@@ -516,17 +509,15 @@ DistributionSummary</code></pre>
 <h4><span class="header-section-number">9.1.4.1</span> Simple linear regression</h4>
 <ul>
 <li>We use <code>lm()</code> function to run linear regression</li>
-<li>First, consider the simple linear regression
-<span class="math display">\[
+<li>First, consider the simple linear regression <span class="math display">\[
 score_i = \beta_0 + \beta_1 size_i + \epsilon_i
-\]</span>
-where <span class="math inline">\(size_i\)</span> is the class size (student-teacher-ratio).
+\]</span> where <span class="math inline">\(size_i\)</span> is the class size (student-teacher-ratio).
 <ul>
 <li>From now on we call student-teacher-ratio (STR) class size.</li>
 </ul></li>
 <li>To run this regression, we use <code>lm</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we rename the variable `STR`</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we rename the variable `STR`</span>
 CASchools <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename</span>( <span class="dt">size =</span> STR) -&gt;<span class="st"> </span>CASchools
 
@@ -534,7 +525,7 @@ CASchools <span class="op">%&gt;%</span><span class="st"> </span>
 model1_summary &lt;-<span class="st"> </span><span class="kw">lm</span>( score <span class="op">~</span><span class="st"> </span>size, <span class="dt">data =</span> CASchools)
 
 <span class="co"># See the results</span>
-<span class="kw">summary</span>(model1_summary)</code></pre>
+<span class="kw">summary</span>(model1_summary)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = score ~ size, data = CASchools)
@@ -544,21 +535,20 @@ model1_summary &lt;-<span class="st"> </span><span class="kw">lm</span>( score <
 ## -47.727 -14.251   0.483  12.822  48.540 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 698.9329     9.4675  73.825  &lt; 2e-16 ***
-## size         -2.2798     0.4798  -4.751 2.78e-06 ***
+##             Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept) 698.9329     9.4675  73.825 &lt; 0.0000000000000002 ***
+## size         -2.2798     0.4798  -4.751           0.00000278 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 18.58 on 418 degrees of freedom
 ## Multiple R-squared:  0.05124,    Adjusted R-squared:  0.04897 
-## F-statistic: 22.58 on 1 and 418 DF,  p-value: 2.783e-06</code></pre>
+## F-statistic: 22.58 on 1 and 418 DF,  p-value: 0.000002783</code></pre>
 <ul>
 <li>Interpretations
 <ul>
 <li>An increase of one student per teacher leads to 2.2 point decrease in test scores.</li>
-<li>p value is very small. The effect of the class size on test score is significant.
-Note: Be careful. These standard errors are NOT heteroskedasiticity robust. We will come back to this point soon.</li>
+<li>p value is very small. The effect of the class size on test score is significant. Note: Be careful. These standard errors are NOT heteroskedasiticity robust. We will come back to this point soon.</li>
 <li><span class="math inline">\(R^2 = 0.051\)</span>, implying that 5.1% of the variance of the dependent variable is explained by the model.</li>
 </ul></li>
 <li>You can add more variable in the regression (will see this soon)</li>
@@ -572,29 +562,29 @@ Note: Be careful. These standard errors are NOT heteroskedasiticity robust. We w
 <li>The package <code>sandwich</code> is automatically loaded if you load <code>AER</code> package.</li>
 </ul></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute heteroskedasticity-robust standard errors</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute heteroskedasticity-robust standard errors</span>
 vcov &lt;-<span class="st"> </span><span class="kw">vcovHC</span>(model1_summary, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>)
 
 <span class="co"># get standard error: the square root of the diagonal element in vcov</span>
 robust_se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">diag</span>(vcov))
-robust_se</code></pre>
+robust_se</code></pre></div>
 <pre><code>## (Intercept)        size 
 ##  10.3643617   0.5194893</code></pre>
 <ul>
 <li>Notice that robust standard errors are larger than the one we obtained from <code>lm</code>!</li>
 <li>How to combine the robust standard errors with the original summary? Use <code>coeftest()</code> from the package <code>lmtest</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load `lmtest`</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load `lmtest`</span>
 <span class="kw">library</span>(lmtest)
 
 <span class="co"># Combine robust standard errors</span>
-<span class="kw">coeftest</span>(model1_summary, <span class="dt">vcov. =</span> vcov)</code></pre>
+<span class="kw">coeftest</span>(model1_summary, <span class="dt">vcov. =</span> vcov)</code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
-##              Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 698.93295   10.36436 67.4362 &lt; 2.2e-16 ***
-## size         -2.27981    0.51949 -4.3886 1.447e-05 ***
+##              Estimate Std. Error t value              Pr(&gt;|t|)    
+## (Intercept) 698.93295   10.36436 67.4362 &lt; 0.00000000000000022 ***
+## size         -2.27981    0.51949 -4.3886            0.00001447 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
@@ -603,11 +593,11 @@ robust_se</code></pre>
 <ul>
 <li><code>stargazer</code> is useful to show the regression result.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load</span>
 <span class="kw">library</span>(stargazer)
 
 <span class="co"># Create output by stargazer</span>
-stargazer<span class="op">::</span><span class="kw">stargazer</span>(model1_summary, <span class="dt">type =</span><span class="st">&quot;text&quot;</span>)</code></pre>
+stargazer<span class="op">::</span><span class="kw">stargazer</span>(model1_summary, <span class="dt">type =</span><span class="st">&quot;text&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## ===============================================
 ##                         Dependent variable:    
@@ -631,14 +621,14 @@ stargazer<span class="op">::</span><span class="kw">stargazer</span>(model1_summ
 <ul>
 <li>Use robust standard errors in stargazer output</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Prepare robust standard errors in list</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Prepare robust standard errors in list</span>
 rob_se &lt;-<span class="st"> </span><span class="kw">list</span>( <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(model1_summary, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>) ) ) ) 
 
 <span class="co"># generate regression table. </span>
 
 <span class="kw">stargazer</span>( model1_summary, 
            <span class="dt">se =</span> rob_se, 
-           <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre>
+           <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre></div>
 <pre><code>## 
 ## ===============================================
 ##                         Dependent variable:    
@@ -663,7 +653,7 @@ rob_se &lt;-<span class="st"> </span><span class="kw">list</span>( <span class="
 <div id="full-results" class="section level4">
 <h4><span class="header-section-number">9.1.4.4</span> Full results</h4>
 <p>Taken from <a href="https://www.econometrics-with-r.org/7-6-analysis-of-the-test-score-data-set.html" class="uri">https://www.econometrics-with-r.org/7-6-analysis-of-the-test-score-data-set.html</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the stargazer library</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the stargazer library</span>
 
 <span class="co"># estimate different model specifications</span>
 spec1 &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>size, <span class="dt">data =</span> CASchools)
@@ -672,7 +662,7 @@ spec3 &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class
 spec4 &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>size <span class="op">+</span><span class="st"> </span>english <span class="op">+</span><span class="st"> </span>calworks, <span class="dt">data =</span> CASchools)
 spec5 &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>size <span class="op">+</span><span class="st"> </span>english <span class="op">+</span><span class="st"> </span>lunch <span class="op">+</span><span class="st"> </span>calworks, <span class="dt">data =</span> CASchools)
 
-<span class="co"># gather robust standard errors in a list</span>
+<span class="co"># gather robust standard errors in a listh</span>
 rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(spec1, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
                <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(spec2, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
                <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(spec3, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
@@ -686,7 +676,7 @@ rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="k
           <span class="dt">header =</span> F,
           <span class="dt">column.labels =</span> <span class="kw">c</span>(<span class="st">&quot;(I)&quot;</span>, <span class="st">&quot;(II)&quot;</span>, <span class="st">&quot;(III)&quot;</span>, <span class="st">&quot;(IV)&quot;</span>, <span class="st">&quot;(V)&quot;</span>),
           <span class="dt">type =</span><span class="st">&quot;text&quot;</span>, 
-          <span class="dt">keep.stat =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;adj.rsq&quot;</span>))</code></pre>
+          <span class="dt">keep.stat =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;adj.rsq&quot;</span>))</code></pre></div>
 <pre><code>## 
 ## ===================================================================
 ##                               Dependent variable:                  
@@ -728,8 +718,8 @@ rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="k
           </div>
         </div>
       </div>
-<a href="linear-regression-1-theory.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="linear-regression-1-theory.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression-3-discussions-on-ols-assumptions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -779,7 +769,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

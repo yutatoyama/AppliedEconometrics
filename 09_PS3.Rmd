@@ -1,0 +1,123 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Exercise 2 (Problem Set 3)
+
+* Due date: June 4th (Tue) 11pm.
+
+## Rules
+
+- If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can use both Japanese and English to write your answer. 
+- Submit your solution through `CourseN@vi`.
+- **Important:** Submission format
+  - If you use Rmarkdown, please compile your Rmarkdown file into either "html" or "PDF" file and submit **both** the compiled file and a Rmarkdown file. 
+  - If you do not use Rmarkdown, please submit the document file that contains your answer and R script file (.R file) **separately**, that is, you submit **two files**.
+
+## Question 1: Omitted Variable Bias
+
+The goal of this question is to investigate the omitted variable bias through Monte Carlo simulations. Consider the following model 
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i
+$$
+
+You compare the sampling distribution of OLS estimates for $\beta_1$ with and without $x_2$ included in the regression. Here is the suggested procedure for this excercise.
+
+1. Set the data generating process. 
+    - Set the parameters $\beta_0 = 1, \beta_1 = 2, \beta_2 = 1$
+    - The explanatory variables $(x_1, x_2)$ are i.i.d. drawn from the multivariate normal distribution
+    $$
+    \left(\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array}\right)\sim N\left(\left(\begin{array}{c}
+3\\
+4
+\end{array}\right),\left(\begin{array}{cc}
+2 & 1\\
+1 & 2
+\end{array}\right)\right)
+    $$
+    - The error term $\epsilon_it$ is i.i.d. drawn from $N(0, 1)$
+1. Draw the dataset $\{y_i, x_{i1}, x_{i2} \}_{i=1}^N$ with $N = 200$.
+3. Using the drawn dataset, regress $y$ on $x_1$ and $x_2$ with constant term. Obtain the OLS estimate for $\beta_1$. Let's call this $\hat\beta_1^{long}$ 
+4. Regress $y$ on $x_1$ with constant term **by omitting $x_2$** and obtain the OLS estimate for $\beta_1$. Let's call this $\hat\beta_1^{short}$  
+5. Repeat step 2 to 4 for $500$ times and obtain $\hat\beta_1^{long}$ and $\hat\beta_1^{short}$ for each drawn sample. 
+6. Plot the distribution of $\hat\beta_1^{long}$ and $\hat\beta_1^{short}$ across samples. 
+
+Please answer the following questions using your simulation results.
+
+- (1) Show the sampling distribution for $\hat\beta_1^{long}$ and $\hat\beta_1^{short}$. 
+- (2) Are these estimates biased? If biased, is the magnitude of bias consistent with theory? 
+- (3) We set $Cov(x_1, x_2)=1$ above. Repeat the same simulation with $Cov(x_1, x_2)=0$. How does the result would change?
+
+## Question 2: Empirical Analysis using Data from Washington(2008, AER)
+
+*Acknowledgement: This exercise is based on the material from Econ 281 "Introductory Applied Econometrics" in Winter 2017 taught by Daley Kutzman at Northwestern University* 
+
+This exercise uses the data from Ebonya Washington's paper, "Female Socialization: How Daughters Affect Their Legislator Father's Voting on Women's Issues," published in *American Economic Review* in 2008. This paper studies whether having a daughter affects legislator's voting on women's issues. 
+
+
+### Preliminary: data cleaning
+
+You can find the file ["data_PS3_basic.dta"](data_PS3_basic.dta) that is available at the journal [website](https://www.aeaweb.org/articles?id=10.1257/aer.98.1.311). 
+This file is in Stata format. You can use `read.dta` function included in `foreign` packages.
+
+```{r, eval = FALSE}
+# Example: 
+library(foreign)
+mydata <- read.dta("c:/mydata.dta")
+```
+
+The original dataset contains data from the 105th to 108th U.S. Congress. 
+We only use the observation from the 105th congress. The variable `congress` indicates this information. Use `filter` function in `dplyr` to subtract observations from the 105th.
+
+The dataset contains many variables, some of which are not used in this exercise. Keep the following variables in the final dataset (Hint: use `select` function in `dplyr`).
+
+| Name | Description 
+|:-----------|:-------------------------------------------------|
+|aauw |AAUW score
+|totchi| Total number of children
+|ngirls | Number of daughters
+|party | Political party. Democrats if 1, Republicans if 2, and Independent if 3.
+|famale | Female dummy variable
+|white | White dummy variable
+|srvlng | Years of service
+|age |  Age
+|demvote | State democratic vote share in most recent presidential election
+|medinc | District median income
+|perf | Female proportion of district voting age population
+|perw | White proportion of total district population
+|perhs | High school graduate proportion of district population age 25
+|percol | College graduate proportion of district population age 25
+|perur | Urban proportion of total district population
+|moredef | State proportion who favor more defense spending
+|stateabb | State abbreviation 
+|district | id for electoral district
+
+You can find the detailed description of each variable in the original paper. The main variable in this analysis is `AAUW`, a score created by the American Association of University Women (AAUW). For each congress, AAUW selects pieces of
+legislation in the areas of education, equality, and reproductive rights. The AAUW keeps track of how each
+legislator voted on these pieces of legislation and whether their vote aligned with the AAUW's position. The
+legislator's score is equal to the proportion of these votes made in agreement with the AAUW.
+
+### Questions
+
+1. Report summary statistics of the following variables in the dataset: political party, age, race, gender, AAUW score, the number of children, and the number of daughters.
+2. Plot the AAUW score against the number of daughters. 
+1. Estimate the following linear regression models using `lm` command. Do not forget to correct the standard errors! Report your regression results in a table. 
+    $$
+    \begin{aligned}
+    aauw_i = \ & \beta_0 + \beta_1 ngirls_i + \epsilon_i \\
+    aauw_i = \ & \beta_0 + \beta_1 ngirls_i + \beta_2 totchi + \epsilon_i \\
+    aauw_i = \ & \beta_0 + \beta_1 ngirls_i + \beta_2 totchi + \beta_3 famale_i + \beta_4 repub_i + \epsilon_i 
+    \end{aligned}
+    $$
+    - All the variables used in the above specifications are in the dataset except for $repub_i$. $repub_i$ takes 1 if the legislator $i$ is affiliated with the Republican party. 
+    - **Important** Never put the raw output from `lm` command shown in R console into your answer! Please prepare a table for regression results as if you write a report or a paper. **If you copy and paste the raw output from `lm` command, you will get 0 points for the empirical exercise part of this problem set.**
+1. Compare the OLS estimates of $\beta_1$ across the above three specifications. Discuss what explains the difference (if any) of the estimate across three specifications?
+2. Consider the third specification (with 3 controls in addition to $ngirls_i$). Conditional on the number of children and other variables, do you think $ngrils_i$ is plausibly exogenous (i.e., uncorrelated with the error term)? Discuss.
+3. It is possible that the effects of having daughters might be different for female and male legislators. Estimate a regression model  that allow for heterogenous effects of daughters for male and female. Discuss whether this story is true or not. 
+

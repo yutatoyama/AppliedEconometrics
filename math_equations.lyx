@@ -193,6 +193,26 @@ E[\mathbf{x}_{i}'\mathbf{x}_{i}]^{-1}\sigma^{2}
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+\left(\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array}\right)\sim N\left(\left(\begin{array}{c}
+3\\
+4
+\end{array}\right),\left(\begin{array}{cc}
+2 & 1\\
+1 & 2
+\end{array}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 ^
 \end_layout
 
