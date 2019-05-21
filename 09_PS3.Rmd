@@ -43,6 +43,7 @@ x_{2}
     $$
     - The error term $\epsilon_it$ is i.i.d. drawn from $N(0, 1)$
 1. Draw the dataset $\{y_i, x_{i1}, x_{i2} \}_{i=1}^N$ with $N = 200$.
+    - To draw the random numbers from the joint normal distribution, use `mvrnorm` function from `MASS` package. 
 3. Using the drawn dataset, regress $y$ on $x_1$ and $x_2$ with constant term. Obtain the OLS estimate for $\beta_1$. Let's call this $\hat\beta_1^{long}$ 
 4. Regress $y$ on $x_1$ with constant term **by omitting $x_2$** and obtain the OLS estimate for $\beta_1$. Let's call this $\hat\beta_1^{short}$  
 5. Repeat step 2 to 4 for $500$ times and obtain $\hat\beta_1^{long}$ and $\hat\beta_1^{short}$ for each drawn sample. 
@@ -106,7 +107,6 @@ legislator's score is equal to the proportion of these votes made in agreement w
 ### Questions
 
 1. Report summary statistics of the following variables in the dataset: political party, age, race, gender, AAUW score, the number of children, and the number of daughters.
-2. Plot the AAUW score against the number of daughters. 
 1. Estimate the following linear regression models using `lm` command. Do not forget to correct the standard errors! Report your regression results in a table. 
     $$
     \begin{aligned}

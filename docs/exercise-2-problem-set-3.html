@@ -272,7 +272,10 @@ x_{2}
 \]</span></li>
 <li>The error term <span class="math inline">\(\epsilon_it\)</span> is i.i.d. drawn from <span class="math inline">\(N(0, 1)\)</span></li>
 </ul></li>
-<li>Draw the dataset <span class="math inline">\(\{y_i, x_{i1}, x_{i2} \}_{i=1}^N\)</span> with <span class="math inline">\(N = 200\)</span>.</li>
+<li>Draw the dataset <span class="math inline">\(\{y_i, x_{i1}, x_{i2} \}_{i=1}^N\)</span> with <span class="math inline">\(N = 200\)</span>.
+<ul>
+<li>To draw the random numbers from the joint normal distribution, use <code>mvrnorm</code> function from <code>MASS</code> package.</li>
+</ul></li>
 <li>Using the drawn dataset, regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> with constant term. Obtain the OLS estimate for <span class="math inline">\(\beta_1\)</span>. Let’s call this <span class="math inline">\(\hat\beta_1^{long}\)</span></li>
 <li>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x_1\)</span> with constant term <strong>by omitting <span class="math inline">\(x_2\)</span></strong> and obtain the OLS estimate for <span class="math inline">\(\beta_1\)</span>. Let’s call this <span class="math inline">\(\hat\beta_1^{short}\)</span><br />
 </li>
@@ -396,7 +399,6 @@ mydata &lt;-<span class="st"> </span><span class="kw">read.dta</span>(<span clas
 <h3><span class="header-section-number">11.3.2</span> Questions</h3>
 <ol style="list-style-type: decimal">
 <li>Report summary statistics of the following variables in the dataset: political party, age, race, gender, AAUW score, the number of children, and the number of daughters.</li>
-<li>Plot the AAUW score against the number of daughters.</li>
 <li>Estimate the following linear regression models using <code>lm</code> command. Do not forget to correct the standard errors! Report your regression results in a table. <span class="math display">\[
 \begin{aligned}
 aauw_i = \ &amp; \beta_0 + \beta_1 ngirls_i + \epsilon_i \\
