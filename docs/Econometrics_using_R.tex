@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Last updated: 2019/05/21}
+    \date{Last updated: 2019/05/28}
 
 
 \begin{document}
@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.26660732  1.11330104  3.01658960  1.82003334  0.94607267
-##  [6] -0.99851960 12.17044542 -3.10992895 -0.03674226  0.44998447
+##  [1]  1.666064368  0.018928785 -5.046554949  9.574404190 -1.344865796
+##  [6] -5.352921268  0.006957755 -5.321193544  6.059195577  8.066038723
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.12417707 -0.16064321  0.30939253  0.01389125 -0.20194189
-##  [6] -0.68217799  2.57002683 -1.20361119 -0.44465766 -0.32445573
+##  [1]  0.1511821 -0.1475938 -1.0664281  1.5856856 -0.3949742 -1.1220002
+##  [7] -0.1497652 -1.1162451  0.9480576  1.3120813
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16.39636
+## [1] 30.39257
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16.39636
+## [1] 30.39257
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16.39636
+## [1] 30.39257
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 14.75673
+## [1] 27.35332
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -3229,6 +3229,15 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \begin{Highlighting}[]
 \CommentTok{# Use "readr" package}
 \KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: パッケージ 'readr' はバージョン 3.5.3 の R の下で造られました
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{pums2000 <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data_pums_2000.csv"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -3289,13 +3298,22 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \CommentTok{# income distribution in population}
 \CommentTok{# Note that the unit is in USD.}
 \KeywordTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: パッケージ 'ggplot2' はバージョン 3.5.3 の R の下で造られました
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{qplot}\NormalTok{(pop, }\DataTypeTok{geom =} \StringTok{"density"}\NormalTok{, }
       \DataTypeTok{xlab =} \StringTok{"Income"}\NormalTok{,}
       \DataTypeTok{ylab =} \StringTok{"Density"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Econometrics_using_R_files/figure-latex/unnamed-chunk-107-1.pdf}
+\includegraphics{05_Statistics_files/figure-latex/unnamed-chunk-3-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3315,7 +3333,7 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Econometrics_using_R_files/figure-latex/unnamed-chunk-108-1.pdf}
+\includegraphics{05_Statistics_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3378,7 +3396,15 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \CommentTok{# Use reshape library}
 \CommentTok{# install.packages("reshape")}
 \KeywordTok{library}\NormalTok{(}\StringTok{"reshape"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Warning: パッケージ 'reshape' はバージョン 3.5.3 の R の下で造られました
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{# Use "melt" to change the format of result_data}
 \NormalTok{data_for_plot <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ result_data, }\DataTypeTok{variable.name =} \StringTok{"Variable"}\NormalTok{ )}
 \end{Highlighting}
@@ -3403,7 +3429,7 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Econometrics_using_R_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{05_Statistics_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3519,7 +3545,7 @@ consistent}{Sample mean \textbackslash{}bar\{Y\} is unbiased and consistent}}\la
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Econometrics_using_R_files/figure-latex/unnamed-chunk-112-1.pdf}
+\includegraphics{05_Statistics_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3759,12 +3785,12 @@ change in \(Y\)\tabularnewline
   regression model.
 \item
   For example: \[
-  wage_i = \beta_0 + \beta_1 educ_i + \beta_2 educ_i \times white_i + \epsilon_i
+  wage_i = \beta_0 + \beta_1 educ_i + \beta_2 white_i + \beta_3 educ_i \times white_i + \epsilon_i
   \] where \(wage_i\) is the earnings of person \(i\) and \(educ_i\) is
   the years of schooling for person \(i\).
 \item
   The effect of \(educ_i\) is \[
-  \frac{\partial wage_i}{\partial educ_i} = \beta_1 + \beta_2 white_i,
+  \frac{\partial wage_i}{\partial educ_i} = \beta_1 + \beta_3 white_i,
   \]
 \item
   This allows for heterogenous effects of education across races.
@@ -4073,8 +4099,94 @@ R}\label{linear-regression-2-implementation-in-r}
 
 \CommentTok{# load packages}
 \KeywordTok{library}\NormalTok{(}\StringTok{"AER"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  要求されたパッケージ car をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ carData をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ lmtest をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ zoo をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ sandwich をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ survival をロード中です
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:car' からマスクされています: 
+## 
+##      recode
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:stats' からマスクされています: 
+## 
+##      filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(}\StringTok{"stargazer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Please cite as:
+\end{verbatim}
+
+\begin{verbatim}
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+\end{verbatim}
+
+\begin{verbatim}
+##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(}\StringTok{"lmtest"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4416,7 +4528,7 @@ analysis}\label{step-1-descriptive-analysis}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Econometrics_using_R_files/figure-latex/unnamed-chunk-123-1.pdf}
+\includegraphics{07_Regression2_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -5070,14 +5182,28 @@ multicollinearity.}\label{imperfect-multicollinearity.}
   variables, implying perfect multicolinearity!!
 \end{itemize}
 
-\subsubsection{Lesson for an empirical
+\section{Lesson for an empirical
 analysis}\label{lesson-for-an-empirical-analysis}
 
 \begin{itemize}
-\tightlist
 \item
   We often say \textbf{the variation of the variable of interest is
   important in an empirical analysis}.
+\item
+  This has two meanings:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{exogenous} variation (i.e., uncorrelated with error term)
+  \item
+    large variance
+  \end{enumerate}
+\item
+  The former is a key for mean independence assumption.
+\item
+  The latter is a key for precise estimation (smaller standard error).
 \item
   If we have more variation, the standard error of the OLS estimator is
   small, meaning that we can precisely estimate the coefficient.
@@ -5433,6 +5559,769 @@ proportion of these votes made in agreement with the AAUW.
   allow for heterogenous effects of daughters for male and female.
   Discuss whether this story is true or not.
 \end{enumerate}
+
+\chapter{Instrumental Variable 1:
+Framework}\label{instrumental-variable-1-framework}
+
+\section{Introduction: Endogeneity Problem and its
+Solution}\label{introduction-endogeneity-problem-and-its-solution}
+
+\begin{itemize}
+\tightlist
+\item
+  When \(Cov(x_k, \epsilon)=0\) does not hold, we have
+  \textbf{endogeneity problem}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We call such \(x_k\) an \textbf{endogenous variable}.
+  \end{itemize}
+\item
+  In this chapter, I introduce an \textbf{instrumental variable}
+  estimation method, a solution to this issue.
+\item
+  The lecture plan
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    More on endogeneity issues
+  \item
+    Framework
+  \item
+    Implementation in R
+  \item
+    Examples
+  \end{enumerate}
+\end{itemize}
+
+\section{Examples of Endogeneity
+Problem}\label{examples-of-endogeneity-problem}
+
+\begin{itemize}
+\tightlist
+\item
+  Here, I explain a bit more about endogeneity problems.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Omitted variable bias
+  \item
+    Measurement error
+  \item
+    Simultaneity
+  \end{enumerate}
+\end{itemize}
+
+\subsection{More on Omitted Variable
+Bias}\label{more-on-omitted-variable-bias}
+
+\begin{itemize}
+\tightlist
+\item
+  Remember the wage regression equation (true model) \[
+  \begin{aligned}
+  \log W_{i}  &=&  & \beta_{0}+\beta_{1}S_{i}+\beta_{2}A_{i}+u_{i} \\
+  E[u_{i}|S_{i},A_{i}]    &=& & 0
+  \end{aligned}
+  \] where \(W_{i}\) is wage, \(S_{i}\) is the years of schooling, and
+  \(A_{i}\) is the ability.
+\item
+  Suppose that you omit \(A_i\) and run the following regression
+  instead. \[
+  \log W_{i}  =   \alpha_{0}+\alpha_{1} S_{i} + v_i 
+  \] Notice that \(v_i = \beta_2 A_i + u_i\), so that \(S_i\) and
+  \(v_i\) is likely to be correlated.
+\item
+  You might want to add more and more additional variables to capture
+  the effect of ability.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Test scores, GPA, SAT scores, etc\ldots{}
+  \end{itemize}
+\item
+  However, can you make sure that \(S_i\) is indeed exogenous after
+  adding many control variables?
+\item
+  Multivariate regression cannot deal with the presence of
+  \textbf{unobserved heterogeneity} that matters both in wage and years
+  of schooling.
+\end{itemize}
+
+\subsection{Measurement error}\label{measurement-error}
+
+\begin{itemize}
+\tightlist
+\item
+  Measurement error in variables
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reporting error, respondent does not understand the question,
+    etc\ldots{}
+  \end{itemize}
+\item
+  Consider the regression \[
+  y_{i}=\beta_{0}+\beta_{1}x_{i}^{*}+\epsilon_{i}
+  \]
+\item
+  Here, we only observe \(x_{i}\) with error: \[
+  x_{i}=x_{i}^{*}+e_{i}\] where \(e_{i}\) is measurement error.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(e_{i}\) is independent from \(\epsilon_i\) and \(x_i^*\) (called
+    classical measurement error)
+  \item
+    You can think \(e_i\) as a noise added to the data.
+  \end{itemize}
+\item
+  The regression equation is \[
+  \begin{aligned}
+  y_{i} = & \  \beta_{0}+\beta_{1}(x_{i}-e_{i})+\epsilon_{i} \\
+  = & \ \beta_{0}+\beta_{1}x_{i}+(\epsilon_{i}-\beta_{1}e_{i})
+  \end{aligned}
+  \]
+\item
+  Then we have correlation between \(x_{i}\) and the error
+  \(\epsilon_{i}-\beta_{1}e_{i}\), violating the mean independence
+  assumption
+\end{itemize}
+
+\subsection{Simultaneity (or reverse
+causality)}\label{simultaneity-or-reverse-causality}
+
+\begin{itemize}
+\item
+  Dependent variable and explanatory variable (endogenous variable) are
+  determined simultaneously.
+\item
+  Consider the demand and supply curve \[
+  \begin{aligned}
+  q^{d}   =\beta_{0}^{d}+\beta_{1}^{d}p+\beta_{2}^{d}x+u^{d} \\
+  q^{s}   =\beta_{0}^{s}+\beta_{1}^{s}p+\beta_{2}^{s}z+u^{s}
+  \end{aligned}
+  \]
+\item
+  The equilibrium price and quantity are determined by \(q^{d}=q^{s}\).
+\item
+  In this case, \[
+  p=\frac{(\beta_{2}^{s}z-\beta_{2}^{d}z)+(\beta_{0}^{s}-\beta_{0}^{d})+(u^{s}-u^{d})}{\beta_{1}^{d}-\beta_{1}^{s}}
+  \] implying the correlation between the price and the error term.
+\item
+  Putting this differently, the data points we observed is the
+  intersection of these supply and demand curves.
+\item
+  How can we distinguish demand and supply?
+  \includegraphics{fig_Demand_Supply.png}
+\end{itemize}
+
+\section{Idea of IV Regression}\label{idea-of-iv-regression}
+
+\begin{itemize}
+\item
+  Let's start with a simple case. \[
+  y_i = \beta_0 + \beta_1 x_i + \epsilon_i, 
+  \] and \(Cov(x_i, \epsilon_i) \neq 0\).
+\item
+  Now, we consider another variable \(z_i\), which we call
+  \textbf{instrumental variable (IV)}.
+\item
+  Instrumental variable \(z_i\) should satisfies the following two
+  conditions:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Independence}: \(Cov(z_i, \epsilon_i) = 0\). No correlation
+    between IV and error.
+  \item
+    \textbf{Relevance}: \(Cov(z_i, x_i) \neq 0\). There should be
+    correlation between IV and endogenous variable \(x_i\).
+  \end{enumerate}
+\item
+  Idea: Use the variation of \(x_i\) \textbf{induced by instrument
+  \(z_i\)} to estimate the direct (causal) effect of \(x_i\) on \(y_i\),
+  that is \(\beta_1\)!.
+\item
+  More on this:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Intuitively, the OLS estimator captures the correlation between
+    \(x\) and \(y\).
+  \item
+    If there is no correlation between \(x\) and \(\epsilon\), it
+    captures the causal effect \(\beta_1\).
+  \item
+    If not, the OLS estimator captures both direct and indirect effect,
+    the latter of which is bias.
+  \item
+    Now, let's capture the variation of \(x\) due to instrument \(z\),
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Such a variation should exist under \textbf{relevance} assumption.
+    \item
+      Such a variation should not be correlated with the error under
+      \textbf{independence assumption}
+    \end{itemize}
+  \item
+    By looking at the correlation between such variation and \(y\), you
+    can get the causal effect \(\beta_1\).
+  \end{enumerate}
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{fig_IV_idea.png}
+\caption{Idea IV}
+\end{figure}
+
+\section{Formal Framework and
+Estimation}\label{formal-framework-and-estimation}
+
+\subsection{Model}\label{model}
+
+\begin{itemize}
+\tightlist
+\item
+  We now introduce a general framework with multiple endogenous
+  variables and multiple instruments.
+\item
+  Consider the model \[
+  \begin{aligned}
+    Y_i = \beta_0 + \beta_1 X_{1i} + \dots + \beta_K X_{Ki} + \beta_{K+1} W_{1i} + \dots + \beta_{K+R} W_{Ri} + u_i, 
+  \end{aligned}
+  \] with \(i=1,\dots,n\) is the general instrumental variables
+  regression model where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Y_i\) is the dependent variable
+  \item
+    \(\beta_0,\dots,\beta_{K+R}\) are \(1+K+R\) unknown regression
+    coefficients
+  \item
+    \(X_{1i},\dots,X_{Ki}\) are \(K\) endogenous regressors:
+    \(Cov(X_{ki}, u_i) \neq 0\) for all \(k\).
+  \item
+    \(W_{1i},\dots,W_{Ri}\) are \(R\) exogenous regressors which are
+    uncorrelated with \(u_i\). \(Cov(W_{ri}, u_i) = 0\) for all \(r\).
+  \item
+    \(u_i\) is the error term
+  \item
+    \(Z_{1i},\dots,Z_{Mi}\) are \(M\) instrumental variables
+  \end{itemize}
+\item
+  I will discuss conditions for valid instruments later.
+\end{itemize}
+
+\subsection{Estimation by Two Stage Least Squares
+(2SLS)}\label{estimation-by-two-stage-least-squares-2sls}
+
+\begin{itemize}
+\tightlist
+\item
+  We can estimate the above model by \textbf{Two Stage Least Squares
+  (2SLS)}
+\item
+  Step 1: \textbf{First-stage regression(s)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Run an OLS regression for each of the endogenous variables
+    (\(X_{1i},\dots,X_{ki}\)) on all instrumental variables
+    (\(Z_{1i},\dots,Z_{mi}\)), all exogenous variables
+    (\(W_{1i},\dots,W_{ri}\)) and an intercept.
+  \item
+    Compute the fitted values
+    (\(\widehat{X}_{1i},\dots,\widehat{X}_{ki}\)).
+  \end{itemize}
+\item
+  Step 2: \textbf{Second-stage regression}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Regress the dependent variable \(Y_i\) on \textbf{the predicted
+    values} of all endogenous regressors
+    (\(\widehat{X}_{1i},\dots,\widehat{X}_{ki}\)), all exogenous
+    variables (\(W_{1i},\dots,W_{ri}\)) and an intercept using OLS.
+  \item
+    This gives
+    \(\widehat{\beta}_{0}^{TSLS},\dots,\widehat{\beta}_{k+r}^{TSLS}\),
+    the 2SLS estimates of the model coefficients.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Intuition}\label{intuition}
+
+\begin{itemize}
+\tightlist
+\item
+  Why does this work? Let's go back to the simple example with 1
+  endogenous variable and 1 IV.
+\item
+  In the first stage, we estimate\\
+  \[
+  x_i = \pi_0 + \pi_1 z_i + v_i
+  \] by OLS and obtain the fitted value
+  \(\widehat{x}_i = \widehat{\pi}_0 + \widehat{\pi}_1 z_i\).
+\item
+  In the second stage, we estimate \[
+  y_i = \beta_0 + \beta_1 \widehat{x}_i + u_i
+  \]
+\item
+  Since \(\widehat{x}_i\) depends only on \(z_i\), which is uncorrelated
+  with \(u_i\), the second stage can estimate \(\beta_1\) without bias.
+\item
+  Can you see the importance of both independence and relevance
+  asssumption here? (More formal discussion later)
+\end{itemize}
+
+\subsection{Conditions for Valid IVs in a general
+framework}\label{conditions-for-valid-ivs-in-a-general-framework}
+
+\subsubsection{Necessary condition}\label{necessary-condition}
+
+\begin{itemize}
+\tightlist
+\item
+  Depending on the number of IVs, we have three cases
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Over-identification: \(M > K\)
+  \item
+    Just identification{]} \(M=K\)
+  \item
+    Under-identification \(M < K\)
+  \end{enumerate}
+\item
+  The necessary condition is \(M \geq K\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We should have more IVs than endogenous variables!!
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Sufficient condition}\label{sufficient-condition}
+
+\begin{itemize}
+\tightlist
+\item
+  How about sufficiency?
+\item
+  In a general framework, the sufficient condition for valid instruments
+  is given as follows.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Independence}: \(Cov( Z_{mi}, \epsilon_i) = 0\) for all
+    \(m\).
+  \item
+    \textbf{Relevance}: In the second stage regression, the variables \[
+    \left( \widehat{X}_{1i},\dots,\widehat{X}_{ki}, W_{1i},\dots,W_{ri}, 1 \right)
+    \] are not perfectly multicollinear.
+  \end{enumerate}
+\item
+  What does the relevance condition mean?
+\item
+  In the simple example above, The first stage is\\
+  \[
+  x_i = \pi_0 + \pi_1 z_i + v_i
+  \] and the second stage is \[
+  y_i = \beta_0 + \beta_1 \widehat{x}_i + u_i
+  \]
+\item
+  The second stage would have perfect multicollinarity if \(\pi_1 = 0\)
+  (i.e., \(\widehat{x}_i = \pi_0\)).
+\item
+  Back to the general case, the first stage for \(X_k\) can be written
+  as \[
+  X_{ki} = \pi_0 + \pi_1 Z_{1i} + \cdots + \pi_M Z_{Mi} + \pi_{M+1} W_{1i} + \cdots + \pi_{M+R} W_{Ri}
+  \] and one of \(\pi_1 , \cdots, \pi_M\) should be non-zero.
+\item
+  Intuitively speaking, \textbf{the instruments should be correlated
+  with endogenous variables after controlling for exogenous variables}
+\end{itemize}
+
+\section{Check Instrument Validity}\label{check-instrument-validity}
+
+\subsection{Relevance}\label{relevance}
+
+\begin{itemize}
+\item
+  Instruments are \textbf{weak} if those instruments explain little
+  variation in the endogenous variables.
+\item
+  Weak instruments lead to
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    imprecise estimates (higher standard errors)
+  \item
+    The asymptotic distribution would deviate from a normal distribution
+    even if we have a large sample.
+  \end{enumerate}
+\item
+  Here is a rule of thumb to check the relevance conditions.
+\item
+  Consider the case with one endogenous variable \(X_{1i}\).
+\item
+  The first stage regression\\
+  \[
+  X_k = \pi_0 + \pi_1 Z_{1i} + \cdots + \pi_M Z_{Mi} + \pi_{M+1} W_{1i} + \cdots + \pi_{M+R} W_{Ri}
+  \]
+\item
+  And test the null hypothesis \[
+  \begin{aligned}
+  H_0 & : \pi_1 = \cdots = \pi_M = 0 \\ 
+  H_1 & : otherwise
+  \end{aligned}
+  \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is F test (test of joint hypothesis)
+  \end{itemize}
+\item
+  If we can reject this, we can say no concern for weak instruments.
+\item
+  A rule of thumbs is that the F statistic should be larger than 10.
+\item ~
+  \subsection{Independence (Instrument
+  exogeneity)}\label{independence-instrument-exogeneity}
+\item
+  Arguing for independence is hard and a key in empirical analysis.
+\item
+  Justification of this assumption depends on a context, institutional
+  features, etc\ldots{}
+\item
+  We will see this through examples in the next chapter.
+\end{itemize}
+
+\chapter{Instrumental Variable 2: Implementation in
+R}\label{instrumental-variable-2-implementation-in-r}
+
+\section{Example 1: Wage regression}\label{example-1-wage-regression}
+
+\begin{itemize}
+\tightlist
+\item
+  Use dataset ``Mroz'', cross-sectional labor force participation data
+  that accompany ``Introductory Econometrics'' by Wooldridge.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Original data from \emph{``The Sensitivity of an Empirical Model of
+    Married Women's Hours of Work to Economic and Statistical
+    Assumptions''} by Thomas Mroz published in \emph{Econometrica} in
+    1987.
+  \item
+    Detailed description of data:
+    \url{https://www.rdocumentation.org/packages/npsf/versions/0.4.2/topics/mroz}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"foreign"}\NormalTok{)}
+
+\CommentTok{# You might get a message "cannot read factor labels from Stata 5 files", but you do not have to worry about it. }
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.dta}\NormalTok{(}\StringTok{"MROZ.DTA"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in read.dta("MROZ.DTA"): cannot read factor labels from Stata 5
+## files
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Describe data
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stargazer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Please cite as:
+\end{verbatim}
+
+\begin{verbatim}
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+\end{verbatim}
+
+\begin{verbatim}
+##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{stargazer}\NormalTok{(data, }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ===================================================================
+## Statistic  N     Mean     St. Dev.   Min   Pctl(25) Pctl(75)  Max  
+## -------------------------------------------------------------------
+## inlf      753   0.568      0.496      0       0        1       1   
+## hours     753  740.576    871.314     0       0      1,516   4,950 
+## kidslt6   753   0.238      0.524      0       0        0       3   
+## kidsge6   753   1.353      1.320      0       0        2       8   
+## age       753   42.538     8.073      30      36       49      60  
+## educ      753   12.287     2.280      5       12       13      17  
+## wage      428   4.178      3.310    0.128   2.263    4.971   25.000
+## repwage   753   1.850      2.420    0.000   0.000    3.580   9.980 
+## hushrs    753 2,267.271   595.567    175    1,928    2,553   5,010 
+## husage    753   45.121     8.059      30      38       52      60  
+## huseduc   753   12.491     3.021      3       11       15      17  
+## huswage   753   7.482      4.231    0.412   4.788    9.167   40.509
+## faminc    753 23,080.600 12,190.200 1,500   15,428   28,200  96,000
+## mtr       753   0.679      0.083    0.442   0.622    0.721   0.942 
+## motheduc  753   9.251      3.367      0       7        12      17  
+## fatheduc  753   8.809      3.572      0       7        12      17  
+## unem      753   8.624      3.115      3      7.5       11      14  
+## city      753   0.643      0.480      0       0        1       1   
+## exper     753   10.631     8.069      0       4        15      45  
+## nwifeinc  753   20.129     11.635   -0.029  13.025   24.466  96.000
+## lwage     428   1.190      0.723    -2.054  0.817    1.604   3.219 
+## expersq   753  178.039    249.631     0       16      225    2,025 
+## -------------------------------------------------------------------
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Consider the wage regression \[
+  \log(w_i) = \beta_0 + \beta_1 educ_i + \beta_2 exper_i + \beta_3 exper_i^2 + \epsilon_i
+  \]
+\item
+  We assume that \(exper_i\) is exogenous but \(educ_i\) is endogenous.
+\item
+  As an instrument for \(educ_i\), we use the years of schooling for his
+  or her father and mother, which we call \(fathereduc_i\) and
+  \(mothereduc_i\).
+\item
+  Discussion on these IVs will be later.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"AER"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  要求されたパッケージ car をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ carData をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ lmtest をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ zoo をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ sandwich をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ survival をロード中です
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:car' からマスクされています: 
+## 
+##      recode
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:stats' からマスクされています: 
+## 
+##      filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# data cleaning}
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(lwage, educ, exper, expersq, motheduc, fatheduc) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{( }\KeywordTok{is.na}\NormalTok{(lwage) }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) ->}\StringTok{ }\NormalTok{data}
+
+\CommentTok{# OLS regression}
+\NormalTok{result_OLS <-}\StringTok{ }\KeywordTok{lm}\NormalTok{( lwage }\OperatorTok{~}\StringTok{ }\NormalTok{educ }\OperatorTok{+}\StringTok{ }\NormalTok{exper }\OperatorTok{+}\StringTok{ }\NormalTok{expersq, }\DataTypeTok{data =}\NormalTok{ data)}
+
+\CommentTok{# IV regression using fathereduc and mothereduc}
+\NormalTok{result_IV <-}\StringTok{ }\KeywordTok{ivreg}\NormalTok{(lwage }\OperatorTok{~}\StringTok{ }\NormalTok{educ }\OperatorTok{+}\StringTok{ }\NormalTok{exper }\OperatorTok{+}\StringTok{ }\NormalTok{expersq }\OperatorTok{|}\StringTok{ }\NormalTok{fatheduc }\OperatorTok{+}\StringTok{ }\NormalTok{motheduc }\OperatorTok{+}\StringTok{ }\NormalTok{exper }\OperatorTok{+}\StringTok{ }\NormalTok{expersq, }\DataTypeTok{data =}\NormalTok{ data)}
+
+\CommentTok{# Robust standard errors }
+\CommentTok{# gather robust standard errors in a list}
+\NormalTok{rob_se <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(result_OLS, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))),}
+               \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(result_IV, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))))}
+
+\CommentTok{# Show result}
+\KeywordTok{stargazer}\NormalTok{(result_OLS, result_IV, }\DataTypeTok{type =}\StringTok{"text"}\NormalTok{, }\DataTypeTok{se =}\NormalTok{ rob_se)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ===================================================================
+##                                        Dependent variable:         
+##                                ------------------------------------
+##                                               lwage                
+##                                          OLS           instrumental
+##                                                          variable  
+##                                          (1)               (2)     
+## -------------------------------------------------------------------
+## educ                                  0.107***            0.061*   
+##                                        (0.013)           (0.033)   
+##                                                                    
+## exper                                 0.042***           0.044***  
+##                                        (0.015)           (0.016)   
+##                                                                    
+## expersq                                -0.001*           -0.001**  
+##                                       (0.0004)           (0.0004)  
+##                                                                    
+## Constant                              -0.522***           0.048    
+##                                        (0.202)           (0.430)   
+##                                                                    
+## -------------------------------------------------------------------
+## Observations                             428               428     
+## R2                                      0.157             0.136    
+## Adjusted R2                             0.151             0.130    
+## Residual Std. Error (df = 424)          0.666             0.675    
+## F Statistic                    26.286*** (df = 3; 424)             
+## ===================================================================
+## Note:                                   *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  How about the first stage? You should always check this!!
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First stage regression }
+
+\NormalTok{result_1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(educ }\OperatorTok{~}\StringTok{ }\NormalTok{motheduc }\OperatorTok{+}\StringTok{ }\NormalTok{fatheduc }\OperatorTok{+}\StringTok{ }\NormalTok{exper }\OperatorTok{+}\StringTok{ }\NormalTok{expersq, }\DataTypeTok{data =}\NormalTok{ data)}
+
+\CommentTok{# F test}
+\KeywordTok{linearHypothesis}\NormalTok{(result_1st, }
+                 \KeywordTok{c}\NormalTok{(}\StringTok{"fatheduc = 0"}\NormalTok{, }\StringTok{"motheduc = 0"}\NormalTok{ ), }
+                 \DataTypeTok{vcov =}\NormalTok{ vcovHC, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear hypothesis test
+## 
+## Hypothesis:
+## fatheduc = 0
+## motheduc = 0
+## 
+## Model 1: restricted model
+## Model 2: educ ~ motheduc + fatheduc + exper + expersq
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F                Pr(>F)    
+## 1    425                                    
+## 2    423  2 48.644 < 0.00000000000000022 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\subsection{Discussion on IV}\label{discussion-on-iv}
+
+\begin{itemize}
+\tightlist
+\item
+  Labor economists have used family background variables as IVs for
+  education.
+\item
+  Relevance: OK from the first stage regression.
+\item
+  Independence: A bit suspicious. Parents' education would be correlated
+  with child's ability through quality of nurturing at an early age.
+\item
+  Still, we can see that these IVs can mitigate (though may not
+  eliminate completely) the omitted variable bias.
+\item
+  Discussion on the validity of instruments is crucial in empirical
+  research.
+\end{itemize}
 
 
 \end{document}

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="Lecture Note for Applied Econometrics">
+  <title>12 Instrumental Variable 1: Framework | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="12 Instrumental Variable 1: Framework | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="12 Instrumental Variable 1: Framework | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="12 Instrumental Variable 1: Framework | Lecture Note for Applied Econometrics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-the-course.html">
+<link rel="prev" href="exercise-2-problem-set-3.html">
+<link rel="next" href="instrumental-variable-2-implementation-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,40 +255,262 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Lecture Note for Applied Econometrics</h1>
-<p class="author"><em>Yuta Toyama</em></p>
-<p class="date"><em>Last updated: 2019/05/28</em></p>
-</div>
-<div id="preface" class="section level1">
-<h1><span class="header-section-number">1</span> Preface</h1>
-<p>Welcome to Applied Econometrics using R!</p>
-<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
-<div id="about-this" class="section level2">
-<h2><span class="header-section-number">1.1</span> About this</h2>
-<p>This lecture note is maintained by Yuta Toyama.</p>
-</div>
-<div id="update-april-23-2019" class="section level2">
-<h2><span class="header-section-number">1.2</span> Update: April 23, 2019</h2>
+<div id="instrumental-variable-1-framework" class="section level1">
+<h1><span class="header-section-number">12</span> Instrumental Variable 1: Framework</h1>
+<div id="introduction-endogeneity-problem-and-its-solution" class="section level2">
+<h2><span class="header-section-number">12.1</span> Introduction: Endogeneity Problem and its Solution</h2>
 <ul>
-<li>Upload chapter 6 (review of statistics)</li>
+<li>When <span class="math inline">\(Cov(x_k, \epsilon)=0\)</span> does not hold, we have <strong>endogeneity problem</strong>
+<ul>
+<li>We call such <span class="math inline">\(x_k\)</span> an <strong>endogenous variable</strong>.</li>
+</ul></li>
+<li>In this chapter, I introduce an <strong>instrumental variable</strong> estimation method, a solution to this issue.</li>
+<li>The lecture plan
+<ol style="list-style-type: decimal">
+<li>More on endogeneity issues</li>
+<li>Framework</li>
+<li>Implementation in R</li>
+<li>Examples</li>
+</ol></li>
 </ul>
 </div>
-<div id="update-april-16-2019" class="section level2">
-<h2><span class="header-section-number">1.3</span> Update: April 16, 2019</h2>
+<div id="examples-of-endogeneity-problem" class="section level2">
+<h2><span class="header-section-number">12.2</span> Examples of Endogeneity Problem</h2>
 <ul>
-<li>Update chapter 3 (basic programming)</li>
-<li>Upload chapter 4 (Data frame)</li>
-<li>Upload chapter 5 (Exercise 1)</li>
+<li>Here, I explain a bit more about endogeneity problems.
+<ol style="list-style-type: decimal">
+<li>Omitted variable bias</li>
+<li>Measurement error</li>
+<li>Simultaneity</li>
+</ol></li>
+</ul>
+<div id="more-on-omitted-variable-bias" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> More on Omitted Variable Bias</h3>
+<ul>
+<li>Remember the wage regression equation (true model) <span class="math display">\[
+\begin{aligned}
+\log W_{i}  &amp;=&amp;  &amp; \beta_{0}+\beta_{1}S_{i}+\beta_{2}A_{i}+u_{i} \\
+E[u_{i}|S_{i},A_{i}]    &amp;=&amp; &amp; 0
+\end{aligned}
+\]</span> where <span class="math inline">\(W_{i}\)</span> is wage, <span class="math inline">\(S_{i}\)</span> is the years of schooling, and <span class="math inline">\(A_{i}\)</span> is the ability.</li>
+<li>Suppose that you omit <span class="math inline">\(A_i\)</span> and run the following regression instead. <span class="math display">\[
+\log W_{i}  =   \alpha_{0}+\alpha_{1} S_{i} + v_i 
+\]</span> Notice that <span class="math inline">\(v_i = \beta_2 A_i + u_i\)</span>, so that <span class="math inline">\(S_i\)</span> and <span class="math inline">\(v_i\)</span> is likely to be correlated.</li>
+<li>You might want to add more and more additional variables to capture the effect of ability.
+<ul>
+<li>Test scores, GPA, SAT scores, etc…</li>
+</ul></li>
+<li>However, can you make sure that <span class="math inline">\(S_i\)</span> is indeed exogenous after adding many control variables?</li>
+<li>Multivariate regression cannot deal with the presence of <strong>unobserved heterogeneity</strong> that matters both in wage and years of schooling.</li>
 </ul>
 </div>
-<div id="acknowledgement-as-of-april-16-2019" class="section level2">
-<h2><span class="header-section-number">1.4</span> Acknowledgement (as of April 16, 2019)</h2>
+<div id="measurement-error" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> Measurement error</h3>
 <ul>
-<li>Chapter 2 through 4 are largely based on Applied Statistics with <code>R</code>. <a href="https://daviddalpiaz.github.io/appliedstats/" class="uri">https://daviddalpiaz.github.io/appliedstats/</a></li>
-<li>Chapter 6 is based on “Introduction to Econometrics with R”. <a href="https://www.econometrics-with-r.org/index.html" class="uri">https://www.econometrics-with-r.org/index.html</a></li>
+<li>Measurement error in variables
+<ul>
+<li>Reporting error, respondent does not understand the question, etc…</li>
+</ul></li>
+<li>Consider the regression <span class="math display">\[
+y_{i}=\beta_{0}+\beta_{1}x_{i}^{*}+\epsilon_{i}
+\]</span></li>
+<li>Here, we only observe <span class="math inline">\(x_{i}\)</span> with error: <span class="math display">\[
+x_{i}=x_{i}^{*}+e_{i}\]</span> where <span class="math inline">\(e_{i}\)</span> is measurement error.
+<ul>
+<li><span class="math inline">\(e_{i}\)</span> is independent from <span class="math inline">\(\epsilon_i\)</span> and <span class="math inline">\(x_i^*\)</span> (called classical measurement error)</li>
+<li>You can think <span class="math inline">\(e_i\)</span> as a noise added to the data.</li>
+</ul></li>
+<li>The regression equation is <span class="math display">\[
+\begin{aligned}
+y_{i} = &amp; \  \beta_{0}+\beta_{1}(x_{i}-e_{i})+\epsilon_{i} \\
+= &amp; \ \beta_{0}+\beta_{1}x_{i}+(\epsilon_{i}-\beta_{1}e_{i})
+\end{aligned}
+\]</span></li>
+<li>Then we have correlation between <span class="math inline">\(x_{i}\)</span> and the error <span class="math inline">\(\epsilon_{i}-\beta_{1}e_{i}\)</span>, violating the mean independence assumption</li>
+</ul>
+</div>
+<div id="simultaneity-or-reverse-causality" class="section level3">
+<h3><span class="header-section-number">12.2.3</span> Simultaneity (or reverse causality)</h3>
+<ul>
+<li>Dependent variable and explanatory variable (endogenous variable) are determined simultaneously.</li>
+<li>Consider the demand and supply curve <span class="math display">\[
+\begin{aligned}
+q^{d}   =\beta_{0}^{d}+\beta_{1}^{d}p+\beta_{2}^{d}x+u^{d} \\
+q^{s}   =\beta_{0}^{s}+\beta_{1}^{s}p+\beta_{2}^{s}z+u^{s}
+\end{aligned}
+\]</span></li>
+<li>The equilibrium price and quantity are determined by <span class="math inline">\(q^{d}=q^{s}\)</span>.</li>
+<li><p>In this case, <span class="math display">\[
+p=\frac{(\beta_{2}^{s}z-\beta_{2}^{d}z)+(\beta_{0}^{s}-\beta_{0}^{d})+(u^{s}-u^{d})}{\beta_{1}^{d}-\beta_{1}^{s}}
+\]</span> implying the correlation between the price and the error term.</p></li>
+<li>Putting this differently, the data points we observed is the intersection of these supply and demand curves.</li>
+<li><p>How can we distinguish demand and supply? <img src="fig_Demand_Supply.png" alt="Demand Supply" /></p></li>
+</ul>
+</div>
+</div>
+<div id="idea-of-iv-regression" class="section level2">
+<h2><span class="header-section-number">12.3</span> Idea of IV Regression</h2>
+<ul>
+<li>Let’s start with a simple case. <span class="math display">\[
+y_i = \beta_0 + \beta_1 x_i + \epsilon_i, 
+\]</span> and <span class="math inline">\(Cov(x_i, \epsilon_i) \neq 0\)</span>.</li>
+<li>Now, we consider another variable <span class="math inline">\(z_i\)</span>, which we call <strong>instrumental variable (IV)</strong>.</li>
+<li>Instrumental variable <span class="math inline">\(z_i\)</span> should satisfies the following two conditions:
+<ol style="list-style-type: decimal">
+<li><strong>Independence</strong>: <span class="math inline">\(Cov(z_i, \epsilon_i) = 0\)</span>. No correlation between IV and error.</li>
+<li><strong>Relevance</strong>: <span class="math inline">\(Cov(z_i, x_i) \neq 0\)</span>. There should be correlation between IV and endogenous variable <span class="math inline">\(x_i\)</span>.</li>
+</ol></li>
+<li><p>Idea: Use the variation of <span class="math inline">\(x_i\)</span> <strong>induced by instrument <span class="math inline">\(z_i\)</span></strong> to estimate the direct (causal) effect of <span class="math inline">\(x_i\)</span> on <span class="math inline">\(y_i\)</span>, that is <span class="math inline">\(\beta_1\)</span>!.</p></li>
+<li>More on this:
+<ol style="list-style-type: decimal">
+<li>Intuitively, the OLS estimator captures the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
+<li>If there is no correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(\epsilon\)</span>, it captures the causal effect <span class="math inline">\(\beta_1\)</span>.</li>
+<li>If not, the OLS estimator captures both direct and indirect effect, the latter of which is bias.</li>
+<li>Now, let’s capture the variation of <span class="math inline">\(x\)</span> due to instrument <span class="math inline">\(z\)</span>,
+<ul>
+<li>Such a variation should exist under <strong>relevance</strong> assumption.</li>
+<li>Such a variation should not be correlated with the error under <strong>independence assumption</strong></li>
+</ul></li>
+<li>By looking at the correlation between such variation and <span class="math inline">\(y\)</span>, you can get the causal effect <span class="math inline">\(\beta_1\)</span>.</li>
+</ol></li>
+</ul>
+<div class="figure">
+<img src="fig_IV_idea.png" alt="Idea IV" />
+<p class="caption">Idea IV</p>
+</div>
+</div>
+<div id="formal-framework-and-estimation" class="section level2">
+<h2><span class="header-section-number">12.4</span> Formal Framework and Estimation</h2>
+<div id="model" class="section level3">
+<h3><span class="header-section-number">12.4.1</span> Model</h3>
+<ul>
+<li>We now introduce a general framework with multiple endogenous variables and multiple instruments.</li>
+<li>Consider the model <span class="math display">\[
+\begin{aligned}
+  Y_i = \beta_0 + \beta_1 X_{1i} + \dots + \beta_K X_{Ki} + \beta_{K+1} W_{1i} + \dots + \beta_{K+R} W_{Ri} + u_i, 
+\end{aligned}
+\]</span> with <span class="math inline">\(i=1,\dots,n\)</span> is the general instrumental variables regression model where
+<ul>
+<li><span class="math inline">\(Y_i\)</span> is the dependent variable</li>
+<li><span class="math inline">\(\beta_0,\dots,\beta_{K+R}\)</span> are <span class="math inline">\(1+K+R\)</span> unknown regression coefficients</li>
+<li><span class="math inline">\(X_{1i},\dots,X_{Ki}\)</span> are <span class="math inline">\(K\)</span> endogenous regressors: <span class="math inline">\(Cov(X_{ki}, u_i) \neq 0\)</span> for all <span class="math inline">\(k\)</span>.</li>
+<li><span class="math inline">\(W_{1i},\dots,W_{Ri}\)</span> are <span class="math inline">\(R\)</span> exogenous regressors which are uncorrelated with <span class="math inline">\(u_i\)</span>. <span class="math inline">\(Cov(W_{ri}, u_i) = 0\)</span> for all <span class="math inline">\(r\)</span>.</li>
+<li><span class="math inline">\(u_i\)</span> is the error term</li>
+<li><span class="math inline">\(Z_{1i},\dots,Z_{Mi}\)</span> are <span class="math inline">\(M\)</span> instrumental variables</li>
+</ul></li>
+<li>I will discuss conditions for valid instruments later.</li>
+</ul>
+</div>
+<div id="estimation-by-two-stage-least-squares-2sls" class="section level3">
+<h3><span class="header-section-number">12.4.2</span> Estimation by Two Stage Least Squares (2SLS)</h3>
+<ul>
+<li>We can estimate the above model by <strong>Two Stage Least Squares (2SLS)</strong></li>
+<li>Step 1: <strong>First-stage regression(s)</strong>
+<ul>
+<li>Run an OLS regression for each of the endogenous variables (<span class="math inline">\(X_{1i},\dots,X_{ki}\)</span>) on all instrumental variables (<span class="math inline">\(Z_{1i},\dots,Z_{mi}\)</span>), all exogenous variables (<span class="math inline">\(W_{1i},\dots,W_{ri}\)</span>) and an intercept.</li>
+<li>Compute the fitted values (<span class="math inline">\(\widehat{X}_{1i},\dots,\widehat{X}_{ki}\)</span>).</li>
+</ul></li>
+<li>Step 2: <strong>Second-stage regression</strong>
+<ul>
+<li>Regress the dependent variable <span class="math inline">\(Y_i\)</span> on <strong>the predicted values</strong> of all endogenous regressors (<span class="math inline">\(\widehat{X}_{1i},\dots,\widehat{X}_{ki}\)</span>), all exogenous variables (<span class="math inline">\(W_{1i},\dots,W_{ri}\)</span>) and an intercept using OLS.</li>
+<li>This gives <span class="math inline">\(\widehat{\beta}_{0}^{TSLS},\dots,\widehat{\beta}_{k+r}^{TSLS}\)</span>, the 2SLS estimates of the model coefficients.</li>
+</ul></li>
+</ul>
+<div id="intuition" class="section level4">
+<h4><span class="header-section-number">12.4.2.1</span> Intuition</h4>
+<ul>
+<li>Why does this work? Let’s go back to the simple example with 1 endogenous variable and 1 IV.</li>
+<li>In the first stage, we estimate<br />
+<span class="math display">\[
+x_i = \pi_0 + \pi_1 z_i + v_i
+\]</span> by OLS and obtain the fitted value <span class="math inline">\(\widehat{x}_i = \widehat{\pi}_0 + \widehat{\pi}_1 z_i\)</span>.</li>
+<li>In the second stage, we estimate <span class="math display">\[
+y_i = \beta_0 + \beta_1 \widehat{x}_i + u_i
+\]</span></li>
+<li>Since <span class="math inline">\(\widehat{x}_i\)</span> depends only on <span class="math inline">\(z_i\)</span>, which is uncorrelated with <span class="math inline">\(u_i\)</span>, the second stage can estimate <span class="math inline">\(\beta_1\)</span> without bias.</li>
+<li>Can you see the importance of both independence and relevance asssumption here? (More formal discussion later)</li>
+</ul>
+</div>
+</div>
+<div id="conditions-for-valid-ivs-in-a-general-framework" class="section level3">
+<h3><span class="header-section-number">12.4.3</span> Conditions for Valid IVs in a general framework</h3>
+<div id="necessary-condition" class="section level4">
+<h4><span class="header-section-number">12.4.3.1</span> Necessary condition</h4>
+<ul>
+<li>Depending on the number of IVs, we have three cases
+<ol style="list-style-type: decimal">
+<li>Over-identification: <span class="math inline">\(M &gt; K\)</span></li>
+<li>Just identification] <span class="math inline">\(M=K\)</span></li>
+<li>Under-identification <span class="math inline">\(M &lt; K\)</span></li>
+</ol></li>
+<li>The necessary condition is <span class="math inline">\(M \geq K\)</span>.
+<ul>
+<li>We should have more IVs than endogenous variables!!</li>
+</ul></li>
+</ul>
+</div>
+<div id="sufficient-condition" class="section level4">
+<h4><span class="header-section-number">12.4.3.2</span> Sufficient condition</h4>
+<ul>
+<li>How about sufficiency?</li>
+<li>In a general framework, the sufficient condition for valid instruments is given as follows.
+<ol style="list-style-type: decimal">
+<li><strong>Independence</strong>: <span class="math inline">\(Cov( Z_{mi}, \epsilon_i) = 0\)</span> for all <span class="math inline">\(m\)</span>.</li>
+<li><strong>Relevance</strong>: In the second stage regression, the variables <span class="math display">\[
+\left( \widehat{X}_{1i},\dots,\widehat{X}_{ki}, W_{1i},\dots,W_{ri}, 1 \right)
+\]</span> are not perfectly multicollinear.</li>
+</ol></li>
+<li>What does the relevance condition mean?</li>
+<li>In the simple example above, The first stage is<br />
+<span class="math display">\[
+x_i = \pi_0 + \pi_1 z_i + v_i
+\]</span> and the second stage is <span class="math display">\[
+y_i = \beta_0 + \beta_1 \widehat{x}_i + u_i
+\]</span></li>
+<li>The second stage would have perfect multicollinarity if <span class="math inline">\(\pi_1 = 0\)</span> (i.e., <span class="math inline">\(\widehat{x}_i = \pi_0\)</span>).</li>
+<li>Back to the general case, the first stage for <span class="math inline">\(X_k\)</span> can be written as <span class="math display">\[
+X_{ki} = \pi_0 + \pi_1 Z_{1i} + \cdots + \pi_M Z_{Mi} + \pi_{M+1} W_{1i} + \cdots + \pi_{M+R} W_{Ri}
+\]</span> and one of <span class="math inline">\(\pi_1 , \cdots, \pi_M\)</span> should be non-zero.</li>
+<li>Intuitively speaking, <strong>the instruments should be correlated with endogenous variables after controlling for exogenous variables</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="check-instrument-validity" class="section level2">
+<h2><span class="header-section-number">12.5</span> Check Instrument Validity</h2>
+<div id="relevance" class="section level3">
+<h3><span class="header-section-number">12.5.1</span> Relevance</h3>
+<ul>
+<li>Instruments are <strong>weak</strong> if those instruments explain little variation in the endogenous variables.</li>
+<li>Weak instruments lead to
+<ol style="list-style-type: decimal">
+<li>imprecise estimates (higher standard errors)</li>
+<li>The asymptotic distribution would deviate from a normal distribution even if we have a large sample.</li>
+</ol></li>
+<li>Here is a rule of thumb to check the relevance conditions.</li>
+<li>Consider the case with one endogenous variable <span class="math inline">\(X_{1i}\)</span>.</li>
+<li>The first stage regression<br />
+<span class="math display">\[
+X_k = \pi_0 + \pi_1 Z_{1i} + \cdots + \pi_M Z_{Mi} + \pi_{M+1} W_{1i} + \cdots + \pi_{M+R} W_{Ri}
+\]</span></li>
+<li>And test the null hypothesis <span class="math display">\[
+\begin{aligned}
+H_0 &amp; : \pi_1 = \cdots = \pi_M = 0 \\ 
+H_1 &amp; : otherwise
+\end{aligned}
+\]</span>
+<ul>
+<li>This is F test (test of joint hypothesis)</li>
+</ul></li>
+<li>If we can reject this, we can say no concern for weak instruments.</li>
+<li>A rule of thumbs is that the F statistic should be larger than 10.</li>
+<li><h3 id="independence-instrument-exogeneity"><span class="header-section-number">12.5.1</span> Independence (Instrument exogeneity)</h3></li>
+<li>Arguing for independence is hard and a key in empirical analysis.</li>
+<li>Justification of this assumption depends on a context, institutional features, etc…</li>
+<li>We will see this through examples in the next chapter.</li>
 </ul>
 
+</div>
 </div>
 </div>
             </section>
@@ -296,8 +518,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="introduction-to-the-course.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-2-problem-set-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="instrumental-variable-2-implementation-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

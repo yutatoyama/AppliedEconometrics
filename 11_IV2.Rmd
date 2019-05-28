@@ -1,0 +1,90 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Instrumental Variable 2: Implementation in R
+
+## Example 1: Wage regression
+
+- Use dataset "Mroz", cross-sectional labor force participation data that accompany "Introductory Econometrics" by Wooldridge. 
+    - Original data from  *"The Sensitivity of an Empirical Model of Married Women's Hours of Work to Economic and Statistical Assumptions"* by Thomas Mroz published in *Econometrica* in 1987.
+    - Detailed description of data: https://www.rdocumentation.org/packages/npsf/versions/0.4.2/topics/mroz 
+    
+ 
+```{r}
+
+library("foreign")
+
+# You might get a message "cannot read factor labels from Stata 5 files", but you do not have to worry about it. 
+data <- read.dta("MROZ.DTA")
+
+
+```
+
+- Describe data
+```{r}
+library(stargazer)
+stargazer(data, type = "text")
+```
+
+- Consider the wage regression 
+$$
+\log(w_i) = \beta_0 + \beta_1 educ_i + \beta_2 exper_i + \beta_3 exper_i^2 + \epsilon_i
+$$
+- We assume that $exper_i$ is exogenous but $educ_i$ is endogenous.
+- As an instrument for $educ_i$, we use the years of schooling for his or her father and mother, which we call $fathereduc_i$ and $mothereduc_i$. 
+- Discussion on these IVs will be later. 
+
+```{r}
+
+library("AER")
+library("dplyr")
+
+# data cleaning
+data %>% 
+  select(lwage, educ, exper, expersq, motheduc, fatheduc) %>%
+  filter( is.na(lwage) == 0 ) -> data
+
+# OLS regression
+result_OLS <- lm( lwage ~ educ + exper + expersq, data = data)
+
+# IV regression using fathereduc and mothereduc
+result_IV <- ivreg(lwage ~ educ + exper + expersq | fatheduc + motheduc + exper + expersq, data = data)
+
+# Robust standard errors 
+# gather robust standard errors in a list
+rob_se <- list(sqrt(diag(vcovHC(result_OLS, type = "HC1"))),
+               sqrt(diag(vcovHC(result_IV, type = "HC1"))))
+
+# Show result
+stargazer(result_OLS, result_IV, type ="text", se = rob_se)
+
+
+```
+
+- How about the first stage? You should always check this!!
+
+```{r}
+
+# First stage regression 
+
+result_1st <- lm(educ ~ motheduc + fatheduc + exper + expersq, data = data)
+
+# F test
+linearHypothesis(result_1st, 
+                 c("fatheduc = 0", "motheduc = 0" ), 
+                 vcov = vcovHC, type = "HC1")
+
+```
+
+### Discussion on IV
+
+- Labor economists have used family background variables as IVs for education. 
+- Relevance: OK from the first stage regression. 
+- Independence: A bit suspicious. Parents' education would be correlated with child's ability through quality of nurturing at an early age. 
+- Still, we can see that these IVs can mitigate (though may not eliminate completely) the omitted variable bias. 
+- Discussion on the validity of instruments is crucial in empirical research. 
+
+

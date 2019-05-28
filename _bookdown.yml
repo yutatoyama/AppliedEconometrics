@@ -1,3 +1,4 @@
 output_dir: docs
 book_filename: "Econometrics_using_R"
 delete_merged_file: TRUE
+new_session: yes

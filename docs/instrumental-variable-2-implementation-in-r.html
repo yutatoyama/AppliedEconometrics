@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Lecture Note for Applied Econometrics</title>
-  <meta name="description" content="Lecture Note for Applied Econometrics">
+  <title>13 Instrumental Variable 2: Implementation in R | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="13 Instrumental Variable 2: Implementation in R | Lecture Note for Applied Econometrics">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Lecture Note for Applied Econometrics" />
+  <meta property="og:title" content="13 Instrumental Variable 2: Implementation in R | Lecture Note for Applied Econometrics" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture Note for Applied Econometrics" />
+  <meta name="twitter:title" content="13 Instrumental Variable 2: Implementation in R | Lecture Note for Applied Econometrics" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="instrumental-variable-1-framework.html">
 
-<link rel="next" href="introduction-to-the-course.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,40 +255,176 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Lecture Note for Applied Econometrics</h1>
-<p class="author"><em>Yuta Toyama</em></p>
-<p class="date"><em>Last updated: 2019/05/28</em></p>
-</div>
-<div id="preface" class="section level1">
-<h1><span class="header-section-number">1</span> Preface</h1>
-<p>Welcome to Applied Econometrics using R!</p>
-<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
-<div id="about-this" class="section level2">
-<h2><span class="header-section-number">1.1</span> About this</h2>
-<p>This lecture note is maintained by Yuta Toyama.</p>
-</div>
-<div id="update-april-23-2019" class="section level2">
-<h2><span class="header-section-number">1.2</span> Update: April 23, 2019</h2>
+<div id="instrumental-variable-2-implementation-in-r" class="section level1">
+<h1><span class="header-section-number">13</span> Instrumental Variable 2: Implementation in R</h1>
+<div id="example-1-wage-regression" class="section level2">
+<h2><span class="header-section-number">13.1</span> Example 1: Wage regression</h2>
 <ul>
-<li>Upload chapter 6 (review of statistics)</li>
+<li>Use dataset “Mroz”, cross-sectional labor force participation data that accompany “Introductory Econometrics” by Wooldridge.
+<ul>
+<li>Original data from <em>“The Sensitivity of an Empirical Model of Married Women’s Hours of Work to Economic and Statistical Assumptions”</em> by Thomas Mroz published in <em>Econometrica</em> in 1987.</li>
+<li>Detailed description of data: <a href="https://www.rdocumentation.org/packages/npsf/versions/0.4.2/topics/mroz" class="uri">https://www.rdocumentation.org/packages/npsf/versions/0.4.2/topics/mroz</a></li>
+</ul></li>
 </ul>
-</div>
-<div id="update-april-16-2019" class="section level2">
-<h2><span class="header-section-number">1.3</span> Update: April 16, 2019</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;foreign&quot;</span>)
+
+<span class="co"># You might get a message &quot;cannot read factor labels from Stata 5 files&quot;, but you do not have to worry about it. </span>
+data &lt;-<span class="st"> </span><span class="kw">read.dta</span>(<span class="st">&quot;MROZ.DTA&quot;</span>)</code></pre></div>
+<pre><code>## Warning in read.dta(&quot;MROZ.DTA&quot;): cannot read factor labels from Stata 5
+## files</code></pre>
 <ul>
-<li>Update chapter 3 (basic programming)</li>
-<li>Upload chapter 4 (Data frame)</li>
-<li>Upload chapter 5 (Exercise 1)</li>
+<li>Describe data</li>
 </ul>
-</div>
-<div id="acknowledgement-as-of-april-16-2019" class="section level2">
-<h2><span class="header-section-number">1.4</span> Acknowledgement (as of April 16, 2019)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stargazer)</code></pre></div>
+<pre><code>## 
+## Please cite as:</code></pre>
+<pre><code>##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
+<pre><code>##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stargazer</span>(data, <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre></div>
+<pre><code>## 
+## ===================================================================
+## Statistic  N     Mean     St. Dev.   Min   Pctl(25) Pctl(75)  Max  
+## -------------------------------------------------------------------
+## inlf      753   0.568      0.496      0       0        1       1   
+## hours     753  740.576    871.314     0       0      1,516   4,950 
+## kidslt6   753   0.238      0.524      0       0        0       3   
+## kidsge6   753   1.353      1.320      0       0        2       8   
+## age       753   42.538     8.073      30      36       49      60  
+## educ      753   12.287     2.280      5       12       13      17  
+## wage      428   4.178      3.310    0.128   2.263    4.971   25.000
+## repwage   753   1.850      2.420    0.000   0.000    3.580   9.980 
+## hushrs    753 2,267.271   595.567    175    1,928    2,553   5,010 
+## husage    753   45.121     8.059      30      38       52      60  
+## huseduc   753   12.491     3.021      3       11       15      17  
+## huswage   753   7.482      4.231    0.412   4.788    9.167   40.509
+## faminc    753 23,080.600 12,190.200 1,500   15,428   28,200  96,000
+## mtr       753   0.679      0.083    0.442   0.622    0.721   0.942 
+## motheduc  753   9.251      3.367      0       7        12      17  
+## fatheduc  753   8.809      3.572      0       7        12      17  
+## unem      753   8.624      3.115      3      7.5       11      14  
+## city      753   0.643      0.480      0       0        1       1   
+## exper     753   10.631     8.069      0       4        15      45  
+## nwifeinc  753   20.129     11.635   -0.029  13.025   24.466  96.000
+## lwage     428   1.190      0.723    -2.054  0.817    1.604   3.219 
+## expersq   753  178.039    249.631     0       16      225    2,025 
+## -------------------------------------------------------------------</code></pre>
 <ul>
-<li>Chapter 2 through 4 are largely based on Applied Statistics with <code>R</code>. <a href="https://daviddalpiaz.github.io/appliedstats/" class="uri">https://daviddalpiaz.github.io/appliedstats/</a></li>
-<li>Chapter 6 is based on “Introduction to Econometrics with R”. <a href="https://www.econometrics-with-r.org/index.html" class="uri">https://www.econometrics-with-r.org/index.html</a></li>
+<li>Consider the wage regression <span class="math display">\[
+\log(w_i) = \beta_0 + \beta_1 educ_i + \beta_2 exper_i + \beta_3 exper_i^2 + \epsilon_i
+\]</span></li>
+<li>We assume that <span class="math inline">\(exper_i\)</span> is exogenous but <span class="math inline">\(educ_i\)</span> is endogenous.</li>
+<li>As an instrument for <span class="math inline">\(educ_i\)</span>, we use the years of schooling for his or her father and mother, which we call <span class="math inline">\(fathereduc_i\)</span> and <span class="math inline">\(mothereduc_i\)</span>.</li>
+<li>Discussion on these IVs will be later.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;AER&quot;</span>)</code></pre></div>
+<pre><code>##  要求されたパッケージ car をロード中です</code></pre>
+<pre><code>##  要求されたパッケージ carData をロード中です</code></pre>
+<pre><code>##  要求されたパッケージ lmtest をロード中です</code></pre>
+<pre><code>##  要求されたパッケージ zoo をロード中です</code></pre>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;zoo&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:base&#39; からマスクされています: 
+## 
+##      as.Date, as.Date.numeric</code></pre>
+<pre><code>##  要求されたパッケージ sandwich をロード中です</code></pre>
+<pre><code>##  要求されたパッケージ survival をロード中です</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;dplyr&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:car&#39; からマスクされています: 
+## 
+##      recode</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
+## 
+##      filter, lag</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:base&#39; からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># data cleaning</span>
+data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(lwage, educ, exper, expersq, motheduc, fatheduc) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>( <span class="kw">is.na</span>(lwage) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) -&gt;<span class="st"> </span>data
+
+<span class="co"># OLS regression</span>
+result_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>( lwage <span class="op">~</span><span class="st"> </span>educ <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span>expersq, <span class="dt">data =</span> data)
+
+<span class="co"># IV regression using fathereduc and mothereduc</span>
+result_IV &lt;-<span class="st"> </span><span class="kw">ivreg</span>(lwage <span class="op">~</span><span class="st"> </span>educ <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span>expersq <span class="op">|</span><span class="st"> </span>fatheduc <span class="op">+</span><span class="st"> </span>motheduc <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span>expersq, <span class="dt">data =</span> data)
+
+<span class="co"># Robust standard errors </span>
+<span class="co"># gather robust standard errors in a list</span>
+rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(result_OLS, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
+               <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(result_IV, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))))
+
+<span class="co"># Show result</span>
+<span class="kw">stargazer</span>(result_OLS, result_IV, <span class="dt">type =</span><span class="st">&quot;text&quot;</span>, <span class="dt">se =</span> rob_se)</code></pre></div>
+<pre><code>## 
+## ===================================================================
+##                                        Dependent variable:         
+##                                ------------------------------------
+##                                               lwage                
+##                                          OLS           instrumental
+##                                                          variable  
+##                                          (1)               (2)     
+## -------------------------------------------------------------------
+## educ                                  0.107***            0.061*   
+##                                        (0.013)           (0.033)   
+##                                                                    
+## exper                                 0.042***           0.044***  
+##                                        (0.015)           (0.016)   
+##                                                                    
+## expersq                                -0.001*           -0.001**  
+##                                       (0.0004)           (0.0004)  
+##                                                                    
+## Constant                              -0.522***           0.048    
+##                                        (0.202)           (0.430)   
+##                                                                    
+## -------------------------------------------------------------------
+## Observations                             428               428     
+## R2                                      0.157             0.136    
+## Adjusted R2                             0.151             0.130    
+## Residual Std. Error (df = 424)          0.666             0.675    
+## F Statistic                    26.286*** (df = 3; 424)             
+## ===================================================================
+## Note:                                   *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<ul>
+<li>How about the first stage? You should always check this!!</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First stage regression </span>
+
+result_1st &lt;-<span class="st"> </span><span class="kw">lm</span>(educ <span class="op">~</span><span class="st"> </span>motheduc <span class="op">+</span><span class="st"> </span>fatheduc <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span>expersq, <span class="dt">data =</span> data)
+
+<span class="co"># F test</span>
+<span class="kw">linearHypothesis</span>(result_1st, 
+                 <span class="kw">c</span>(<span class="st">&quot;fatheduc = 0&quot;</span>, <span class="st">&quot;motheduc = 0&quot;</span> ), 
+                 <span class="dt">vcov =</span> vcovHC, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>)</code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## fatheduc = 0
+## motheduc = 0
+## 
+## Model 1: restricted model
+## Model 2: educ ~ motheduc + fatheduc + exper + expersq
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F                Pr(&gt;F)    
+## 1    425                                    
+## 2    423  2 48.644 &lt; 0.00000000000000022 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div id="discussion-on-iv" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> Discussion on IV</h3>
+<ul>
+<li>Labor economists have used family background variables as IVs for education.</li>
+<li>Relevance: OK from the first stage regression.</li>
+<li>Independence: A bit suspicious. Parents’ education would be correlated with child’s ability through quality of nurturing at an early age.</li>
+<li>Still, we can see that these IVs can mitigate (though may not eliminate completely) the omitted variable bias.</li>
+<li>Discussion on the validity of instruments is crucial in empirical research.</li>
 </ul>
 
+</div>
 </div>
 </div>
             </section>
@@ -296,8 +432,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
+<a href="instrumental-variable-1-framework.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction-to-the-course.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
