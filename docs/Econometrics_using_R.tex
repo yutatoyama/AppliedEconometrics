@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 10.2556416  4.8646681 11.0330421  7.5084762 -5.7439591  0.9675929
-##  [7]  2.5812197  3.1059440  1.7548992  0.9300860
+##  [1] -2.53115782  5.62885917 -1.19781244  0.02842195 -4.35923091
+##  [6]  6.95286927  8.44694256 10.14671116  7.56555571  7.33916341
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.3138268  0.2291507  1.4702416  0.7610909 -1.9053293 -0.5549497
-##  [7] -0.2302843 -0.1247086 -0.3965419 -0.5624962
+##  [1] -1.2071441  0.3482042 -0.9530004 -0.7192728 -1.5555858  0.6005685
+##  [7]  0.8853478  1.2093339  0.7173502  0.6741985
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 24.70212
+## [1] 27.52497
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 24.70212
+## [1] 27.52497
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 24.70212
+## [1] 27.52497
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 22.23191
+## [1] 24.77247
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -7252,12 +7252,12 @@ Gas price (dollars per thousand cubic feet for gas.)\strut
   and without instruments. \[
   \begin{aligned}
   \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
-  \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+  \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 \log (population_{it}) + \epsilon_{it} 
   \end{aligned}
   \] where \(Q_{jt}\): quantity, \(P_{jt}\): price, \(population_{jt}\):
   population As an instrument for price, you use wage, coal price,
-  electricity price, and gas price. The variable \(population_{jt}\) is
-  treated as exogenous.
+  electricity price, and gas price. The variable
+  \(\log(population_{jt})\) is treated as exogenous.
 \item
   Discuss the results above. In particular, explain (1) the importance
   of adding population as a control variable, and (2) the difference
@@ -7267,7 +7267,7 @@ Gas price (dollars per thousand cubic feet for gas.)\strut
 \item
   Instead of log-log specification, consider the following linear
   specification (with population as a control variable) \[
-  Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+  Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 \log(population_{it}) + \epsilon_{it}. 
   \] Estimate this specification using instruments. Do not forget
   checking the 1st stage.
 \item

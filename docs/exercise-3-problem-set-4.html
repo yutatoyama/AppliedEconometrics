@@ -383,13 +383,13 @@ stargazer<span class="op">::</span><span class="kw">stargazer</span>(<span class
 <li><p>Estimate the demand model for the following two specifications with and without instruments. <span class="math display">\[
 \begin{aligned}
 \log(Q_{jt}) &amp; = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
-\log(Q_{jt}) &amp; = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+\log(Q_{jt}) &amp; = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 \log (population_{it}) + \epsilon_{it} 
 \end{aligned}
-\]</span> where <span class="math inline">\(Q_{jt}\)</span>: quantity, <span class="math inline">\(P_{jt}\)</span>: price, <span class="math inline">\(population_{jt}\)</span>: population As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable <span class="math inline">\(population_{jt}\)</span> is treated as exogenous.</p></li>
+\]</span> where <span class="math inline">\(Q_{jt}\)</span>: quantity, <span class="math inline">\(P_{jt}\)</span>: price, <span class="math inline">\(population_{jt}\)</span>: population As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable <span class="math inline">\(\log(population_{jt})\)</span> is treated as exogenous.</p></li>
 <li><p>Discuss the results above. In particular, explain (1) the importance of adding population as a control variable, and (2) the difference between results with and without IVs.</p></li>
 <li><p>Discuss the validity of those instruments.</p></li>
 <li><p>Instead of log-log specification, consider the following linear specification (with population as a control variable) <span class="math display">\[
-Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 \log(population_{it}) + \epsilon_{it}. 
 \]</span> Estimate this specification using instruments. Do not forget checking the 1st stage.</p></li>
 <li><p>The price elasticity of demand is defined as <span class="math display">\[
 \frac{\partial Q_{jt}}{\partial P_{jt} } \frac{P_{jt}}{Q_{jt}} 

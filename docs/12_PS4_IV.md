@@ -133,11 +133,11 @@ stargazer::stargazer(as.data.frame(RyanData), type = "text")
 $$
 \begin{aligned}
 \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
-\log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+\log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 \log (population_{it}) + \epsilon_{it} 
 \end{aligned}
 $$
 where $Q_{jt}$: quantity, $P_{jt}$: price, $population_{jt}$: population
-As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable $population_{jt}$ is treated as exogenous.
+As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable $\log(population_{jt})$ is treated as exogenous.
 
 2. Discuss the results above. In particular, explain (1) the importance of adding population as a control variable, and (2) the difference between results with and without IVs. 
 
@@ -145,7 +145,7 @@ As an instrument for price, you use wage, coal price, electricity price, and gas
 
 3. Instead of log-log specification, consider the following linear specification (with population as a control variable)
 $$
-Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 \log(population_{it}) + \epsilon_{it}. 
 $$
 Estimate this specification using instruments. Do not forget checking the 1st stage. 
 
