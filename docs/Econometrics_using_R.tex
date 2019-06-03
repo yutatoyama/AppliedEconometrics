@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Last updated: 2019/05/28}
+    \date{Last updated: 2019/06/03}
 
 
 \begin{document}
@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.666064368  0.018928785 -5.046554949  9.574404190 -1.344865796
-##  [6] -5.352921268  0.006957755 -5.321193544  6.059195577  8.066038723
+##  [1] 10.2556416  4.8646681 11.0330421  7.5084762 -5.7439591  0.9675929
+##  [7]  2.5812197  3.1059440  1.7548992  0.9300860
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.1511821 -0.1475938 -1.0664281  1.5856856 -0.3949742 -1.1220002
-##  [7] -0.1497652 -1.1162451  0.9480576  1.3120813
+##  [1]  1.3138268  0.2291507  1.4702416  0.7610909 -1.9053293 -0.5549497
+##  [7] -0.2302843 -0.1247086 -0.3965419 -0.5624962
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 30.39257
+## [1] 24.70212
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 30.39257
+## [1] 24.70212
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 30.39257
+## [1] 24.70212
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 27.35332
+## [1] 22.23191
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -6322,6 +6322,965 @@ R}\label{instrumental-variable-2-implementation-in-r}
   Discussion on the validity of instruments is crucial in empirical
   research.
 \end{itemize}
+
+\section{Example 2: Estimation of the Demand for
+Cigaretts}\label{example-2-estimation-of-the-demand-for-cigaretts}
+
+\begin{itemize}
+\item
+  Demand model is a building block in many branches of Economics.
+\item
+  For example, health economics is concerned with the study of how
+  health-affecting behavior of individuals is influenced by the
+  health-care system and regulation policy.
+\item
+  Smoking is a prominent example as it is related to many illnesses and
+  negative externalities.
+\item
+  It is plausible that cigarette consumption can be reduced by taxing
+  cigarettes more heavily.
+\item
+  Question: how much taxes must be increased to reach a certain
+  reduction in cigarette consumption? -\textgreater{} Need to know
+  \textbf{price elasticity of demand} for cigaretts.
+\item
+  Use \texttt{CigarrettesSW} in the package \texttt{AER}.
+\item
+  a panel data set that contains observations on cigarette consumption
+  and several economic indicators for all 48 continental federal states
+  of the U.S. from 1985 to 1995.
+\item
+  What is \textbf{panel data}? The data involves both time series and
+  cross-sectional information.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The variable is denoted as \(y_{it}\), which indexed by individual
+    \(i\) and time \(t\).
+  \item
+    Cross section data \(y_i\): information for a particular individual
+    \(i\) (e.g., income for person \(i\)).
+  \item
+    Time series data \(y_t\): information for a particular time period
+    (e.g., GDP in year \(y\))
+  \item
+    Panel data \(y_{it}\): income of person \(i\) in year \(t\).
+  \end{itemize}
+\item
+  We will see more on panel data later in this course. For now, we use
+  the panel data as just cross-sectional data (\textbf{pooled
+  cross-sections})
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load the data set and get an overview}
+\KeywordTok{library}\NormalTok{(AER)}
+\KeywordTok{data}\NormalTok{(}\StringTok{"CigarettesSW"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(CigarettesSW)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      state      year         cpi          population      
+##  AL     : 2   1985:48   Min.   :1.076   Min.   :  478447  
+##  AR     : 2   1995:48   1st Qu.:1.076   1st Qu.: 1622606  
+##  AZ     : 2             Median :1.300   Median : 3697472  
+##  CA     : 2             Mean   :1.300   Mean   : 5168866  
+##  CO     : 2             3rd Qu.:1.524   3rd Qu.: 5901500  
+##  CT     : 2             Max.   :1.524   Max.   :31493524  
+##  (Other):84                                               
+##      packs            income               tax            price       
+##  Min.   : 49.27   Min.   :  6887097   Min.   :18.00   Min.   : 84.97  
+##  1st Qu.: 92.45   1st Qu.: 25520384   1st Qu.:31.00   1st Qu.:102.71  
+##  Median :110.16   Median : 61661644   Median :37.00   Median :137.72  
+##  Mean   :109.18   Mean   : 99878736   Mean   :42.68   Mean   :143.45  
+##  3rd Qu.:123.52   3rd Qu.:127313964   3rd Qu.:50.88   3rd Qu.:176.15  
+##  Max.   :197.99   Max.   :771470144   Max.   :99.00   Max.   :240.85  
+##                                                                       
+##       taxs       
+##  Min.   : 21.27  
+##  1st Qu.: 34.77  
+##  Median : 41.05  
+##  Mean   : 48.33  
+##  3rd Qu.: 59.48  
+##  Max.   :112.63  
+## 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Consider the following model \[
+  \log (Q_{it}) = \beta_0 + \beta_1 \log (P_{it}) + \beta_2 \log(income_{it}) + u_{it}
+  \] where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Q_{it}\) is the number of packs per capita in state \(i\) in year
+    \(t\),
+  \item
+    \(P_{it}\) is the after-tax average real price per pack of
+    cigarettes, and
+  \item
+    \(income_{it}\) is the real income per capita. This is demand
+    shifter.
+  \end{itemize}
+\item
+  As an IV for the price, we use the followings:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(SalesTax_{it}\): the proportion of taxes on cigarettes arising
+    from the general sales tax.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Relevant as it is included in the after-tax price
+    \item
+      Exogenous(indepndent) since the sales tax does not influence
+      demand directly, but indirectly through the price.
+    \end{itemize}
+  \item
+    \(CigTax_{it}\): the cigarett-specific taxes
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\NormalTok{CigarettesSW }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{rincome =}\NormalTok{ (income }\OperatorTok{/}\StringTok{ }\NormalTok{population) }\OperatorTok{/}\StringTok{ }\NormalTok{cpi) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{rprice  =}\NormalTok{ price }\OperatorTok{/}\StringTok{ }\NormalTok{cpi ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{salestax =}\NormalTok{ (taxs }\OperatorTok{-}\StringTok{ }\NormalTok{tax) }\OperatorTok{/}\StringTok{ }\NormalTok{cpi ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{cigtax =}\NormalTok{ tax}\OperatorTok{/}\NormalTok{cpi ) ->}\StringTok{ }\NormalTok{Cigdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Let's run the regressions
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cig_ols <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome) ,  }\DataTypeTok{data =}\NormalTok{ Cigdata)}
+\CommentTok{#coeftest(cig_ols, vcov = vcovHC, type = "HC1")}
+
+
+\NormalTok{cig_ivreg <-}\StringTok{ }\KeywordTok{ivreg}\NormalTok{(}\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }
+\StringTok{                    }\KeywordTok{log}\NormalTok{(rincome) }\OperatorTok{+}\StringTok{  }\NormalTok{salestax }\OperatorTok{+}\StringTok{  }\NormalTok{cigtax, }\DataTypeTok{data =}\NormalTok{ Cigdata)}
+\CommentTok{#coeftest(cig_ivreg, vcov = vcovHC, type = "HC1")}
+
+\CommentTok{# Robust standard errors }
+\NormalTok{rob_se <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(cig_ols, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))),}
+               \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(cig_ivreg, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))))}
+
+\CommentTok{# Show result}
+\KeywordTok{stargazer}\NormalTok{(cig_ols, cig_ivreg, }\DataTypeTok{type =}\StringTok{"text"}\NormalTok{, }\DataTypeTok{se =}\NormalTok{ rob_se)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## =================================================================
+##                                       Dependent variable:        
+##                               -----------------------------------
+##                                           log(packs)             
+##                                        OLS           instrumental
+##                                                        variable  
+##                                        (1)               (2)     
+## -----------------------------------------------------------------
+## log(rprice)                         -1.334***         -1.229***  
+##                                      (0.154)           (0.155)   
+##                                                                  
+## log(rincome)                         0.318**            0.257*   
+##                                      (0.154)           (0.153)   
+##                                                                  
+## Constant                            10.067***          9.736***  
+##                                      (0.502)           (0.514)   
+##                                                                  
+## -----------------------------------------------------------------
+## Observations                            96                96     
+## R2                                    0.552             0.549    
+## Adjusted R2                           0.542             0.539    
+## Residual Std. Error (df = 93)         0.165             0.165    
+## F Statistic                   57.185*** (df = 2; 93)             
+## =================================================================
+## Note:                                 *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  The first stage regression
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First stage regression }
+
+\NormalTok{result_1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome) }\OperatorTok{+}\StringTok{ }\NormalTok{salestax }\OperatorTok{+}\StringTok{ }\NormalTok{cigtax , }\DataTypeTok{data=}\NormalTok{ Cigdata)}
+
+\CommentTok{# F test}
+\KeywordTok{linearHypothesis}\NormalTok{(result_1st, }
+                 \KeywordTok{c}\NormalTok{(}\StringTok{"salestax = 0"}\NormalTok{, }\StringTok{"cigtax = 0"}\NormalTok{ ), }
+                 \DataTypeTok{vcov =}\NormalTok{ vcovHC, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear hypothesis test
+## 
+## Hypothesis:
+## salestax = 0
+## cigtax = 0
+## 
+## Model 1: restricted model
+## Model 2: log(rprice) ~ log(rincome) + log(rincome) + salestax + cigtax
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F                Pr(>F)    
+## 1     94                                    
+## 2     92  2 127.77 < 0.00000000000000022 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\section{Example 3: Effects of Turnout on Partisan
+Voting}\label{example-3-effects-of-turnout-on-partisan-voting}
+
+\begin{itemize}
+\tightlist
+\item
+  THOMAS G. HANSFORD and BRAD T. GOMEZ ``Estimating the Electoral
+  Effects of Voter Turnout'' The American Political Science Review Vol.
+  104, No. 2 (May 2010), pp.~268-288
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Link:
+    \url{https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C}
+  \end{itemize}
+\item
+  Here, we will see a simplified version of their analysis.
+\item
+  The dataset is \href{HansfordGomez_Data.csv}{here}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: パッケージ 'readr' はバージョン 3.5.3 の R の下で造られました
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{HGdata <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"HansfordGomez_Data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(HGdata), }\DataTypeTok{type=}\StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## =========================================================================================
+## Statistic           N       Mean       St. Dev.      Min   Pctl(25)  Pctl(75)     Max    
+## -----------------------------------------------------------------------------------------
+## Year              27,401  1,973.972     16.111      1,948    1,960     1,988     2,000   
+## FIPS_County       27,401 29,985.500   13,081.250    4,001   20,013    39,157     56,045  
+## Turnout           27,401   65.562       10.514     20.366   58.477    72.613    100.000  
+## Closing2          27,401   23.053       13.042        0       11        30        125    
+## Literacy          27,401    0.058        0.234        0        0         0         1     
+## PollTax           27,401    0.001        0.023        0        0         0         1     
+## Motor             27,401    0.211        0.408        0        0         0         1     
+## GubElection       27,401    0.434        0.496        0        0         1         1     
+## SenElection       27,401    0.680        0.467        0        0         1         1     
+## GOP_Inc           27,401    0.501        0.500        0        0         1         1     
+## Yr52              27,401    0.071        0.258        0        0         0         1     
+## Yr56              27,401    0.071        0.258        0        0         0         1     
+## Yr60              27,401    0.071        0.258        0        0         0         1     
+## Yr64              27,401    0.071        0.258        0        0         0         1     
+## Yr68              27,401    0.071        0.258        0        0         0         1     
+## Yr72              27,401    0.071        0.258        0        0         0         1     
+## Yr76              27,401    0.071        0.258        0        0         0         1     
+## Yr80              27,401    0.071        0.258        0        0         0         1     
+## Yr84              27,401    0.072        0.258        0        0         0         1     
+## Yr88              27,401    0.072        0.258        0        0         0         1     
+## Yr92              27,401    0.072        0.258        0        0         0         1     
+## Yr96              27,401    0.072        0.258        0        0         0         1     
+## Yr2000            27,401    0.070        0.256        0        0         0         1     
+## DNormPrcp_KRIG    27,401    0.005        0.208     -0.419   -0.093     0.001     2.627   
+## GOPIT             27,401   33.282       34.066        0        0       66.3       100    
+## DemVoteShare2_3MA 27,401   44.250       10.606     10.145   37.006    50.996     88.982  
+## DemVoteShare2     27,401   43.622       12.415      6.420   34.954    51.858     97.669  
+## RainGOPI          27,401    0.007        0.142       -0      -0.03       0         2     
+## TO_DVS23MA        27,401  2,886.877     792.530    473.161 2,321.025 3,384.772 8,526.616 
+## Rain_DVS23MA      27,401    0.355       10.188     -25.054  -4.019     0.028    144.257  
+## dph               27,401    0.021        0.145        0        0         0         1     
+## dvph              27,401    0.018        0.133        0        0         0         1     
+## rph               27,401    0.025        0.155        0        0         0         1     
+## rvph              27,401    0.025        0.155        0        0         0         1     
+## state_del         27,401    0.037        0.187     -0.821   -0.090     0.172     0.619   
+## dph_StateVAP      27,401 77,525.150   597,474.000     0        0         0     6,150,988 
+## dvph_StateVAP     27,401 63,138.400   663,707.600     0        0         0     12,700,000
+## rph_StateVAP      27,401 243,707.900 1,720,659.000    0        0         0     18,300,000
+## rvph_StateVAP     27,401 142,166.500 1,071,445.000    0        0         0     12,800,000
+## State_DVS_lag     27,401   46.896        8.317     22.035   40.767    52.197     80.872  
+## State_DVS_lag2    27,401  2,268.381     786.199    485.533 1,661.934 2,724.515 6,540.244 
+## -----------------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Data description:
+\end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.05\columnwidth}\raggedright\strut
+Name\strut
+\end{minipage} & \begin{minipage}[b]{0.89\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Year\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Election Year\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+FIPS\_County\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+FIPS County Code\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Turnout\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Turnout as Pcnt VAP\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Closing2\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Days between registration closing date and election\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Literacy\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Literacy Test\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+PollTax\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Poll Tax\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Motor\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Motor Voter\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+GubElection\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Gubernatorial Election in State\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+SenElection\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+U.S. Senate Election in State\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+GOP\_Inc\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Republican Incumbent\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr52\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1952 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr56\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1956 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr60\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1960 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr64\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1964 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr68\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1968 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr72\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1972 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr76\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1976 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr80\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1980 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr84\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1984 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr88\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1988 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr92\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1992 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr96\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+1996 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Yr2000\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+2000 Dummy\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+DNormPrcp\_KRIG\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Election day rainfall - differenced from normal rain for the day\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+GOPIT\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Turnout x Republican Incumbent\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+DemVoteShare2\textasciitilde{}A\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Partisan composition measure = 3 election moving avg. of Dem Vote
+Share\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+DemVoteShare2\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Democratic Pres Candidate's Vote Share\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+RainGOPI\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Rainfall measure x Republican Incumbent\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+TO\_DVS23MA\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Turnout x Partisan Composition measure\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+Rain\_DVS23MA\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Rainfall measure x Partisan composition measure\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+dph\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+=1 if home state of Dem pres candidate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+dvph\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+=1 if home state of Dem vice pres candidate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+rph\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+=1 if home state of Rep pres candidate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+rvph\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+=1 if home state of Rep vice pres candidate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+state\_del\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+avg common space score for the House delegation\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+dph\_StateVAP\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+= dph*State voting age population\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+dvph\_StateVAP\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+= dvph*State voting age population\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+rph\_StateVAP\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+= rph*State voting age population\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+rvph\_StateVAP\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+= rvph*State voting age population\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+State\_DVS\_lag\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+State-wide Dem vote share, lagged one election\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+State\_DVS\_lag2\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+State\_DVS\_lag squared\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Consider the following regression \[
+  DemoShare_{it} = \beta_0 + \beta_1 Turnout_{it} + u_t + u_{it}
+   \] where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Demoshare_{it}\): Two-party vote share for Democrat candidate in
+    county \(i\) in the presidential election in year \(t\)
+  \item
+    \(Turnout_{it}\): Turnout rate in county \(i\) in the presidential
+    election in year \(t\)
+  \item
+    \(u_t\): \textbf{Year fixed effects}. Time dummies for each
+    presidential election year
+  \end{itemize}
+\item
+  As an IV, we use the rainfall measure denoted by
+  \texttt{DNormPrcp\_KRIG}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# You can do this, but it is tedious.}
+\NormalTok{hg_ols <-}\StringTok{ }\KeywordTok{lm}\NormalTok{( DemVoteShare2 }\OperatorTok{~}\StringTok{ }\NormalTok{Turnout }\OperatorTok{+}\StringTok{ }\NormalTok{Yr52 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr56 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr60 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr64 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr68 }\OperatorTok{+}\StringTok{ }
+\StringTok{                }\NormalTok{Yr72 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr76 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr80 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr84 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr88 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr92 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr96 }\OperatorTok{+}\StringTok{ }\NormalTok{Yr2000,  }\DataTypeTok{data =}\NormalTok{ HGdata)}
+\CommentTok{#coeftest(hg_ols, vcov = vcovHC, type = "HC1")}
+
+\CommentTok{# By using "factor(Year)" as an explanatory variable, the regression automatically incorporates the dummies for each value.}
+\NormalTok{hg_ols <-}\StringTok{ }\KeywordTok{lm}\NormalTok{( DemVoteShare2 }\OperatorTok{~}\StringTok{ }\NormalTok{Turnout }\OperatorTok{+}\StringTok{ }\KeywordTok{factor}\NormalTok{(Year)   ,  }\DataTypeTok{data =}\NormalTok{ HGdata)}
+\CommentTok{#coeftest(hg_ols, vcov = vcovHC, type = "HC1")}
+
+\CommentTok{# Iv regression}
+\NormalTok{hg_ivreg <-}\StringTok{ }\KeywordTok{ivreg}\NormalTok{( DemVoteShare2 }\OperatorTok{~}\StringTok{ }\NormalTok{Turnout }\OperatorTok{+}\StringTok{ }\KeywordTok{factor}\NormalTok{(Year) }\OperatorTok{|}\StringTok{ }
+\StringTok{                    }\KeywordTok{factor}\NormalTok{(Year) }\OperatorTok{+}\StringTok{ }\NormalTok{DNormPrcp_KRIG, }\DataTypeTok{data =}\NormalTok{ HGdata)}
+\CommentTok{#coeftest(hg_ivreg, vcov = vcovHC, type = "HC1")}
+
+\CommentTok{# Robust standard errors }
+\NormalTok{rob_se <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(hg_ols, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))),}
+               \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(}\KeywordTok{vcovHC}\NormalTok{(hg_ivreg, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{))))}
+
+\CommentTok{# Show result}
+\KeywordTok{stargazer}\NormalTok{(hg_ols, hg_ivreg, }\DataTypeTok{type =}\StringTok{"text"}\NormalTok{, }\DataTypeTok{se =}\NormalTok{ rob_se)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## =========================================================================
+##                                            Dependent variable:           
+##                                  ----------------------------------------
+##                                               DemVoteShare2              
+##                                              OLS             instrumental
+##                                                                variable  
+##                                              (1)                 (2)     
+## -------------------------------------------------------------------------
+## Turnout                                   -0.157***            0.363**   
+##                                            (0.008)             (0.178)   
+##                                                                          
+## factor(Year)1952                         -10.215***           -15.832*** 
+##                                            (0.374)             (1.987)   
+##                                                                          
+## factor(Year)1956                          -8.756***           -13.656*** 
+##                                            (0.357)             (1.746)   
+##                                                                          
+## factor(Year)1960                          -3.862***           -11.094*** 
+##                                            (0.351)             (2.531)   
+##                                                                          
+## factor(Year)1964                          10.851***            6.837***  
+##                                            (0.337)             (1.441)   
+##                                                                          
+## factor(Year)1968                          -6.477***           -8.514***  
+##                                            (0.356)             (0.811)   
+##                                                                          
+## factor(Year)1972                         -13.749***           -16.473*** 
+##                                            (0.335)             (1.022)   
+##                                                                          
+## factor(Year)1976                           -0.367             -2.111***  
+##                                            (0.337)             (0.715)   
+##                                                                          
+## factor(Year)1980                         -10.346***           -11.696*** 
+##                                            (0.356)             (0.620)   
+##                                                                          
+## factor(Year)1984                         -13.134***           -13.515*** 
+##                                            (0.352)             (0.404)   
+##                                                                          
+## factor(Year)1988                          -5.712***           -4.951***  
+##                                            (0.349)             (0.447)   
+##                                                                          
+## factor(Year)1992                           -0.327              -1.008**  
+##                                            (0.362)             (0.469)   
+##                                                                          
+## factor(Year)1996                          -1.193***             0.811    
+##                                            (0.377)             (0.782)   
+##                                                                          
+## factor(Year)2000                          -9.013***           -8.130***  
+##                                            (0.386)             (0.465)   
+##                                                                          
+## Constant                                  59.085***            26.910**  
+##                                            (0.560)             (11.024)  
+##                                                                          
+## -------------------------------------------------------------------------
+## Observations                               27,401               27,401   
+## R2                                          0.281               0.130    
+## Adjusted R2                                 0.280               0.130    
+## Residual Std. Error (df = 27386)           10.533               11.582   
+## F Statistic                      763.153*** (df = 14; 27386)             
+## =========================================================================
+## Note:                                         *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First stage regression }
+\NormalTok{hg_1st <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Turnout }\OperatorTok{~}\StringTok{  }\KeywordTok{factor}\NormalTok{(Year) }\OperatorTok{+}\StringTok{ }\NormalTok{DNormPrcp_KRIG, }\DataTypeTok{data=}\NormalTok{ HGdata)}
+
+\CommentTok{# F test}
+\KeywordTok{linearHypothesis}\NormalTok{(hg_1st, }
+                 \KeywordTok{c}\NormalTok{(}\StringTok{"DNormPrcp_KRIG = 0"}\NormalTok{ ), }
+                 \DataTypeTok{vcov =}\NormalTok{ vcovHC, }\DataTypeTok{type =} \StringTok{"HC1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear hypothesis test
+## 
+## Hypothesis:
+## DNormPrcp_KRIG = 0
+## 
+## Model 1: restricted model
+## Model 2: Turnout ~ factor(Year) + DNormPrcp_KRIG
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F           Pr(>F)    
+## 1  27387                               
+## 2  27386  1 44.029 0.00000000003296 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  We will see this paper more in excercise 4 (due on July 9th).
+\end{itemize}
+
+\chapter{Exercise 3 (Problem Set 4)}\label{exercise-3-problem-set-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Due date: June 18th (Tue) 11pm.
+\end{itemize}
+
+\section{Rules}\label{rules-1}
+
+\begin{itemize}
+\tightlist
+\item
+  If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can
+  use both Japanese and English to write your answer.
+\item
+  Submit your solution through \texttt{CourseN@vi}.
+\item
+  \textbf{Important:} Submission format
+\item
+  If you use Rmarkdown, please compile your Rmarkdown file into either
+  ``html'' or ``PDF'' file and submit \textbf{both} the compiled file
+  and a Rmarkdown file.
+\item
+  If you do not use Rmarkdown, please submit the document file that
+  contains your answer and R script file (.R file) \textbf{separately},
+  that is, you submit \textbf{two files}.
+\end{itemize}
+
+\section{Question: Demand Estimation}\label{question-demand-estimation}
+
+\begin{itemize}
+\item
+  You might want to refer \href{IV_Examples_190524.pdf}{the lecture
+  note} in my other class where I covered the same topic.
+\item
+  We use the dataset from Stephen Ryan (2012) ``The Costs of
+  Environmental Regulation in a Concentrated Industry'', Econometrica,
+  Issue 3, 1019-1061, 2012
+\item
+  This is the data for Portland cement in the US. The data is panel for
+  22 regions (roughly corresponding to the US state) from 1981 to 1999.
+\item
+  Ryan (2012) studies the effects of environmental regulation on dynamic
+  competition among cement producers.
+\item
+  Graduate-level knowledge about econometrics and industrial
+  organization is needed to understand the whole paper. Rather we focus
+  on a part of his analysis, that is demand estimation.
+\item
+  The dataset is \href{cementDec2009.csv}{here}.
+\item
+  The original dataset contains many variable. Here, we pick a subset of
+  the variable we use in the analysis.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: パッケージ 'readr' はバージョン 3.5.3 の R の下で造られました
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:stats' からマスクされています: 
+## 
+##      filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stargazer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Please cite as:
+\end{verbatim}
+
+\begin{verbatim}
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+\end{verbatim}
+
+\begin{verbatim}
+##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RyanData <-}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read_csv}\NormalTok{(}\StringTok{"cementDec2009.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   region = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## See spec(...) for full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RyanData }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(year, shipped, price, wage96, coal96, elec96, population, gas96) ->}\StringTok{ }\NormalTok{RyanData}
+
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(RyanData), }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## =====================================================================================
+## Statistic   N       Mean        St. Dev.      Min    Pctl(25)    Pctl(75)     Max    
+## -------------------------------------------------------------------------------------
+## year       483   1,989.907        5.537      1,981     1,985      1,995      1,999   
+## shipped    483   2,850.592      1,575.068     186     1,717.5    3,689.5     10,262  
+## price      483     67.935        13.731     39.351    58.644      74.892    138.992  
+## wage96     483     31.679         4.377     20.139    28.695      34.475     44.338  
+## coal96     483     26.904         8.243     15.880    19.190      34.200     42.330  
+## elec96     483     5.706          1.023      4.230     4.750      6.740      7.600   
+## population 483 10,297,214.000 7,410,527.000 689,584 4,692,603.0 12,000,000 33,100,000
+## gas96      483     6.263          2.266      3.701     5.041      6.810      24.304  
+## -------------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  The data description
+\end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.05\columnwidth}\raggedright\strut
+Name\strut
+\end{minipage} & \begin{minipage}[b]{0.89\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+shipped\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Quantity of cement shipped (measured in thousands of tons per
+year)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+price\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Price (measured in dollars per ton).\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+wage96\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+wage in dollars per hour for skilled manufacturing workers, and taken
+from County Business Patterns\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+coal96\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Coal price (dollars per ton)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+elec96\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+electricity price (dollars per kilowatt hour for electricity)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+population\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+the total populations of the states covered by a regional market.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
+gas96\strut
+\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
+Gas price (dollars per thousand cubic feet for gas.)\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Note that all price are adjusted to 1996 constant dollars.
+\end{itemize}
+
+\subsection{Questions}\label{questions-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Estimate the demand model for the following two specifications with
+  and without instruments. \[
+  \begin{aligned}
+  \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
+  \log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+  \end{aligned}
+  \] where \(Q_{jt}\): quantity, \(P_{jt}\): price, \(population_{jt}\):
+  population As an instrument for price, you use wage, coal price,
+  electricity price, and gas price. The variable \(population_{jt}\) is
+  treated as exogenous.
+\item
+  Discuss the results above. In particular, explain (1) the importance
+  of adding population as a control variable, and (2) the difference
+  between results with and without IVs.
+\item
+  Discuss the validity of those instruments.
+\item
+  Instead of log-log specification, consider the following linear
+  specification (with population as a control variable) \[
+  Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+  \] Estimate this specification using instruments. Do not forget
+  checking the 1st stage.
+\item
+  The price elasticity of demand is defined as \[
+  \frac{\partial Q_{jt}}{\partial P_{jt} } \frac{P_{jt}}{Q_{jt}} 
+  \] If we use the log-log specification, the coefficient on the price
+  is the elasticity and it is constant across markets and time. Using
+  the estimation result with linear specification, calculate the price
+  elasticity for each observation (i.e., market-year pair). Report the
+  summary statistics of the price elasticity across markets and time.
+  Compare the result with the one from log-log specification that
+  includes population as a control variable.
+\end{enumerate}
 
 
 \end{document}

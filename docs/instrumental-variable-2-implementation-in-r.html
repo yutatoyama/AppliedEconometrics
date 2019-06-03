@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="instrumental-variable-1-framework.html">
-
+<link rel="next" href="exercise-3-problem-set-4.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -234,6 +234,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-1-wage-regression"><i class="fa fa-check"></i><b>13.1</b> Example 1: Wage regression</a><ul>
 <li class="chapter" data-level="13.1.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#discussion-on-iv"><i class="fa fa-check"></i><b>13.1.1</b> Discussion on IV</a></li>
 </ul></li>
+<li class="chapter" data-level="13.2" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-2-estimation-of-the-demand-for-cigaretts"><i class="fa fa-check"></i><b>13.2</b> Example 2: Estimation of the Demand for Cigaretts</a></li>
+<li class="chapter" data-level="13.3" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-3-effects-of-turnout-on-partisan-voting"><i class="fa fa-check"></i><b>13.3</b> Example 3: Effects of Turnout on Partisan Voting</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html"><i class="fa fa-check"></i><b>14</b> Exercise 3 (Problem Set 4)</a><ul>
+<li class="chapter" data-level="14.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#rules-1"><i class="fa fa-check"></i><b>14.1</b> Rules</a></li>
+<li class="chapter" data-level="14.2" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#question-demand-estimation"><i class="fa fa-check"></i><b>14.2</b> Question: Demand Estimation</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#questions-1"><i class="fa fa-check"></i><b>14.2.1</b> Questions</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -423,8 +431,516 @@ result_1st &lt;-<span class="st"> </span><span class="kw">lm</span>(educ <span c
 <li>Still, we can see that these IVs can mitigate (though may not eliminate completely) the omitted variable bias.</li>
 <li>Discussion on the validity of instruments is crucial in empirical research.</li>
 </ul>
-
 </div>
+</div>
+<div id="example-2-estimation-of-the-demand-for-cigaretts" class="section level2">
+<h2><span class="header-section-number">13.2</span> Example 2: Estimation of the Demand for Cigaretts</h2>
+<ul>
+<li>Demand model is a building block in many branches of Economics.</li>
+<li>For example, health economics is concerned with the study of how health-affecting behavior of individuals is influenced by the health-care system and regulation policy.</li>
+<li>Smoking is a prominent example as it is related to many illnesses and negative externalities.</li>
+<li>It is plausible that cigarette consumption can be reduced by taxing cigarettes more heavily.</li>
+<li><p>Question: how much taxes must be increased to reach a certain reduction in cigarette consumption? -&gt; Need to know <strong>price elasticity of demand</strong> for cigaretts.</p></li>
+<li>Use <code>CigarrettesSW</code> in the package <code>AER</code>.</li>
+<li>a panel data set that contains observations on cigarette consumption and several economic indicators for all 48 continental federal states of the U.S. from 1985 to 1995.</li>
+<li>What is <strong>panel data</strong>? The data involves both time series and cross-sectional information.
+<ul>
+<li>The variable is denoted as <span class="math inline">\(y_{it}\)</span>, which indexed by individual <span class="math inline">\(i\)</span> and time <span class="math inline">\(t\)</span>.</li>
+<li>Cross section data <span class="math inline">\(y_i\)</span>: information for a particular individual <span class="math inline">\(i\)</span> (e.g., income for person <span class="math inline">\(i\)</span>).</li>
+<li>Time series data <span class="math inline">\(y_t\)</span>: information for a particular time period (e.g., GDP in year <span class="math inline">\(y\)</span>)</li>
+<li>Panel data <span class="math inline">\(y_{it}\)</span>: income of person <span class="math inline">\(i\)</span> in year <span class="math inline">\(t\)</span>.</li>
+</ul></li>
+<li><p>We will see more on panel data later in this course. For now, we use the panel data as just cross-sectional data (<strong>pooled cross-sections</strong>)</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the data set and get an overview</span>
+<span class="kw">library</span>(AER)
+<span class="kw">data</span>(<span class="st">&quot;CigarettesSW&quot;</span>)
+<span class="kw">summary</span>(CigarettesSW)</code></pre></div>
+<pre><code>##      state      year         cpi          population      
+##  AL     : 2   1985:48   Min.   :1.076   Min.   :  478447  
+##  AR     : 2   1995:48   1st Qu.:1.076   1st Qu.: 1622606  
+##  AZ     : 2             Median :1.300   Median : 3697472  
+##  CA     : 2             Mean   :1.300   Mean   : 5168866  
+##  CO     : 2             3rd Qu.:1.524   3rd Qu.: 5901500  
+##  CT     : 2             Max.   :1.524   Max.   :31493524  
+##  (Other):84                                               
+##      packs            income               tax            price       
+##  Min.   : 49.27   Min.   :  6887097   Min.   :18.00   Min.   : 84.97  
+##  1st Qu.: 92.45   1st Qu.: 25520384   1st Qu.:31.00   1st Qu.:102.71  
+##  Median :110.16   Median : 61661644   Median :37.00   Median :137.72  
+##  Mean   :109.18   Mean   : 99878736   Mean   :42.68   Mean   :143.45  
+##  3rd Qu.:123.52   3rd Qu.:127313964   3rd Qu.:50.88   3rd Qu.:176.15  
+##  Max.   :197.99   Max.   :771470144   Max.   :99.00   Max.   :240.85  
+##                                                                       
+##       taxs       
+##  Min.   : 21.27  
+##  1st Qu.: 34.77  
+##  Median : 41.05  
+##  Mean   : 48.33  
+##  3rd Qu.: 59.48  
+##  Max.   :112.63  
+## </code></pre>
+<ul>
+<li>Consider the following model <span class="math display">\[
+\log (Q_{it}) = \beta_0 + \beta_1 \log (P_{it}) + \beta_2 \log(income_{it}) + u_{it}
+\]</span> where
+<ul>
+<li><span class="math inline">\(Q_{it}\)</span> is the number of packs per capita in state <span class="math inline">\(i\)</span> in year <span class="math inline">\(t\)</span>,</li>
+<li><span class="math inline">\(P_{it}\)</span> is the after-tax average real price per pack of cigarettes, and</li>
+<li><span class="math inline">\(income_{it}\)</span> is the real income per capita. This is demand shifter.</li>
+</ul></li>
+<li>As an IV for the price, we use the followings:
+<ul>
+<li><span class="math inline">\(SalesTax_{it}\)</span>: the proportion of taxes on cigarettes arising from the general sales tax.
+<ul>
+<li>Relevant as it is included in the after-tax price</li>
+<li>Exogenous(indepndent) since the sales tax does not influence demand directly, but indirectly through the price.</li>
+</ul></li>
+<li><span class="math inline">\(CigTax_{it}\)</span>: the cigarett-specific taxes</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+CigarettesSW <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">rincome =</span> (income <span class="op">/</span><span class="st"> </span>population) <span class="op">/</span><span class="st"> </span>cpi) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">rprice  =</span> price <span class="op">/</span><span class="st"> </span>cpi ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">salestax =</span> (taxs <span class="op">-</span><span class="st"> </span>tax) <span class="op">/</span><span class="st"> </span>cpi ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">cigtax =</span> tax<span class="op">/</span>cpi ) -&gt;<span class="st"> </span>Cigdata</code></pre></div>
+<ul>
+<li>Let’s run the regressions</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cig_ols &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(packs) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(rprice) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(rincome) ,  <span class="dt">data =</span> Cigdata)
+<span class="co">#coeftest(cig_ols, vcov = vcovHC, type = &quot;HC1&quot;)</span>
+
+
+cig_ivreg &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(packs) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(rprice) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(rincome)  <span class="op">|</span><span class="st"> </span>
+<span class="st">                    </span><span class="kw">log</span>(rincome) <span class="op">+</span><span class="st">  </span>salestax <span class="op">+</span><span class="st">  </span>cigtax, <span class="dt">data =</span> Cigdata)
+<span class="co">#coeftest(cig_ivreg, vcov = vcovHC, type = &quot;HC1&quot;)</span>
+
+<span class="co"># Robust standard errors </span>
+rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(cig_ols, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
+               <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(cig_ivreg, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))))
+
+<span class="co"># Show result</span>
+<span class="kw">stargazer</span>(cig_ols, cig_ivreg, <span class="dt">type =</span><span class="st">&quot;text&quot;</span>, <span class="dt">se =</span> rob_se)</code></pre></div>
+<pre><code>## 
+## =================================================================
+##                                       Dependent variable:        
+##                               -----------------------------------
+##                                           log(packs)             
+##                                        OLS           instrumental
+##                                                        variable  
+##                                        (1)               (2)     
+## -----------------------------------------------------------------
+## log(rprice)                         -1.334***         -1.229***  
+##                                      (0.154)           (0.155)   
+##                                                                  
+## log(rincome)                         0.318**            0.257*   
+##                                      (0.154)           (0.153)   
+##                                                                  
+## Constant                            10.067***          9.736***  
+##                                      (0.502)           (0.514)   
+##                                                                  
+## -----------------------------------------------------------------
+## Observations                            96                96     
+## R2                                    0.552             0.549    
+## Adjusted R2                           0.542             0.539    
+## Residual Std. Error (df = 93)         0.165             0.165    
+## F Statistic                   57.185*** (df = 2; 93)             
+## =================================================================
+## Note:                                 *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<ul>
+<li>The first stage regression</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First stage regression </span>
+
+result_1st &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(rprice) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(rincome) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(rincome) <span class="op">+</span><span class="st"> </span>salestax <span class="op">+</span><span class="st"> </span>cigtax , <span class="dt">data=</span> Cigdata)
+
+<span class="co"># F test</span>
+<span class="kw">linearHypothesis</span>(result_1st, 
+                 <span class="kw">c</span>(<span class="st">&quot;salestax = 0&quot;</span>, <span class="st">&quot;cigtax = 0&quot;</span> ), 
+                 <span class="dt">vcov =</span> vcovHC, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>)</code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## salestax = 0
+## cigtax = 0
+## 
+## Model 1: restricted model
+## Model 2: log(rprice) ~ log(rincome) + log(rincome) + salestax + cigtax
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F                Pr(&gt;F)    
+## 1     94                                    
+## 2     92  2 127.77 &lt; 0.00000000000000022 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="example-3-effects-of-turnout-on-partisan-voting" class="section level2">
+<h2><span class="header-section-number">13.3</span> Example 3: Effects of Turnout on Partisan Voting</h2>
+<ul>
+<li>THOMAS G. HANSFORD and BRAD T. GOMEZ “Estimating the Electoral Effects of Voter Turnout” The American Political Science Review Vol. 104, No. 2 (May 2010), pp. 268-288
+<ul>
+<li>Link: <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C" class="uri">https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C</a></li>
+</ul></li>
+<li>Here, we will see a simplified version of their analysis.</li>
+<li>The dataset is <a href="HansfordGomez_Data.csv">here</a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
+<pre><code>## Warning: パッケージ &#39;readr&#39; はバージョン 3.5.3 の R の下で造られました</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HGdata &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;HansfordGomez_Data.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stargazer<span class="op">::</span><span class="kw">stargazer</span>(<span class="kw">as.data.frame</span>(HGdata), <span class="dt">type=</span><span class="st">&quot;text&quot;</span>)</code></pre></div>
+<pre><code>## 
+## =========================================================================================
+## Statistic           N       Mean       St. Dev.      Min   Pctl(25)  Pctl(75)     Max    
+## -----------------------------------------------------------------------------------------
+## Year              27,401  1,973.972     16.111      1,948    1,960     1,988     2,000   
+## FIPS_County       27,401 29,985.500   13,081.250    4,001   20,013    39,157     56,045  
+## Turnout           27,401   65.562       10.514     20.366   58.477    72.613    100.000  
+## Closing2          27,401   23.053       13.042        0       11        30        125    
+## Literacy          27,401    0.058        0.234        0        0         0         1     
+## PollTax           27,401    0.001        0.023        0        0         0         1     
+## Motor             27,401    0.211        0.408        0        0         0         1     
+## GubElection       27,401    0.434        0.496        0        0         1         1     
+## SenElection       27,401    0.680        0.467        0        0         1         1     
+## GOP_Inc           27,401    0.501        0.500        0        0         1         1     
+## Yr52              27,401    0.071        0.258        0        0         0         1     
+## Yr56              27,401    0.071        0.258        0        0         0         1     
+## Yr60              27,401    0.071        0.258        0        0         0         1     
+## Yr64              27,401    0.071        0.258        0        0         0         1     
+## Yr68              27,401    0.071        0.258        0        0         0         1     
+## Yr72              27,401    0.071        0.258        0        0         0         1     
+## Yr76              27,401    0.071        0.258        0        0         0         1     
+## Yr80              27,401    0.071        0.258        0        0         0         1     
+## Yr84              27,401    0.072        0.258        0        0         0         1     
+## Yr88              27,401    0.072        0.258        0        0         0         1     
+## Yr92              27,401    0.072        0.258        0        0         0         1     
+## Yr96              27,401    0.072        0.258        0        0         0         1     
+## Yr2000            27,401    0.070        0.256        0        0         0         1     
+## DNormPrcp_KRIG    27,401    0.005        0.208     -0.419   -0.093     0.001     2.627   
+## GOPIT             27,401   33.282       34.066        0        0       66.3       100    
+## DemVoteShare2_3MA 27,401   44.250       10.606     10.145   37.006    50.996     88.982  
+## DemVoteShare2     27,401   43.622       12.415      6.420   34.954    51.858     97.669  
+## RainGOPI          27,401    0.007        0.142       -0      -0.03       0         2     
+## TO_DVS23MA        27,401  2,886.877     792.530    473.161 2,321.025 3,384.772 8,526.616 
+## Rain_DVS23MA      27,401    0.355       10.188     -25.054  -4.019     0.028    144.257  
+## dph               27,401    0.021        0.145        0        0         0         1     
+## dvph              27,401    0.018        0.133        0        0         0         1     
+## rph               27,401    0.025        0.155        0        0         0         1     
+## rvph              27,401    0.025        0.155        0        0         0         1     
+## state_del         27,401    0.037        0.187     -0.821   -0.090     0.172     0.619   
+## dph_StateVAP      27,401 77,525.150   597,474.000     0        0         0     6,150,988 
+## dvph_StateVAP     27,401 63,138.400   663,707.600     0        0         0     12,700,000
+## rph_StateVAP      27,401 243,707.900 1,720,659.000    0        0         0     18,300,000
+## rvph_StateVAP     27,401 142,166.500 1,071,445.000    0        0         0     12,800,000
+## State_DVS_lag     27,401   46.896        8.317     22.035   40.767    52.197     80.872  
+## State_DVS_lag2    27,401  2,268.381     786.199    485.533 1,661.934 2,724.515 6,540.244 
+## -----------------------------------------------------------------------------------------</code></pre>
+<ul>
+<li>Data description:</li>
+</ul>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="94%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Year</td>
+<td>Election Year</td>
+</tr>
+<tr class="even">
+<td>FIPS_County</td>
+<td>FIPS County Code</td>
+</tr>
+<tr class="odd">
+<td>Turnout</td>
+<td>Turnout as Pcnt VAP</td>
+</tr>
+<tr class="even">
+<td>Closing2</td>
+<td>Days between registration closing date and election</td>
+</tr>
+<tr class="odd">
+<td>Literacy</td>
+<td>Literacy Test</td>
+</tr>
+<tr class="even">
+<td>PollTax</td>
+<td>Poll Tax</td>
+</tr>
+<tr class="odd">
+<td>Motor</td>
+<td>Motor Voter</td>
+</tr>
+<tr class="even">
+<td>GubElection</td>
+<td>Gubernatorial Election in State</td>
+</tr>
+<tr class="odd">
+<td>SenElection</td>
+<td>U.S. Senate Election in State</td>
+</tr>
+<tr class="even">
+<td>GOP_Inc</td>
+<td>Republican Incumbent</td>
+</tr>
+<tr class="odd">
+<td>Yr52</td>
+<td>1952 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr56</td>
+<td>1956 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr60</td>
+<td>1960 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr64</td>
+<td>1964 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr68</td>
+<td>1968 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr72</td>
+<td>1972 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr76</td>
+<td>1976 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr80</td>
+<td>1980 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr84</td>
+<td>1984 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr88</td>
+<td>1988 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr92</td>
+<td>1992 Dummy</td>
+</tr>
+<tr class="even">
+<td>Yr96</td>
+<td>1996 Dummy</td>
+</tr>
+<tr class="odd">
+<td>Yr2000</td>
+<td>2000 Dummy</td>
+</tr>
+<tr class="even">
+<td>DNormPrcp_KRIG</td>
+<td>Election day rainfall - differenced from normal rain for the day</td>
+</tr>
+<tr class="odd">
+<td>GOPIT</td>
+<td>Turnout x Republican Incumbent</td>
+</tr>
+<tr class="even">
+<td>DemVoteShare2~A</td>
+<td>Partisan composition measure = 3 election moving avg. of Dem Vote Share</td>
+</tr>
+<tr class="odd">
+<td>DemVoteShare2</td>
+<td>Democratic Pres Candidate’s Vote Share</td>
+</tr>
+<tr class="even">
+<td>RainGOPI</td>
+<td>Rainfall measure x Republican Incumbent</td>
+</tr>
+<tr class="odd">
+<td>TO_DVS23MA</td>
+<td>Turnout x Partisan Composition measure</td>
+</tr>
+<tr class="even">
+<td>Rain_DVS23MA</td>
+<td>Rainfall measure x Partisan composition measure</td>
+</tr>
+<tr class="odd">
+<td>dph</td>
+<td>=1 if home state of Dem pres candidate</td>
+</tr>
+<tr class="even">
+<td>dvph</td>
+<td>=1 if home state of Dem vice pres candidate</td>
+</tr>
+<tr class="odd">
+<td>rph</td>
+<td>=1 if home state of Rep pres candidate</td>
+</tr>
+<tr class="even">
+<td>rvph</td>
+<td>=1 if home state of Rep vice pres candidate</td>
+</tr>
+<tr class="odd">
+<td>state_del</td>
+<td>avg common space score for the House delegation</td>
+</tr>
+<tr class="even">
+<td>dph_StateVAP</td>
+<td>= dph*State voting age population</td>
+</tr>
+<tr class="odd">
+<td>dvph_StateVAP</td>
+<td>= dvph*State voting age population</td>
+</tr>
+<tr class="even">
+<td>rph_StateVAP</td>
+<td>= rph*State voting age population</td>
+</tr>
+<tr class="odd">
+<td>rvph_StateVAP</td>
+<td>= rvph*State voting age population</td>
+</tr>
+<tr class="even">
+<td>State_DVS_lag</td>
+<td>State-wide Dem vote share, lagged one election</td>
+</tr>
+<tr class="odd">
+<td>State_DVS_lag2</td>
+<td>State_DVS_lag squared</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Consider the following regression <span class="math display">\[
+DemoShare_{it} = \beta_0 + \beta_1 Turnout_{it} + u_t + u_{it}
+ \]</span> where
+<ul>
+<li><span class="math inline">\(Demoshare_{it}\)</span>: Two-party vote share for Democrat candidate in county <span class="math inline">\(i\)</span> in the presidential election in year <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(Turnout_{it}\)</span>: Turnout rate in county <span class="math inline">\(i\)</span> in the presidential election in year <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(u_t\)</span>: <strong>Year fixed effects</strong>. Time dummies for each presidential election year</li>
+</ul></li>
+<li>As an IV, we use the rainfall measure denoted by <code>DNormPrcp_KRIG</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can do this, but it is tedious.</span>
+hg_ols &lt;-<span class="st"> </span><span class="kw">lm</span>( DemVoteShare2 <span class="op">~</span><span class="st"> </span>Turnout <span class="op">+</span><span class="st"> </span>Yr52 <span class="op">+</span><span class="st"> </span>Yr56 <span class="op">+</span><span class="st"> </span>Yr60 <span class="op">+</span><span class="st"> </span>Yr64 <span class="op">+</span><span class="st"> </span>Yr68 <span class="op">+</span><span class="st"> </span>
+<span class="st">                </span>Yr72 <span class="op">+</span><span class="st"> </span>Yr76 <span class="op">+</span><span class="st"> </span>Yr80 <span class="op">+</span><span class="st"> </span>Yr84 <span class="op">+</span><span class="st"> </span>Yr88 <span class="op">+</span><span class="st"> </span>Yr92 <span class="op">+</span><span class="st"> </span>Yr96 <span class="op">+</span><span class="st"> </span>Yr2000,  <span class="dt">data =</span> HGdata)
+<span class="co">#coeftest(hg_ols, vcov = vcovHC, type = &quot;HC1&quot;)</span>
+
+<span class="co"># By using &quot;factor(Year)&quot; as an explanatory variable, the regression automatically incorporates the dummies for each value.</span>
+hg_ols &lt;-<span class="st"> </span><span class="kw">lm</span>( DemVoteShare2 <span class="op">~</span><span class="st"> </span>Turnout <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(Year)   ,  <span class="dt">data =</span> HGdata)
+<span class="co">#coeftest(hg_ols, vcov = vcovHC, type = &quot;HC1&quot;)</span>
+
+<span class="co"># Iv regression</span>
+hg_ivreg &lt;-<span class="st"> </span><span class="kw">ivreg</span>( DemVoteShare2 <span class="op">~</span><span class="st"> </span>Turnout <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(Year) <span class="op">|</span><span class="st"> </span>
+<span class="st">                    </span><span class="kw">factor</span>(Year) <span class="op">+</span><span class="st"> </span>DNormPrcp_KRIG, <span class="dt">data =</span> HGdata)
+<span class="co">#coeftest(hg_ivreg, vcov = vcovHC, type = &quot;HC1&quot;)</span>
+
+<span class="co"># Robust standard errors </span>
+rob_se &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(hg_ols, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))),
+               <span class="kw">sqrt</span>(<span class="kw">diag</span>(<span class="kw">vcovHC</span>(hg_ivreg, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>))))
+
+<span class="co"># Show result</span>
+<span class="kw">stargazer</span>(hg_ols, hg_ivreg, <span class="dt">type =</span><span class="st">&quot;text&quot;</span>, <span class="dt">se =</span> rob_se)</code></pre></div>
+<pre><code>## 
+## =========================================================================
+##                                            Dependent variable:           
+##                                  ----------------------------------------
+##                                               DemVoteShare2              
+##                                              OLS             instrumental
+##                                                                variable  
+##                                              (1)                 (2)     
+## -------------------------------------------------------------------------
+## Turnout                                   -0.157***            0.363**   
+##                                            (0.008)             (0.178)   
+##                                                                          
+## factor(Year)1952                         -10.215***           -15.832*** 
+##                                            (0.374)             (1.987)   
+##                                                                          
+## factor(Year)1956                          -8.756***           -13.656*** 
+##                                            (0.357)             (1.746)   
+##                                                                          
+## factor(Year)1960                          -3.862***           -11.094*** 
+##                                            (0.351)             (2.531)   
+##                                                                          
+## factor(Year)1964                          10.851***            6.837***  
+##                                            (0.337)             (1.441)   
+##                                                                          
+## factor(Year)1968                          -6.477***           -8.514***  
+##                                            (0.356)             (0.811)   
+##                                                                          
+## factor(Year)1972                         -13.749***           -16.473*** 
+##                                            (0.335)             (1.022)   
+##                                                                          
+## factor(Year)1976                           -0.367             -2.111***  
+##                                            (0.337)             (0.715)   
+##                                                                          
+## factor(Year)1980                         -10.346***           -11.696*** 
+##                                            (0.356)             (0.620)   
+##                                                                          
+## factor(Year)1984                         -13.134***           -13.515*** 
+##                                            (0.352)             (0.404)   
+##                                                                          
+## factor(Year)1988                          -5.712***           -4.951***  
+##                                            (0.349)             (0.447)   
+##                                                                          
+## factor(Year)1992                           -0.327              -1.008**  
+##                                            (0.362)             (0.469)   
+##                                                                          
+## factor(Year)1996                          -1.193***             0.811    
+##                                            (0.377)             (0.782)   
+##                                                                          
+## factor(Year)2000                          -9.013***           -8.130***  
+##                                            (0.386)             (0.465)   
+##                                                                          
+## Constant                                  59.085***            26.910**  
+##                                            (0.560)             (11.024)  
+##                                                                          
+## -------------------------------------------------------------------------
+## Observations                               27,401               27,401   
+## R2                                          0.281               0.130    
+## Adjusted R2                                 0.280               0.130    
+## Residual Std. Error (df = 27386)           10.533               11.582   
+## F Statistic                      763.153*** (df = 14; 27386)             
+## =========================================================================
+## Note:                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First stage regression </span>
+hg_1st &lt;-<span class="st"> </span><span class="kw">lm</span>(Turnout <span class="op">~</span><span class="st">  </span><span class="kw">factor</span>(Year) <span class="op">+</span><span class="st"> </span>DNormPrcp_KRIG, <span class="dt">data=</span> HGdata)
+
+<span class="co"># F test</span>
+<span class="kw">linearHypothesis</span>(hg_1st, 
+                 <span class="kw">c</span>(<span class="st">&quot;DNormPrcp_KRIG = 0&quot;</span> ), 
+                 <span class="dt">vcov =</span> vcovHC, <span class="dt">type =</span> <span class="st">&quot;HC1&quot;</span>)</code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## DNormPrcp_KRIG = 0
+## 
+## Model 1: restricted model
+## Model 2: Turnout ~ factor(Year) + DNormPrcp_KRIG
+## 
+## Note: Coefficient covariance matrix supplied.
+## 
+##   Res.Df Df      F           Pr(&gt;F)    
+## 1  27387                               
+## 2  27386  1 44.029 0.00000000003296 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<ul>
+<li>We will see this paper more in excercise 4 (due on July 9th).</li>
+</ul>
+
 </div>
 </div>
             </section>
@@ -432,8 +948,8 @@ result_1st &lt;-<span class="st"> </span><span class="kw">lm</span>(educ <span c
           </div>
         </div>
       </div>
-<a href="instrumental-variable-1-framework.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="instrumental-variable-1-framework.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-3-problem-set-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

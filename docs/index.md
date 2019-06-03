@@ -1,7 +1,7 @@
 ---
 title: "Lecture Note for Applied Econometrics"
 author: "Yuta Toyama"
-date: "Last updated: 2019/05/28"
+date: "Last updated: 2019/06/03"
 site: bookdown::bookdown_site
 documentclass: book
 output: bookdown::gitbook

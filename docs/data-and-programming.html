@@ -234,6 +234,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-1-wage-regression"><i class="fa fa-check"></i><b>13.1</b> Example 1: Wage regression</a><ul>
 <li class="chapter" data-level="13.1.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#discussion-on-iv"><i class="fa fa-check"></i><b>13.1.1</b> Discussion on IV</a></li>
 </ul></li>
+<li class="chapter" data-level="13.2" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-2-estimation-of-the-demand-for-cigaretts"><i class="fa fa-check"></i><b>13.2</b> Example 2: Estimation of the Demand for Cigaretts</a></li>
+<li class="chapter" data-level="13.3" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-3-effects-of-turnout-on-partisan-voting"><i class="fa fa-check"></i><b>13.3</b> Example 3: Effects of Turnout on Partisan Voting</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html"><i class="fa fa-check"></i><b>14</b> Exercise 3 (Problem Set 4)</a><ul>
+<li class="chapter" data-level="14.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#rules-1"><i class="fa fa-check"></i><b>14.1</b> Rules</a></li>
+<li class="chapter" data-level="14.2" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#question-demand-estimation"><i class="fa fa-check"></i><b>14.2</b> Question: Demand Estimation</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#questions-1"><i class="fa fa-check"></i><b>14.2.1</b> Questions</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -1389,11 +1397,11 @@ x</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_sample =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)
 test_sample</code></pre></div>
-<pre><code>##  [1]  4.9369597  9.2085313  2.3433867  3.6978000  6.6752762  0.4615800
-##  [7] -1.0715673  7.1514679 -2.9442160 -0.2625316</code></pre>
+<pre><code>##  [1] -3.403493  2.236742  7.384789  2.558544  5.818400 -1.935588  1.360128
+##  [8]  7.050571 -1.547571 -9.697681</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  0.4810744  1.5528698 -0.1696883  0.1701524  0.9172417 -0.6418593
-##  [7] -1.0265468  1.0367247 -1.4964198 -0.8235487</code></pre>
+<pre><code>##  [1] -0.82622670  0.23627611  1.20606098  0.29689686  0.91098583
+##  [6] -0.54970409  0.07114024  1.14310112 -0.47660974 -2.01192060</code></pre>
 <ul>
 <li>The same function can be written more simply.</li>
 </ul>
@@ -1450,16 +1458,16 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 15.8837</code></pre>
+<pre><code>## [1] 28.17956</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 15.8837</code></pre>
+<pre><code>## [1] 28.17956</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 15.8837</code></pre>
+<pre><code>## [1] 28.17956</code></pre>
 <ul>
 <li>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 14.29533</code></pre>
+<pre><code>## [1] 25.36161</code></pre>
 
 </div>
 </div>

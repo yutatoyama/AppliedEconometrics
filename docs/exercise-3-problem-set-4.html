@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>14 Exercise 3 (Problem Set 4) | Lecture Note for Applied Econometrics</title>
+  <meta name="description" content="14 Exercise 3 (Problem Set 4) | Lecture Note for Applied Econometrics">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="14 Exercise 3 (Problem Set 4) | Lecture Note for Applied Econometrics" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="14 Exercise 3 (Problem Set 4) | Lecture Note for Applied Econometrics" />
+  
+  
+  
+
+<meta name="author" content="Yuta Toyama">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="instrumental-variable-2-implementation-in-r.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Applied Econometrics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-this"><i class="fa fa-check"></i><b>1.1</b> About this</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#update-april-23-2019"><i class="fa fa-check"></i><b>1.2</b> Update: April 23, 2019</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#update-april-16-2019"><i class="fa fa-check"></i><b>1.3</b> Update: April 16, 2019</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#acknowledgement-as-of-april-16-2019"><i class="fa fa-check"></i><b>1.4</b> Acknowledgement (as of April 16, 2019)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html"><i class="fa fa-check"></i><b>2</b> Introduction to the course</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#what-is-econometrics"><i class="fa fa-check"></i><b>2.1</b> What is econometrics?</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-need-to-learn-computation"><i class="fa fa-check"></i><b>2.2</b> Why do we need to learn computation</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-the-course.html"><a href="introduction-to-the-course.html#why-do-we-use-r"><i class="fa fa-check"></i><b>2.3</b> Why do we use R?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html"><i class="fa fa-check"></i><b>3</b> Introduction of <code>R</code> and <code>R studio</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-started"><i class="fa fa-check"></i><b>3.1</b> Getting Started</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#helps"><i class="fa fa-check"></i><b>3.2</b> Helps</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#quick-tour-of-rstudio"><i class="fa fa-check"></i><b>3.3</b> Quick tour of Rstudio</a></li>
+<li class="chapter" data-level="3.4" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#basic-calculations"><i class="fa fa-check"></i><b>3.4</b> Basic Calculations</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#getting-help"><i class="fa fa-check"></i><b>3.5</b> Getting Help</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-of-r-and-r-studio.html"><a href="introduction-of-r-and-r-studio.html#installing-packages"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-and-programming.html"><a href="data-and-programming.html"><i class="fa fa-check"></i><b>4</b> Data and Programming</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-and-programming.html"><a href="data-and-programming.html#data-types"><i class="fa fa-check"></i><b>4.1</b> Data Types</a></li>
+<li class="chapter" data-level="4.2" data-path="data-and-programming.html"><a href="data-and-programming.html#data-structures"><i class="fa fa-check"></i><b>4.2</b> Data Structures</a></li>
+<li class="chapter" data-level="4.3" data-path="data-and-programming.html"><a href="data-and-programming.html#vectors"><i class="fa fa-check"></i><b>4.3</b> Vectors</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics-of-vectors"><i class="fa fa-check"></i><b>4.3.1</b> Basics of vectors</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-and-programming.html"><a href="data-and-programming.html#useful-functions-for-creating-vectors"><i class="fa fa-check"></i><b>4.3.2</b> Useful functions for creating vectors</a></li>
+<li class="chapter" data-level="4.3.3" data-path="data-and-programming.html"><a href="data-and-programming.html#subsetting"><i class="fa fa-check"></i><b>4.3.3</b> Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-and-programming.html"><a href="data-and-programming.html#vectorization"><i class="fa fa-check"></i><b>4.4</b> Vectorization</a></li>
+<li class="chapter" data-level="4.5" data-path="data-and-programming.html"><a href="data-and-programming.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical Operators</a></li>
+<li class="chapter" data-level="4.6" data-path="data-and-programming.html"><a href="data-and-programming.html#matrices"><i class="fa fa-check"></i><b>4.6</b> Matrices</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-and-programming.html"><a href="data-and-programming.html#basics"><i class="fa fa-check"></i><b>4.6.1</b> Basics</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-and-programming.html"><a href="data-and-programming.html#matrix-calculations"><i class="fa fa-check"></i><b>4.6.2</b> Matrix calculations</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-and-programming.html"><a href="data-and-programming.html#getting-information-for-matrix"><i class="fa fa-check"></i><b>4.6.3</b> Getting information for matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-and-programming.html"><a href="data-and-programming.html#lists"><i class="fa fa-check"></i><b>4.7</b> Lists</a></li>
+<li class="chapter" data-level="4.8" data-path="data-and-programming.html"><a href="data-and-programming.html#data-frames"><i class="fa fa-check"></i><b>4.8</b> Data Frames</a></li>
+<li class="chapter" data-level="4.9" data-path="data-and-programming.html"><a href="data-and-programming.html#programming-basics--control-flow-"><i class="fa fa-check"></i><b>4.9</b> Programming Basics -Control flow-</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="data-and-programming.html"><a href="data-and-programming.html#ifelse"><i class="fa fa-check"></i><b>4.9.1</b> if/else</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="data-and-programming.html"><a href="data-and-programming.html#for-loop"><i class="fa fa-check"></i><b>4.10</b> <code>for</code> loop</a></li>
+<li class="chapter" data-level="4.11" data-path="data-and-programming.html"><a href="data-and-programming.html#functions"><i class="fa fa-check"></i><b>4.11</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>5</b> Data frame</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-frame.html"><a href="data-frame.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="data-frame.html"><a href="data-frame.html#load-csv-file"><i class="fa fa-check"></i><b>5.2</b> Load csv file</a></li>
+<li class="chapter" data-level="5.3" data-path="data-frame.html"><a href="data-frame.html#examine-dataframe"><i class="fa fa-check"></i><b>5.3</b> Examine dataframe</a></li>
+<li class="chapter" data-level="5.4" data-path="data-frame.html"><a href="data-frame.html#subsetting-data"><i class="fa fa-check"></i><b>5.4</b> Subsetting data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>6</b> Exercise 1</a><ul>
+<li class="chapter" data-level="6.1" data-path="exercise-1.html"><a href="exercise-1.html#update-as-of-10am-april-18th"><i class="fa fa-check"></i><b>6.1</b> Update (as of 10am, April 18th)</a></li>
+<li class="chapter" data-level="6.2" data-path="exercise-1.html"><a href="exercise-1.html#question-examine-the-law-of-large-numbers-through-numerical-simulations"><i class="fa fa-check"></i><b>6.2</b> Question: Examine the law of large numbers through numerical simulations</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="exercise-1.html"><a href="exercise-1.html#how-to-implement"><i class="fa fa-check"></i><b>6.2.1</b> How to implement</a></li>
+<li class="chapter" data-level="6.2.2" data-path="exercise-1.html"><a href="exercise-1.html#what-to-submit"><i class="fa fa-check"></i><b>6.2.2</b> What to submit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html"><i class="fa fa-check"></i><b>7</b> A Review of Statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#estimation"><i class="fa fa-check"></i><b>7.1</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#properties-of-the-estimator"><i class="fa fa-check"></i><b>7.1.1</b> Properties of the estimator</a></li>
+<li class="chapter" data-level="7.1.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#sample-mean-bary-is-unbiased-and-consistent"><i class="fa fa-check"></i><b>7.1.2</b> Sample mean <span class="math inline">\(\bar{Y}\)</span> is unbiased and consistent</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>7.2.1</b> Central limit theorem</a></li>
+<li class="chapter" data-level="7.2.2" data-path="a-review-of-statistics.html"><a href="a-review-of-statistics.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>7.2.2</b> Hypothesis testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html"><i class="fa fa-check"></i><b>8</b> Linear Regression 1: Theory</a><ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#regression-framework"><i class="fa fa-check"></i><b>8.1</b> Regression framework</a></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#theoretical-properties-of-ols-estimator"><i class="fa fa-check"></i><b>8.2</b> Theoretical Properties of OLS estimator</a></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interpretation-and-specifications-of-linear-regression-model"><i class="fa fa-check"></i><b>8.3</b> Interpretation and Specifications of Linear Regression Model</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#nonlinear-term"><i class="fa fa-check"></i><b>8.3.1</b> Nonlinear term</a></li>
+<li class="chapter" data-level="8.3.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#log-specification"><i class="fa fa-check"></i><b>8.3.2</b> log specification</a></li>
+<li class="chapter" data-level="8.3.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#dummy-variable"><i class="fa fa-check"></i><b>8.3.3</b> Dummy variable</a></li>
+<li class="chapter" data-level="8.3.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#interaction-term"><i class="fa fa-check"></i><b>8.3.4</b> Interaction term</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#measures-of-fit"><i class="fa fa-check"></i><b>8.4</b> Measures of Fit</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#statistical-inference"><i class="fa fa-check"></i><b>8.5</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#distribution-of-the-ols-estimators-based-on-asymptotic-theory"><i class="fa fa-check"></i><b>8.5.1</b> Distribution of the OLS estimators based on asymptotic theory</a></li>
+<li class="chapter" data-level="8.5.2" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#hypothesis-testing-2"><i class="fa fa-check"></i><b>8.5.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="8.5.3" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#confidence-interval"><i class="fa fa-check"></i><b>8.5.3</b> Confidence interval</a></li>
+<li class="chapter" data-level="8.5.4" data-path="linear-regression-1-theory.html"><a href="linear-regression-1-theory.html#homoskedasticity-vs-heteroskedasticity"><i class="fa fa-check"></i><b>8.5.4</b> Homoskedasticity vs Heteroskedasticity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html"><i class="fa fa-check"></i><b>9</b> Linear Regression 2: Implementation in R</a><ul>
+<li class="chapter" data-level="9.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#implementation-in-r"><i class="fa fa-check"></i><b>9.1</b> Implementation in R</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#preliminary-packages"><i class="fa fa-check"></i><b>9.1.1</b> Preliminary: packages</a></li>
+<li class="chapter" data-level="9.1.2" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#empirical-setting-data-from-california-school"><i class="fa fa-check"></i><b>9.1.2</b> Empirical setting: Data from California School</a></li>
+<li class="chapter" data-level="9.1.3" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-1-descriptive-analysis"><i class="fa fa-check"></i><b>9.1.3</b> Step 1: Descriptive analysis</a></li>
+<li class="chapter" data-level="9.1.4" data-path="linear-regression-2-implementation-in-r.html"><a href="linear-regression-2-implementation-in-r.html#step-2-run-regression"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Run regression</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html"><i class="fa fa-check"></i><b>10</b> Linear Regression 3: Discussions on OLS Assumptions</a><ul>
+<li class="chapter" data-level="10.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#endogeneity-problem"><i class="fa fa-check"></i><b>10.2</b> Endogeneity problem</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#omitted-variable-bias"><i class="fa fa-check"></i><b>10.2.1</b> Omitted variable bias</a></li>
+<li class="chapter" data-level="10.2.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#correlation-v.s.-causality"><i class="fa fa-check"></i><b>10.2.2</b> Correlation v.s. Causality</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#multicollinearity-issue"><i class="fa fa-check"></i><b>10.3</b> Multicollinearity issue</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#perfect-multicollinearity"><i class="fa fa-check"></i><b>10.3.1</b> Perfect Multicollinearity</a></li>
+<li class="chapter" data-level="10.3.2" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#imperfect-multicollinearity."><i class="fa fa-check"></i><b>10.3.2</b> Imperfect multicollinearity.</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="linear-regression-3-discussions-on-ols-assumptions.html"><a href="linear-regression-3-discussions-on-ols-assumptions.html#lesson-for-an-empirical-analysis"><i class="fa fa-check"></i><b>10.4</b> Lesson for an empirical analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html"><i class="fa fa-check"></i><b>11</b> Exercise 2 (Problem Set 3)</a><ul>
+<li class="chapter" data-level="11.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#rules"><i class="fa fa-check"></i><b>11.1</b> Rules</a></li>
+<li class="chapter" data-level="11.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-1-omitted-variable-bias"><i class="fa fa-check"></i><b>11.2</b> Question 1: Omitted Variable Bias</a></li>
+<li class="chapter" data-level="11.3" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#question-2-empirical-analysis-using-data-from-washington2008-aer"><i class="fa fa-check"></i><b>11.3</b> Question 2: Empirical Analysis using Data from Washington(2008, AER)</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#preliminary-data-cleaning"><i class="fa fa-check"></i><b>11.3.1</b> Preliminary: data cleaning</a></li>
+<li class="chapter" data-level="11.3.2" data-path="exercise-2-problem-set-3.html"><a href="exercise-2-problem-set-3.html#questions"><i class="fa fa-check"></i><b>11.3.2</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html"><i class="fa fa-check"></i><b>12</b> Instrumental Variable 1: Framework</a><ul>
+<li class="chapter" data-level="12.1" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#introduction-endogeneity-problem-and-its-solution"><i class="fa fa-check"></i><b>12.1</b> Introduction: Endogeneity Problem and its Solution</a></li>
+<li class="chapter" data-level="12.2" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#examples-of-endogeneity-problem"><i class="fa fa-check"></i><b>12.2</b> Examples of Endogeneity Problem</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#more-on-omitted-variable-bias"><i class="fa fa-check"></i><b>12.2.1</b> More on Omitted Variable Bias</a></li>
+<li class="chapter" data-level="12.2.2" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#measurement-error"><i class="fa fa-check"></i><b>12.2.2</b> Measurement error</a></li>
+<li class="chapter" data-level="12.2.3" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#simultaneity-or-reverse-causality"><i class="fa fa-check"></i><b>12.2.3</b> Simultaneity (or reverse causality)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#idea-of-iv-regression"><i class="fa fa-check"></i><b>12.3</b> Idea of IV Regression</a></li>
+<li class="chapter" data-level="12.4" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#formal-framework-and-estimation"><i class="fa fa-check"></i><b>12.4</b> Formal Framework and Estimation</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#model"><i class="fa fa-check"></i><b>12.4.1</b> Model</a></li>
+<li class="chapter" data-level="12.4.2" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#estimation-by-two-stage-least-squares-2sls"><i class="fa fa-check"></i><b>12.4.2</b> Estimation by Two Stage Least Squares (2SLS)</a></li>
+<li class="chapter" data-level="12.4.3" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#conditions-for-valid-ivs-in-a-general-framework"><i class="fa fa-check"></i><b>12.4.3</b> Conditions for Valid IVs in a general framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#check-instrument-validity"><i class="fa fa-check"></i><b>12.5</b> Check Instrument Validity</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="instrumental-variable-1-framework.html"><a href="instrumental-variable-1-framework.html#relevance"><i class="fa fa-check"></i><b>12.5.1</b> Relevance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html"><i class="fa fa-check"></i><b>13</b> Instrumental Variable 2: Implementation in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-1-wage-regression"><i class="fa fa-check"></i><b>13.1</b> Example 1: Wage regression</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#discussion-on-iv"><i class="fa fa-check"></i><b>13.1.1</b> Discussion on IV</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-2-estimation-of-the-demand-for-cigaretts"><i class="fa fa-check"></i><b>13.2</b> Example 2: Estimation of the Demand for Cigaretts</a></li>
+<li class="chapter" data-level="13.3" data-path="instrumental-variable-2-implementation-in-r.html"><a href="instrumental-variable-2-implementation-in-r.html#example-3-effects-of-turnout-on-partisan-voting"><i class="fa fa-check"></i><b>13.3</b> Example 3: Effects of Turnout on Partisan Voting</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html"><i class="fa fa-check"></i><b>14</b> Exercise 3 (Problem Set 4)</a><ul>
+<li class="chapter" data-level="14.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#rules-1"><i class="fa fa-check"></i><b>14.1</b> Rules</a></li>
+<li class="chapter" data-level="14.2" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#question-demand-estimation"><i class="fa fa-check"></i><b>14.2</b> Question: Demand Estimation</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="exercise-3-problem-set-4.html"><a href="exercise-3-problem-set-4.html#questions-1"><i class="fa fa-check"></i><b>14.2.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lecture Note for Applied Econometrics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exercise-3-problem-set-4" class="section level1">
+<h1><span class="header-section-number">14</span> Exercise 3 (Problem Set 4)</h1>
+<ul>
+<li>Due date: June 18th (Tue) 11pm.</li>
+</ul>
+<div id="rules-1" class="section level2">
+<h2><span class="header-section-number">14.1</span> Rules</h2>
+<ul>
+<li>If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can use both Japanese and English to write your answer.</li>
+<li>Submit your solution through <code>CourseN@vi</code>.</li>
+<li><strong>Important:</strong> Submission format</li>
+<li>If you use Rmarkdown, please compile your Rmarkdown file into either “html” or “PDF” file and submit <strong>both</strong> the compiled file and a Rmarkdown file.</li>
+<li>If you do not use Rmarkdown, please submit the document file that contains your answer and R script file (.R file) <strong>separately</strong>, that is, you submit <strong>two files</strong>.</li>
+</ul>
+</div>
+<div id="question-demand-estimation" class="section level2">
+<h2><span class="header-section-number">14.2</span> Question: Demand Estimation</h2>
+<ul>
+<li>You might want to refer <a href="IV_Examples_190524.pdf">the lecture note</a> in my other class where I covered the same topic.</li>
+<li>We use the dataset from Stephen Ryan (2012) “The Costs of Environmental Regulation in a Concentrated Industry”, Econometrica, Issue 3, 1019-1061, 2012</li>
+<li>This is the data for Portland cement in the US. The data is panel for 22 regions (roughly corresponding to the US state) from 1981 to 1999.</li>
+<li>Ryan (2012) studies the effects of environmental regulation on dynamic competition among cement producers.</li>
+<li><p>Graduate-level knowledge about econometrics and industrial organization is needed to understand the whole paper. Rather we focus on a part of his analysis, that is demand estimation.</p></li>
+<li>The dataset is <a href="cementDec2009.csv">here</a>.</li>
+<li><p>The original dataset contains many variable. Here, we pick a subset of the variable we use in the analysis.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
+<pre><code>## Warning: パッケージ &#39;readr&#39; はバージョン 3.5.3 の R の下で造られました</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;dplyr&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
+## 
+##      filter, lag</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:base&#39; からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stargazer)</code></pre></div>
+<pre><code>## 
+## Please cite as:</code></pre>
+<pre><code>##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
+<pre><code>##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RyanData &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;cementDec2009.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   region = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RyanData <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(year, shipped, price, wage96, coal96, elec96, population, gas96) -&gt;<span class="st"> </span>RyanData
+
+stargazer<span class="op">::</span><span class="kw">stargazer</span>(<span class="kw">as.data.frame</span>(RyanData), <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>)</code></pre></div>
+<pre><code>## 
+## =====================================================================================
+## Statistic   N       Mean        St. Dev.      Min    Pctl(25)    Pctl(75)     Max    
+## -------------------------------------------------------------------------------------
+## year       483   1,989.907        5.537      1,981     1,985      1,995      1,999   
+## shipped    483   2,850.592      1,575.068     186     1,717.5    3,689.5     10,262  
+## price      483     67.935        13.731     39.351    58.644      74.892    138.992  
+## wage96     483     31.679         4.377     20.139    28.695      34.475     44.338  
+## coal96     483     26.904         8.243     15.880    19.190      34.200     42.330  
+## elec96     483     5.706          1.023      4.230     4.750      6.740      7.600   
+## population 483 10,297,214.000 7,410,527.000 689,584 4,692,603.0 12,000,000 33,100,000
+## gas96      483     6.263          2.266      3.701     5.041      6.810      24.304  
+## -------------------------------------------------------------------------------------</code></pre>
+<ul>
+<li>The data description</li>
+</ul>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="94%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>shipped</td>
+<td>Quantity of cement shipped (measured in thousands of tons per year)</td>
+</tr>
+<tr class="even">
+<td>price</td>
+<td>Price (measured in dollars per ton).</td>
+</tr>
+<tr class="odd">
+<td>wage96</td>
+<td>wage in dollars per hour for skilled manufacturing workers, and taken from County Business Patterns</td>
+</tr>
+<tr class="even">
+<td>coal96</td>
+<td>Coal price (dollars per ton)</td>
+</tr>
+<tr class="odd">
+<td>elec96</td>
+<td>electricity price (dollars per kilowatt hour for electricity)</td>
+</tr>
+<tr class="even">
+<td>population</td>
+<td>the total populations of the states covered by a regional market.</td>
+</tr>
+<tr class="odd">
+<td>gas96</td>
+<td>Gas price (dollars per thousand cubic feet for gas.)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note that all price are adjusted to 1996 constant dollars.</li>
+</ul>
+<div id="questions-1" class="section level3">
+<h3><span class="header-section-number">14.2.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li><p>Estimate the demand model for the following two specifications with and without instruments. <span class="math display">\[
+\begin{aligned}
+\log(Q_{jt}) &amp; = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
+\log(Q_{jt}) &amp; = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+\end{aligned}
+\]</span> where <span class="math inline">\(Q_{jt}\)</span>: quantity, <span class="math inline">\(P_{jt}\)</span>: price, <span class="math inline">\(population_{jt}\)</span>: population As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable <span class="math inline">\(population_{jt}\)</span> is treated as exogenous.</p></li>
+<li><p>Discuss the results above. In particular, explain (1) the importance of adding population as a control variable, and (2) the difference between results with and without IVs.</p></li>
+<li><p>Discuss the validity of those instruments.</p></li>
+<li><p>Instead of log-log specification, consider the following linear specification (with population as a control variable) <span class="math display">\[
+Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+\]</span> Estimate this specification using instruments. Do not forget checking the 1st stage.</p></li>
+<li><p>The price elasticity of demand is defined as <span class="math display">\[
+\frac{\partial Q_{jt}}{\partial P_{jt} } \frac{P_{jt}}{Q_{jt}} 
+\]</span> If we use the log-log specification, the coefficient on the price is the elasticity and it is constant across markets and time. Using the estimation result with linear specification, calculate the price elasticity for each observation (i.e., market-year pair). Report the summary statistics of the price elasticity across markets and time. Compare the result with the one from log-log specification that includes population as a control variable.</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="instrumental-variable-2-implementation-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Econometrics_using_R.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

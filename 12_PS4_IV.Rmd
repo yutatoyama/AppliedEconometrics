@@ -1,0 +1,84 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Exercise 3 (Problem Set 4)
+
+* Due date: June 18th (Tue) 11pm.
+
+## Rules
+
+- If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can use both Japanese and English to write your answer. 
+- Submit your solution through `CourseN@vi`.
+- **Important:** Submission format
+  - If you use Rmarkdown, please compile your Rmarkdown file into either "html" or "PDF" file and submit **both** the compiled file and a Rmarkdown file. 
+  - If you do not use Rmarkdown, please submit the document file that contains your answer and R script file (.R file) **separately**, that is, you submit **two files**.
+
+
+## Question: Demand Estimation
+
+- You might want to refer [the lecture note](IV_Examples_190524.pdf) in my other class where I covered the same topic. 
+- We use the dataset from Stephen Ryan (2012) "The Costs of Environmental Regulation in a Concentrated Industry", Econometrica, Issue 3, 1019-1061, 2012
+- This is the data for Portland cement in the US. The data is panel for 22 regions (roughly corresponding to the US state) from 1981 to 1999.
+- Ryan (2012) studies the effects of environmental regulation on dynamic competition among cement producers.
+- Graduate-level knowledge about econometrics and industrial organization is needed to understand the whole paper. Rather we focus on a part of his analysis, that is demand estimation.
+
+- The dataset is [here](cementDec2009.csv).
+- The original dataset contains many variable. Here, we pick a subset of the variable we use in the analysis. 
+
+```{r}
+library(readr)
+library(dplyr)
+library(stargazer)
+
+RyanData <- readr::read_csv("cementDec2009.csv")
+
+RyanData %>% 
+  dplyr::select(year, shipped, price, wage96, coal96, elec96, population, gas96) -> RyanData
+
+stargazer::stargazer(as.data.frame(RyanData), type = "text")
+
+```
+- The data description
+
+| Name | Description|
+|---|-------------------------------------------------------------------|
+| shipped | Quantity of cement shipped (measured in thousands of tons per year) |
+| price | Price (measured in dollars per ton).   |
+| wage96 | wage in dollars per hour for skilled manufacturing workers, and taken from County Business Patterns|
+| coal96 | Coal price (dollars per ton)  |
+| elec96 | electricity price (dollars per kilowatt hour for electricity) |
+| population |  the total populations of the states covered by a regional market. |
+| gas96 | Gas price (dollars per thousand cubic feet for gas.) | 
+
+- Note that all price are adjusted to 1996 constant dollars.
+
+### Questions
+
+1. Estimate the demand model for the following two specifications with and without instruments.
+$$
+\begin{aligned}
+\log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \epsilon_{it} \\ 
+\log(Q_{jt}) & = \beta_0 + \beta_1 \log(P_{jt}) + \beta_2 population_{it} + \epsilon_{it} 
+\end{aligned}
+$$
+where $Q_{jt}$: quantity, $P_{jt}$: price, $population_{jt}$: population
+As an instrument for price, you use wage, coal price, electricity price, and gas price. The variable $population_{jt}$ is treated as exogenous.
+
+2. Discuss the results above. In particular, explain (1) the importance of adding population as a control variable, and (2) the difference between results with and without IVs. 
+
+2. Discuss the validity of those instruments. 
+
+3. Instead of log-log specification, consider the following linear specification (with population as a control variable)
+$$
+Q_{jt}  = \beta_0 + \beta_1 P_{jt} + \beta_2 population_{it} + \epsilon_{it}. 
+$$
+Estimate this specification using instruments. Do not forget checking the 1st stage. 
+
+4. The price elasticity of demand is defined as 
+$$
+\frac{\partial Q_{jt}}{\partial P_{jt} } \frac{P_{jt}}{Q_{jt}} 
+$$
+If we use the log-log specification, the coefficient on the price is the elasticity and it is constant across markets and time. Using the estimation result with linear specification, calculate the price elasticity for each observation (i.e., market-year pair). Report the summary statistics of the price elasticity across markets and time. Compare the result with the one from log-log specification that includes population as a control variable.
