@@ -1,0 +1,151 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Panel Data 2: Implementation in R
+
+## Preliminary:
+
+- I use the following package
+    - `lfe` package.
+
+## Panel Data Regression
+
+- I use the dataset `Fatalities` in `AER` package.
+    - See https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/Fatalities for details.
+
+```{r}
+
+library(AER)
+data(Fatalities)
+
+str(Fatalities)
+
+```
+
+- As a preliminary analysis, let's plot the relationship between fatality rate and beer tax in 1998.
+
+```{r}
+library("dplyr")
+
+Fatalities %>%
+  mutate(fatal_rate = fatal / pop * 10000) %>% 
+  filter(year == "1988") -> data
+
+
+plot(x = data$beertax, 
+     y = data$fatal_rate, 
+     xlab = "Beer tax (in 1988 dollars)",
+     ylab = "Fatality rate (fatalities per 10000)",
+     main = "Traffic Fatality Rates and Beer Taxes in 1988",
+     pch = 20, 
+     
+     col = "steelblue")
+
+
+
+```
+
+- Positive correlation between alcohol tax and traffic accident. Possibly due to omitted variable bias. 
+
+- Run fixed effect regression using `felm` command in `lfe` package. 
+    - https://www.rdocumentation.org/packages/lfe/versions/2.8-3/topics/felm
+    
+
+```{r}
+
+library("lfe")
+
+Fatalities %>%
+    mutate(fatal_rate = fatal / pop * 10000) -> data
+
+# OLS 
+result_ols <- felm( fatal_rate ~ beertax  | 0 | 0 | 0, data = data )
+summary(result_ols, robust = TRUE)
+
+# State FE
+result_stateFE <- felm( fatal_rate ~ beertax  | state | 0 | state, data = data )
+summary(result_stateFE, robust = TRUE)
+
+# State and Year FE
+result_bothFE <- felm( fatal_rate ~ beertax  | state + year | 0 | state, data = data )
+summary(result_bothFE, robust = TRUE)
+
+
+stargazer::stargazer(result_ols, result_stateFE, result_bothFE, type = "text")
+
+
+```
+
+- What if we do not use the cluster-robust standard error?
+
+```{r}
+
+# State FE w.o. CRS
+result_wo_CRS <- felm( fatal_rate ~ beertax  | state | 0 | 0, data = data )
+
+# State FE w. CRS
+result_w_CRS <- felm( fatal_rate ~ beertax  | state | 0 | state, data = data )
+
+# Report heteroskedasticity robust standard error and cluster-robust standard errors
+stargazer::stargazer(result_wo_CRS, result_w_CRS,  type = "text", se = list(summary(result_wo_CRS)$rse, NULL))
+
+```
+
+
+## Panel Data with Instrumental Variables
+
+- Revisit the demand for Cigaretts
+- Consider the following model
+$$
+\log (Q_{it}) = \beta_0 + \beta_1 \log (P_{it}) + \beta_2 \log(income_{it}) + u_i + e_{it}
+$$
+where 
+    - $Q_{it}$ is the number of packs per capita in state $i$ in year $t$, 
+    - $P_{it}$ is the after-tax average real price per pack of cigarettes, and 
+    - $income_{it}$ is the real income per capita. This is demand shifter.
+- As an IV for the price, we use the followings:
+    - $SalesTax_{it}$: the proportion of taxes on cigarettes arising from the general sales tax.
+        - Relevant as it is included in the after-tax price
+        - Exogenous(indepndent) since the sales tax does not influence demand directly, but indirectly through the price.
+    - $CigTax_{it}$: the cigarett-specific taxes
+    
+    
+```{r}
+
+# load the data set and get an overview
+library(AER)
+data("CigarettesSW")
+CigarettesSW %>% 
+  mutate( rincome = (income / population) / cpi) %>% 
+  mutate( rprice  = price / cpi ) %>% 
+  mutate( salestax = (taxs - tax) / cpi ) %>% 
+  mutate( cigtax = tax/cpi ) -> Cigdata
+
+
+```
+    
+- Run IV regression with panel data.
+
+```{r}
+
+# OLS
+result_1 <- felm( log(packs) ~ log(rprice) + log(rincome)  | 0 | 0 | state, data = Cigdata )
+
+# State FE
+result_2 <- felm( log(packs) ~ log(rprice) + log(rincome)  | state | 0 | state, data = Cigdata )
+
+# IV without FE
+result_3 <- felm( log(packs) ~ log(rincome)  | 0 | (log(rprice) ~  salestax + cigtax) | state, data = Cigdata )
+
+# IV with FE 
+result_4 <- felm( log(packs) ~ log(rincome)  | state | (log(rprice) ~  salestax + cigtax) | state, data = Cigdata )
+
+stargazer::stargazer(result_1, result_2, result_3, result_4, type = "text")
+
+
+```
+
+

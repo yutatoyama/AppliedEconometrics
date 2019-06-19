@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Last updated: 2019/06/03}
+    \date{Last updated: 2019/06/19}
 
 
 \begin{document}
@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.53115782  5.62885917 -1.19781244  0.02842195 -4.35923091
-##  [6]  6.95286927  8.44694256 10.14671116  7.56555571  7.33916341
+##  [1]  4.9454257 11.8713119 -5.2725712  2.1561729  6.2180119 -1.3871908
+##  [7]  0.5645212  3.0598267  3.5685517  5.2260413
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.2071441  0.3482042 -0.9530004 -0.7192728 -1.5555858  0.6005685
-##  [7]  0.8853478  1.2093339  0.7173502  0.6741985
+##  [1]  0.400252957  1.898352339 -1.809944334 -0.203074589  0.675518908
+##  [6] -0.969519606 -0.547355785 -0.007610332  0.102429108  0.460951334
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 27.52497
+## [1] 21.3732
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 27.52497
+## [1] 21.3732
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 27.52497
+## [1] 21.3732
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 24.77247
+## [1] 19.23588
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -7281,6 +7281,909 @@ Gas price (dollars per thousand cubic feet for gas.)\strut
   Compare the result with the one from log-log specification that
   includes population as a control variable.
 \end{enumerate}
+
+\chapter{Exercise 4 (Problem Set 5)}\label{exercise-4-problem-set-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Due date: July 8th (Tue) 11pm.
+\item
+  This is the last problem set!
+\end{itemize}
+
+\section{Rules}\label{rules-2}
+
+\begin{itemize}
+\tightlist
+\item
+  If you are enrolled in Japanese class (i.e., Wednesday 2nd), you can
+  use both Japanese and English to write your answer.
+\item
+  Submit your solution through \texttt{CourseN@vi}.
+\item
+  \textbf{Important:} Submission format
+\item
+  If you use Rmarkdown, please compile your Rmarkdown file into either
+  ``html'' or ``PDF'' file and submit \textbf{both} the compiled file
+  and a Rmarkdown file.
+\item
+  If you do not use Rmarkdown, please submit the document file that
+  contains your answer and R script file (.R file) \textbf{separately},
+  that is, you submit \textbf{two files}.
+\end{itemize}
+
+\section{Question 1: Hansford and Gomez (2010,
+APSR)}\label{question-1-hansford-and-gomez-2010-apsr}
+
+\begin{itemize}
+\tightlist
+\item
+  This problem set is based on THOMAS G. HANSFORD and BRAD T. GOMEZ
+  ``Estimating the Electoral Effects of Voter Turnout'' The American
+  Political Science Review Vol. 104, No. 2 (May 2010), pp.~268-288
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Link:
+    \url{https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C}
+  \end{itemize}
+\item
+  You will use the same dataset as I introduced in the chapter for
+  instrumental variable estimation.
+\end{itemize}
+
+\section{Questions}\label{questions-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What is the research question of this paper? Provide a summary up to
+  2-3 sentences.
+\item
+  What is the difficulty of the analysis? Provide a summary up to 2-3
+  sentences.
+\item
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    What is the research design, i.e., how do authors overcome the
+    issue?
+  \end{enumerate}
+\item
+  Summarize four hypothesis the authors are trying to test.
+\item
+  Replicate the first three columns of Table A1 to the best of your
+  ability.
+\item
+  Replicate Table 1 to the best of your ability.
+\item
+  Interpret the results from Table 1 in terms of those three hypotheses.
+\end{enumerate}
+
+\textbf{Note} Do not worry about the standard errors in replication
+exercise.
+
+\chapter{Panel Data}\label{panel-data}
+
+\section{Contents}\label{contents}
+
+\begin{itemize}
+\tightlist
+\item
+  Framework
+\item
+  Clustered Standard Errors
+\item
+  Many FEs
+\item
+  Implementation in R: felm command
+\end{itemize}
+
+\section{Introduction}\label{introduction-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Panel data has observations on \(n\) cross-sectional units at \(T\)
+  time periods: \((X_{it}, Y_{it}\)
+\item
+  Examples:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Person \(i\)'s income in year \(t\).
+  \item
+    Vote share in county \(i\) for the presidential election year \(t\).
+  \item
+    Country \(i\)'s GDP in year \(t\).
+  \end{enumerate}
+\item
+  Panel data is useful because
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    More variation (both cross-sectional and temporal variation)
+  \item
+    Can deal with time-invariant unobserved factors.
+  \item
+    (Not focus in this course) Dynamics of individual over time.
+  \end{enumerate}
+\end{itemize}
+
+\section{Overview}\label{overview}
+
+\begin{itemize}
+\tightlist
+\item
+  Consider the model \[
+  y_{it} = \beta' x_{it} + \epsilon_{it}, E[\epsilon_{it} | x_{it} ] = 0
+  \] where \(x_{it}\) is a k-dimensional vector
+\item
+  If there is no correlation between \(x_{it}\) and \(\epsilon_{it}\),
+  you can estimate the model by OLS \textbf{(pooled OLS)}
+\item
+  A natural concern here is the omitted variable bias.
+\item
+  We now consider that \(\epsilon_{it}\) is written as \[
+  \epsilon_{it} = \alpha_i + u_{it}
+  \] where \(\alpha_i\) is called \textbf{unit fixed effect}, which is
+  the time-invariant unobserved heterogeneity.
+\item
+  With panel data, we can control for the unit fixed effects by
+  incorporating the dummy variable for each unit \(i\)! \[
+  y_{it} = \beta' x_{it} + \gamma_2 D2_i + \cdots + \gamma_n Dn_i + u_{it}
+  \] where \(Dl_i\) takes 1 if \(l=i\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Notice that we cannot do this for the cross-section data!
+  \end{itemize}
+\item
+  We often write the model with unit FE as \[
+  y_{it} = \beta' x_{it} + \alpha_i + u_{it}
+  \]
+\end{itemize}
+
+\section{Framework}\label{framework}
+
+\begin{itemize}
+\tightlist
+\item
+  The fixed effects model \[
+  y_{it} = \beta' x_{it} + \alpha_i + u_{it}
+  \]
+\item
+  Assumptions:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \(u_{it}\) is uncorrelated with \((X_{i1},\cdots, X_{iT})\), that is
+    \(E[u_{it}|X_{i1},\cdots, X_{iT} ] = 0\)
+  \item
+    \((Y_{it}, X_{it})\) are independent across individual \(i\).
+  \item
+    No outliers
+  \item
+    No Perfect multicollinarity
+  \end{enumerate}
+\item
+  Let's discuss Assumptions 1, 2, and 4 in detail.
+\item
+  Assumption 1 is weaker than the assumption in OLS, because the
+  time-invariant factor \(\alpha_i\) is captured by the fixed effect.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Example: Unobserved ability is caputured by \(\alpha_i\).
+  \end{itemize}
+\item
+  Assumption 2 allows for serial correlation (i.e.,
+  \(Cov(x_{it},x_{it'} ) \neq 0\) ) within individual \(i\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is related to the cluster-robust standard error.
+  \end{itemize}
+\item
+  Assumption 4 seems as usual, but it has an important role in panel
+  data analysis.
+\item
+  Consider the following regression with unit FE \[
+  wage_{it} = \beta_0 + \beta_1 experience_{it} + \beta_2 male_{i} + \beta_3 white_{i} + \alpha_i + u_{it}
+  \] where \(experience_{it}\) measures how many years worker \(i\) has
+  worked before at time \(t\).
+\item
+  In the regression above, we have multicollinearity issue because of
+  \(male_{i}\) and \(white_{i}\).
+\item
+  Intuitively, we cannot estimate the coefficient \(\beta_2\) and
+  \(\beta_3\) because those \textbf{time-invariant} variables are
+  completely captured by the unit fixed effect \(\alpha_i\).
+\end{itemize}
+
+\section{Estimation (within
+transformation)}\label{estimation-within-transformation}
+
+\begin{itemize}
+\tightlist
+\item
+  You can estimate the model by adding dummy variables for each
+  individual. This is called \textbf{least square dummy variables (LSDV)
+  estimator}.
+\item
+  This is computationary demanding if we have many cross-sectional
+  observations.
+\item
+  We often use the following \textbf{within transformation}.
+\item
+  Define the new variable \(\tilde{Y}_{it}\) as \[
+  \tilde{Y}_{it} = Y_{it} - \bar{Y}_i
+  \] where \(\bar{Y}_i = \sum_{t=1}^T Y_{it}\).
+\item
+  Why is this useful? By applying the within transformation to the
+  regression model, we can eliminate the unit fixed effect \(\alpha_i\)
+  \[
+  \tilde{Y}_{it} = \beta' \tilde{X}_{it} + \tilde{u}_{it}
+  \] Then apply the OLS estimator to the above equation!.
+\end{itemize}
+
+\subsection{Importance of within
+variation}\label{importance-of-within-variation}
+
+\begin{itemize}
+\tightlist
+\item
+  As I talked before, the variation of the explanatory variable is key
+  for precisely estimating the coefficients (once we control for the
+  endogeneity).
+\item
+  Within transformation eliminates the time-invariant unobserved factor,
+  which is a large source of endogeneity in many situations.
+\item
+  But, within transformation also absorbs the variation of \(X_{it}\).
+\item
+  Remember that \[
+  \tilde{X}_{it} = X_{it} - \bar{X}_i
+  \]
+\item
+  The transformed variable \(\tilde{X}_{it}\) has the variation over
+  time \(t\) within unit \(i\).
+\item
+  If \(X_{it}\) is fixed over time within unit \(i\),
+  \(\tilde{X}_{it} = 0\), so that no variation.
+\end{itemize}
+
+\section{FE, FE, and FE}\label{fe-fe-and-fe}
+
+\begin{itemize}
+\tightlist
+\item
+  In addition to unit FE, you can also add \textbf{time fixed effects
+  (FE)} \[
+  y_{it} = \beta' x_{it} + \alpha_i + \gamma_t + u_{it}
+  \]
+\item
+  The regression above controls for both \textbf{time-invariant
+  individual heterogeneity} and \textbf{(unobserved) aggregate year
+  shock}.
+\item
+  Panel data is useful to capture various unobserved shock by including
+  fixed effects.
+\end{itemize}
+
+\section{Panel + IV}\label{panel-iv}
+
+\begin{itemize}
+\tightlist
+\item
+  You can use IV regression with panel data. This is PS5.
+\end{itemize}
+
+\section{Standard Errors}\label{standard-errors}
+
+\begin{itemize}
+\tightlist
+\item
+  In the cross-section data, we need to use the heteroskedasticity
+  robust standard error.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Remember: Heteroskedasticity means \(Var(u_i | x_i) = \sigma(x_i)\).
+  \end{itemize}
+\item
+  In the panel data setting, we need to consider the
+  \textbf{autocorrelation} of the variable, that is the correlation
+  between \(u_{it}\) and \(u_{it'}\) across periods for each individual
+  \(i\).
+\item
+  The current standard is to use so-called \textbf{cluster-robust
+  standard error}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The cluster is unit \(i\). The observations within cluster are
+    allowed to be freely correlated.
+  \item
+    Cluster-robust standard error takes care for such correlation.
+  \end{itemize}
+\item
+  I will explain how to deal with this in R.
+\end{itemize}
+
+\chapter{Panel Data 2: Implementation in
+R}\label{panel-data-2-implementation-in-r}
+
+\section{Preliminary:}\label{preliminary}
+
+\begin{itemize}
+\tightlist
+\item
+  I use the following package
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{lfe} package.
+  \end{itemize}
+\end{itemize}
+
+\section{Panel Data Regression}\label{panel-data-regression}
+
+\begin{itemize}
+\tightlist
+\item
+  I use the dataset \texttt{Fatalities} in \texttt{AER} package.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    See
+    \url{https://www.rdocumentation.org/packages/AER/versions/1.2-6/topics/Fatalities}
+    for details.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(AER)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  要求されたパッケージ car をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ carData をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ lmtest をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ zoo をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ sandwich をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ survival をロード中です
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(Fatalities)}
+
+\KeywordTok{str}\NormalTok{(Fatalities)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    336 obs. of  34 variables:
+##  $ state       : Factor w/ 48 levels "al","az","ar",..: 1 1 1 1 1 1 1 2 2 2 ...
+##  $ year        : Factor w/ 7 levels "1982","1983",..: 1 2 3 4 5 6 7 1 2 3 ...
+##  $ spirits     : num  1.37 1.36 1.32 1.28 1.23 ...
+##  $ unemp       : num  14.4 13.7 11.1 8.9 9.8 ...
+##  $ income      : num  10544 10733 11109 11333 11662 ...
+##  $ emppop      : num  50.7 52.1 54.2 55.3 56.5 ...
+##  $ beertax     : num  1.54 1.79 1.71 1.65 1.61 ...
+##  $ baptist     : num  30.4 30.3 30.3 30.3 30.3 ...
+##  $ mormon      : num  0.328 0.343 0.359 0.376 0.393 ...
+##  $ drinkage    : num  19 19 19 19.7 21 ...
+##  $ dry         : num  25 23 24 23.6 23.5 ...
+##  $ youngdrivers: num  0.212 0.211 0.211 0.211 0.213 ...
+##  $ miles       : num  7234 7836 8263 8727 8953 ...
+##  $ breath      : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ jail        : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 2 2 2 ...
+##  $ service     : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 2 2 2 ...
+##  $ fatal       : int  839 930 932 882 1081 1110 1023 724 675 869 ...
+##  $ nfatal      : int  146 154 165 146 172 181 139 131 112 149 ...
+##  $ sfatal      : int  99 98 94 98 119 114 89 76 60 81 ...
+##  $ fatal1517   : int  53 71 49 66 82 94 66 40 40 51 ...
+##  $ nfatal1517  : int  9 8 7 9 10 11 8 7 7 8 ...
+##  $ fatal1820   : int  99 108 103 100 120 127 105 81 83 118 ...
+##  $ nfatal1820  : int  34 26 25 23 23 31 24 16 19 34 ...
+##  $ fatal2124   : int  120 124 118 114 119 138 123 96 80 123 ...
+##  $ nfatal2124  : int  32 35 34 45 29 30 25 36 17 33 ...
+##  $ afatal      : num  309 342 305 277 361 ...
+##  $ pop         : num  3942002 3960008 3988992 4021008 4049994 ...
+##  $ pop1517     : num  209000 202000 197000 195000 204000 ...
+##  $ pop1820     : num  221553 219125 216724 214349 212000 ...
+##  $ pop2124     : num  290000 290000 288000 284000 263000 ...
+##  $ milestot    : num  28516 31032 32961 35091 36259 ...
+##  $ unempus     : num  9.7 9.6 7.5 7.2 7 ...
+##  $ emppopus    : num  57.8 57.9 59.5 60.1 60.7 ...
+##  $ gsp         : num  -0.0221 0.0466 0.0628 0.0275 0.0321 ...
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  As a preliminary analysis, let's plot the relationship between
+  fatality rate and beer tax in 1998.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:car' からマスクされています: 
+## 
+##      recode
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:stats' からマスクされています: 
+## 
+##      filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:base' からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Fatalities }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{fatal_rate =}\NormalTok{ fatal }\OperatorTok{/}\StringTok{ }\NormalTok{pop }\OperatorTok{*}\StringTok{ }\DecValTok{10000}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ "1988"}\NormalTok{) ->}\StringTok{ }\NormalTok{data}
+
+
+\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ data}\OperatorTok{$}\NormalTok{beertax, }
+     \DataTypeTok{y =}\NormalTok{ data}\OperatorTok{$}\NormalTok{fatal_rate, }
+     \DataTypeTok{xlab =} \StringTok{"Beer tax (in 1988 dollars)"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Fatality rate (fatalities per 10000)"}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Traffic Fatality Rates and Beer Taxes in 1988"}\NormalTok{,}
+     \DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
+     
+     \DataTypeTok{col =} \StringTok{"steelblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{15_Panel2_Implementation_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{itemize}
+\item
+  Positive correlation between alcohol tax and traffic accident.
+  Possibly due to omitted variable bias.
+\item
+  Run fixed effect regression using \texttt{felm} command in
+  \texttt{lfe} package.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{https://www.rdocumentation.org/packages/lfe/versions/2.8-3/topics/felm}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"lfe"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: パッケージ 'lfe' はバージョン 3.5.2 の R の下で造られました
+\end{verbatim}
+
+\begin{verbatim}
+##  要求されたパッケージ Matrix をロード中です
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  次のパッケージを付け加えます: 'lfe'
+\end{verbatim}
+
+\begin{verbatim}
+##  以下のオブジェクトは 'package:lmtest' からマスクされています: 
+## 
+##      waldtest
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Fatalities }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{fatal_rate =}\NormalTok{ fatal }\OperatorTok{/}\StringTok{ }\NormalTok{pop }\OperatorTok{*}\StringTok{ }\DecValTok{10000}\NormalTok{) ->}\StringTok{ }\NormalTok{data}
+
+\CommentTok{# OLS }
+\NormalTok{result_ols <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( fatal_rate }\OperatorTok{~}\StringTok{ }\NormalTok{beertax  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ data )}
+\KeywordTok{summary}\NormalTok{(result_ols, }\DataTypeTok{robust =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##    felm(formula = fatal_rate ~ beertax | 0 | 0 | 0, data = data) 
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.09060 -0.37768 -0.09436  0.28548  2.27643 
+## 
+## Coefficients:
+##             Estimate Robust s.e t value             Pr(>|t|)    
+## (Intercept)  1.85331    0.04713  39.324 < 0.0000000000000002 ***
+## beertax      0.36461    0.05285   6.899      0.0000000000264 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.5437 on 334 degrees of freedom
+## Multiple R-squared(full model): 0.09336   Adjusted R-squared: 0.09065 
+## Multiple R-squared(proj model): 0.09336   Adjusted R-squared: 0.09065 
+## F-statistic(full model, *iid*):34.39 on 1 and 334 DF, p-value: 0.00000001082 
+## F-statistic(proj model): 47.59 on 1 and 334 DF, p-value: 0.00000000002643
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# State FE}
+\NormalTok{result_stateFE <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( fatal_rate }\OperatorTok{~}\StringTok{ }\NormalTok{beertax  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ data )}
+\KeywordTok{summary}\NormalTok{(result_stateFE, }\DataTypeTok{robust =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##    felm(formula = fatal_rate ~ beertax | state | 0 | state, data = data) 
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.58696 -0.08284 -0.00127  0.07955  0.89780 
+## 
+## Coefficients:
+##         Estimate Cluster s.e. t value Pr(>|t|)  
+## beertax  -0.6559       0.3148  -2.083   0.0381 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1899 on 287 degrees of freedom
+## Multiple R-squared(full model): 0.905   Adjusted R-squared: 0.8891 
+## Multiple R-squared(proj model): 0.04074   Adjusted R-squared: -0.1197 
+## F-statistic(full model, *iid*):56.97 on 48 and 287 DF, p-value: < 0.00000000000000022 
+## F-statistic(proj model):  4.34 on 1 and 47 DF, p-value: 0.0427
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# State and Year FE}
+\NormalTok{result_bothFE <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( fatal_rate }\OperatorTok{~}\StringTok{ }\NormalTok{beertax  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{+}\StringTok{ }\NormalTok{year }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ data )}
+\KeywordTok{summary}\NormalTok{(result_bothFE, }\DataTypeTok{robust =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##    felm(formula = fatal_rate ~ beertax | state + year | 0 | state,      data = data) 
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.59556 -0.08096  0.00143  0.08234  0.83883 
+## 
+## Coefficients:
+##         Estimate Cluster s.e. t value Pr(>|t|)  
+## beertax  -0.6400       0.3858  -1.659   0.0983 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1879 on 281 degrees of freedom
+## Multiple R-squared(full model): 0.9089   Adjusted R-squared: 0.8914 
+## Multiple R-squared(proj model): 0.03606   Adjusted R-squared: -0.1492 
+## F-statistic(full model, *iid*):51.93 on 54 and 281 DF, p-value: < 0.00000000000000022 
+## F-statistic(proj model): 2.752 on 1 and 47 DF, p-value: 0.1038
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(result_ols, result_stateFE, result_bothFE, }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ======================================================================
+##                                    Dependent variable:                
+##                     --------------------------------------------------
+##                                         fatal_rate                    
+##                           (1)              (2)              (3)       
+## ----------------------------------------------------------------------
+## beertax                 0.365***         -0.656**         -0.640*     
+##                         (0.062)          (0.315)          (0.386)     
+##                                                                       
+## Constant                1.853***                                      
+##                         (0.044)                                       
+##                                                                       
+## ----------------------------------------------------------------------
+## Observations              336              336              336       
+## R2                       0.093            0.905            0.909      
+## Adjusted R2              0.091            0.889            0.891      
+## Residual Std. Error 0.544 (df = 334) 0.190 (df = 287) 0.188 (df = 281)
+## ======================================================================
+## Note:                                      *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  What if we do not use the cluster-robust standard error?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# State FE w.o. CRS}
+\NormalTok{result_wo_CRS <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( fatal_rate }\OperatorTok{~}\StringTok{ }\NormalTok{beertax  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ data )}
+
+\CommentTok{# State FE w. CRS}
+\NormalTok{result_w_CRS <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( fatal_rate }\OperatorTok{~}\StringTok{ }\NormalTok{beertax  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ data )}
+
+\CommentTok{# Report heteroskedasticity robust standard error and cluster-robust standard errors}
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(result_wo_CRS, result_w_CRS,  }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{, }\DataTypeTok{se =} \KeywordTok{list}\NormalTok{(}\KeywordTok{summary}\NormalTok{(result_wo_CRS)}\OperatorTok{$}\NormalTok{rse, }\OtherTok{NULL}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ===========================================================
+##                                    Dependent variable:     
+##                                ----------------------------
+##                                         fatal_rate         
+##                                     (1)            (2)     
+## -----------------------------------------------------------
+## beertax                          -0.656***      -0.656**   
+##                                   (0.190)        (0.315)   
+##                                                            
+## -----------------------------------------------------------
+## Observations                        336            336     
+## R2                                 0.905          0.905    
+## Adjusted R2                        0.889          0.889    
+## Residual Std. Error (df = 287)     0.190          0.190    
+## ===========================================================
+## Note:                           *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\section{Panel Data with Instrumental
+Variables}\label{panel-data-with-instrumental-variables}
+
+\begin{itemize}
+\tightlist
+\item
+  Revisit the demand for Cigaretts
+\item
+  Consider the following model \[
+  \log (Q_{it}) = \beta_0 + \beta_1 \log (P_{it}) + \beta_2 \log(income_{it}) + u_i + e_{it}
+  \] where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Q_{it}\) is the number of packs per capita in state \(i\) in year
+    \(t\),
+  \item
+    \(P_{it}\) is the after-tax average real price per pack of
+    cigarettes, and
+  \item
+    \(income_{it}\) is the real income per capita. This is demand
+    shifter.
+  \end{itemize}
+\item
+  As an IV for the price, we use the followings:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(SalesTax_{it}\): the proportion of taxes on cigarettes arising
+    from the general sales tax.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Relevant as it is included in the after-tax price
+    \item
+      Exogenous(indepndent) since the sales tax does not influence
+      demand directly, but indirectly through the price.
+    \end{itemize}
+  \item
+    \(CigTax_{it}\): the cigarett-specific taxes
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load the data set and get an overview}
+\KeywordTok{library}\NormalTok{(AER)}
+\KeywordTok{data}\NormalTok{(}\StringTok{"CigarettesSW"}\NormalTok{)}
+\NormalTok{CigarettesSW }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{rincome =}\NormalTok{ (income }\OperatorTok{/}\StringTok{ }\NormalTok{population) }\OperatorTok{/}\StringTok{ }\NormalTok{cpi) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{rprice  =}\NormalTok{ price }\OperatorTok{/}\StringTok{ }\NormalTok{cpi ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{salestax =}\NormalTok{ (taxs }\OperatorTok{-}\StringTok{ }\NormalTok{tax) }\OperatorTok{/}\StringTok{ }\NormalTok{cpi ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{cigtax =}\NormalTok{ tax}\OperatorTok{/}\NormalTok{cpi ) ->}\StringTok{ }\NormalTok{Cigdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Run IV regression with panel data.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# OLS}
+\NormalTok{result_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( }\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+\CommentTok{# State FE}
+\NormalTok{result_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( }\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+\CommentTok{# IV without FE}
+\NormalTok{result_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( }\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{(}\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{~}\StringTok{  }\NormalTok{salestax }\OperatorTok{+}\StringTok{ }\NormalTok{cigtax) }\OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+\CommentTok{# IV with FE }
+\NormalTok{result_}\DecValTok{4}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( }\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }\NormalTok{state }\OperatorTok{|}\StringTok{ }\NormalTok{(}\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{~}\StringTok{  }\NormalTok{salestax }\OperatorTok{+}\StringTok{ }\NormalTok{cigtax) }\OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(result_}\DecValTok{1}\NormalTok{, result_}\DecValTok{2}\NormalTok{, result_}\DecValTok{3}\NormalTok{, result_}\DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ===================================================================================
+##                                           Dependent variable:                      
+##                     ---------------------------------------------------------------
+##                                               log(packs)                           
+##                           (1)             (2)             (3)             (4)      
+## -----------------------------------------------------------------------------------
+## log(rprice)            -1.334***       -1.210***                                   
+##                         (0.174)         (0.203)                                    
+##                                                                                    
+## log(rincome)             0.318           0.121           0.257           0.204     
+##                         (0.212)         (0.310)         (0.204)         (0.338)    
+##                                                                                    
+## `log(rprice)(fit)`                                     -1.229***       -1.268***   
+##                                                         (0.183)         (0.231)    
+##                                                                                    
+## Constant               10.067***                       9.736***                    
+##                         (0.464)                         (0.555)                    
+##                                                                                    
+## -----------------------------------------------------------------------------------
+## Observations              96              96              96              96       
+## R2                       0.552           0.966           0.549           0.966     
+## Adjusted R2              0.542           0.929           0.539           0.929     
+## Residual Std. Error 0.165 (df = 93) 0.065 (df = 46) 0.165 (df = 93) 0.065 (df = 46)
+## ===================================================================================
+## Note:                                                   *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\chapter{Introduction to Causal
+Inference}\label{introduction-to-causal-inference}
+
+\section{Introduction:}\label{introduction-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Recommended books:
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Angrist Pischke ``Mastering Metrics''
+\item
+  Ito ``Data Bunseki no Chikara'' (in Japanese)
+\end{enumerate}
+
+\begin{itemize}
+\item
+\end{itemize}
+
+\chapter{Discrete Choice Model}\label{discrete-choice-model}
+
+\section{Introduction:}\label{introduction-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Discrete choise (logit, profit)
+\item
+  Discrete choice example (from Text)
+\item
+  Group logit, or Berry (1994)'s logit
+\end{itemize}
+
+For the multinomial choice, see my lecture note or Train.
+
+\chapter{Difference in Differences}\label{difference-in-differences}
+
+\section{Reference}\label{reference}
+
+\begin{itemize}
+\tightlist
+\item
+  Hiro Ishise, Shuhei Kitamura, Masa Kudamatsu, Tetsuya Matsubayashi,
+  and Takeshi Murooka (2019) ``Empirical Research Design for Public
+  Policy School Students: How to Conduct Policy Evaluations with
+  Difference-in-differences Estimation'' February 2019
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Slide: \url{https://slides.com/kudamatsu/did-manual/fullscreen\#}\\
+  \item
+    Paper:
+    \url{https://docs.google.com/viewer?a=v\&pid=sites\&srcid=ZGVmYXVsdGRvbWFpbnxta3VkYW1hdHN1fGd4OjM4YzkwYmVjM2ZmMzA2YWQ}
+  \end{itemize}
+\end{itemize}
+
+\section{Introduction:}\label{introduction-5}
+
+\chapter{Regression Discontinuity
+Design}\label{regression-discontinuity-design}
+
+\section{Introduction:}\label{introduction-6}
 
 
 \end{document}

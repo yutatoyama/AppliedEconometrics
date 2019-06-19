@@ -1,0 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Regression Discontinuity Design
+
+## Introduction: 
