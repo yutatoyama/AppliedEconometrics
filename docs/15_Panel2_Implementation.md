@@ -406,4 +406,94 @@ stargazer::stargazer(result_1, result_2, result_3, result_4, type = "text")
 ## Note:                                                   *p<0.1; **p<0.05; ***p<0.01
 ```
 
+## Some tips in `felm` command
+
+### How to report heteroskedasticity robust standard error in `stargazer`
+
+
+```r
+# Run felm command without specifying cluster.
+result_1 <- felm( log(packs) ~ log(rprice) + log(rincome)  | 0 | 0 | state, data = Cigdata )
+
+# `result_1$rse` contains heteroskedasticity robust standard error.  Put this into `se` option in `stargazer`.
+stargazer::stargazer(result_1, type = "text", 
+                     se = list(result_1$rse ) ) 
+```
+
+```
+## 
+## ===============================================
+##                         Dependent variable:    
+##                     ---------------------------
+##                             log(packs)         
+## -----------------------------------------------
+## log(rprice)                  -1.334***         
+##                               (0.154)          
+##                                                
+## log(rincome)                  0.318**          
+##                               (0.154)          
+##                                                
+## Constant                     10.067***         
+##                               (0.502)          
+##                                                
+## -----------------------------------------------
+## Observations                    96             
+## R2                             0.552           
+## Adjusted R2                    0.542           
+## Residual Std. Error       0.165 (df = 93)      
+## ===============================================
+## Note:               *p<0.1; **p<0.05; ***p<0.01
+```
+
+### How to conduct F test after `felm`
+
+
+```r
+# Run felm command without specifying cluster.
+result_1 <- felm( packs ~ rprice + rincome  | 0 | 0 | state, data = Cigdata )
+
+
+# The following tests H0: _b[rincome] = 0 & _b[rprice] = 0 
+ftest1 = waldtest(result_1, ~ rincome | rprice  )
+ftest1 
+```
+
+```
+##                            p                         chi2 
+##  0.0000000000000000008465984 83.2261209162241897274725488 
+##                          df1                          p.F 
+##  2.0000000000000000000000000  0.0000000000397094809714199 
+##                            F                          df2 
+## 41.6130604581120948637362744 47.0000000000000000000000000 
+## attr(,"formula")
+## ~rincome | rprice
+## <environment: 0x000000002311bd38>
+```
+
+```r
+# ftest[5] corresponds to F-value
+fval1 = ftest1[5]
+
+
+# The following tests H0: _b[rincome] - 1 = 0 & _b[rprice] = 0 
+ftest2 = waldtest(result_1, ~ rincome - 1 | rprice  )
+ftest2 
+```
+
+```
+##                              p                           chi2 
+##  0.000000000000000000001015456 96.677898116431165931317082141 
+##                            df1                            p.F 
+##  2.000000000000000000000000000  0.000000000003941263397955757 
+##                              F                            df2 
+## 48.338949058215582965658541070 47.000000000000000000000000000 
+## attr(,"formula")
+## ~rincome - 1 | rprice
+## <environment: 0x000000001cfb9e00>
+```
+
+```r
+# ftest[5] corresponds to F-value
+fval2 = ftest1[5]
+```
 

@@ -148,4 +148,42 @@ stargazer::stargazer(result_1, result_2, result_3, result_4, type = "text")
 
 ```
 
+## Some tips in `felm` command
+
+### How to report heteroskedasticity robust standard error in `stargazer`
+
+```{r}
+
+# Run felm command without specifying cluster.
+result_1 <- felm( log(packs) ~ log(rprice) + log(rincome)  | 0 | 0 | state, data = Cigdata )
+
+# `result_1$rse` contains heteroskedasticity robust standard error.  Put this into `se` option in `stargazer`.
+stargazer::stargazer(result_1, type = "text", 
+                     se = list(result_1$rse ) ) 
+
+```
+
+### How to conduct F test after `felm`
+
+```{r}
+
+# Run felm command without specifying cluster.
+result_1 <- felm( packs ~ rprice + rincome  | 0 | 0 | state, data = Cigdata )
+
+
+# The following tests H0: _b[rincome] = 0 & _b[rprice] = 0 
+ftest1 = waldtest(result_1, ~ rincome | rprice  )
+ftest1 
+# ftest[5] corresponds to F-value
+fval1 = ftest1[5]
+
+
+# The following tests H0: _b[rincome] - 1 = 0 & _b[rprice] = 0 
+ftest2 = waldtest(result_1, ~ rincome - 1 | rprice  )
+ftest2 
+# ftest[5] corresponds to F-value
+fval2 = ftest1[5]
+
+
+```
 

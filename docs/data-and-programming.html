@@ -264,6 +264,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#preliminary"><i class="fa fa-check"></i><b>17.1</b> Preliminary:</a></li>
 <li class="chapter" data-level="17.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-regression"><i class="fa fa-check"></i><b>17.2</b> Panel Data Regression</a></li>
 <li class="chapter" data-level="17.3" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-with-instrumental-variables"><i class="fa fa-check"></i><b>17.3</b> Panel Data with Instrumental Variables</a></li>
+<li class="chapter" data-level="17.4" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#some-tips-in-felm-command"><i class="fa fa-check"></i><b>17.4</b> Some tips in <code>felm</code> command</a><ul>
+<li class="chapter" data-level="17.4.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-report-heteroskedasticity-robust-standard-error-in-stargazer"><i class="fa fa-check"></i><b>17.4.1</b> How to report heteroskedasticity robust standard error in <code>stargazer</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-conduct-f-test-after-felm"><i class="fa fa-check"></i><b>17.4.2</b> How to conduct F test after <code>felm</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html"><i class="fa fa-check"></i><b>18</b> Introduction to Causal Inference</a><ul>
 <li class="chapter" data-level="18.1" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html#introduction-3"><i class="fa fa-check"></i><b>18.1</b> Introduction:</a></li>
@@ -1432,11 +1436,11 @@ x</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_sample =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)
 test_sample</code></pre></div>
-<pre><code>##  [1]  1.8657166  7.0423102  7.5194583  0.4105163 -1.9217074 -1.1116126
-##  [7] -5.1054748  2.1059824  4.6203654 -1.0252660</code></pre>
+<pre><code>##  [1]  2.3638240  6.6241857  3.0267052  6.9443959 -1.2547383  6.0740352
+##  [7] -0.4296674 -3.9213243 -2.2092396 10.6851801</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  0.1053743  1.3867826  1.5048953 -0.2548444 -0.8321605 -0.6316305
-##  [7] -1.6202668  0.1648494  0.7872570 -0.6102564</code></pre>
+<pre><code>##  [1] -0.09001064  0.80909240  0.04988322  0.87666927 -0.85366889
+##  [6]  0.69298910 -0.67954665 -1.41642290 -1.05510602  1.66612112</code></pre>
 <ul>
 <li>The same function can be written more simply.</li>
 </ul>
@@ -1493,16 +1497,16 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 16.31973</code></pre>
+<pre><code>## [1] 22.45298</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 16.31973</code></pre>
+<pre><code>## [1] 22.45298</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 16.31973</code></pre>
+<pre><code>## [1] 22.45298</code></pre>
 <ul>
 <li>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 14.68776</code></pre>
+<pre><code>## [1] 20.20768</code></pre>
 
 </div>
 </div>

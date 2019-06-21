@@ -264,6 +264,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#preliminary"><i class="fa fa-check"></i><b>17.1</b> Preliminary:</a></li>
 <li class="chapter" data-level="17.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-regression"><i class="fa fa-check"></i><b>17.2</b> Panel Data Regression</a></li>
 <li class="chapter" data-level="17.3" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-with-instrumental-variables"><i class="fa fa-check"></i><b>17.3</b> Panel Data with Instrumental Variables</a></li>
+<li class="chapter" data-level="17.4" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#some-tips-in-felm-command"><i class="fa fa-check"></i><b>17.4</b> Some tips in <code>felm</code> command</a><ul>
+<li class="chapter" data-level="17.4.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-report-heteroskedasticity-robust-standard-error-in-stargazer"><i class="fa fa-check"></i><b>17.4.1</b> How to report heteroskedasticity robust standard error in <code>stargazer</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-conduct-f-test-after-felm"><i class="fa fa-check"></i><b>17.4.2</b> How to conduct F test after <code>felm</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html"><i class="fa fa-check"></i><b>18</b> Introduction to Causal Inference</a><ul>
 <li class="chapter" data-level="18.1" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html#introduction-3"><i class="fa fa-check"></i><b>18.1</b> Introduction:</a></li>
@@ -357,8 +361,8 @@ y_{it} = \beta&#39; x_{it} + \alpha_i + u_{it}
 \]</span></li>
 <li>Assumptions:
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(u_{it}\)</span> is uncorrelated with <span class="math inline">\((X_{i1},\cdots, X_{iT})\)</span>, that is <span class="math inline">\(E[u_{it}|X_{i1},\cdots, X_{iT} ] = 0\)</span></li>
-<li><span class="math inline">\((Y_{it}, X_{it})\)</span> are independent across individual <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(u_{it}\)</span> is uncorrelated with <span class="math inline">\((x_{i1},\cdots, x_{iT})\)</span>, that is <span class="math inline">\(E[u_{it}|x_{i1},\cdots, x_{iT} ] = 0\)</span></li>
+<li><span class="math inline">\((Y_{it}, x_{it})\)</span> are independent across individual <span class="math inline">\(i\)</span>.</li>
 <li>No outliers</li>
 <li>No Perfect multicollinarity</li>
 </ol></li>
@@ -387,7 +391,7 @@ wage_{it} = \beta_0 + \beta_1 experience_{it} + \beta_2 male_{i} + \beta_3 white
 <li>We often use the following <strong>within transformation</strong>.</li>
 <li>Define the new variable <span class="math inline">\(\tilde{Y}_{it}\)</span> as <span class="math display">\[
 \tilde{Y}_{it} = Y_{it} - \bar{Y}_i
-\]</span> where <span class="math inline">\(\bar{Y}_i = \sum_{t=1}^T Y_{it}\)</span>.</li>
+\]</span> where <span class="math inline">\(\bar{Y}_i = \frac{1}{T} \sum_{t=1}^T Y_{it}\)</span>.</li>
 <li>Why is this useful? By applying the within transformation to the regression model, we can eliminate the unit fixed effect <span class="math inline">\(\alpha_i\)</span> <span class="math display">\[
 \tilde{Y}_{it} = \beta&#39; \tilde{X}_{it} + \tilde{u}_{it}
 \]</span> Then apply the OLS estimator to the above equation!.</li>

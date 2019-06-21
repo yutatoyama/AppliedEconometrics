@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Last updated: 2019/06/19}
+    \date{Last updated: 2019/06/21}
 
 
 \begin{document}
@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.9454257 11.8713119 -5.2725712  2.1561729  6.2180119 -1.3871908
-##  [7]  0.5645212  3.0598267  3.5685517  5.2260413
+##  [1]  2.604928  1.988754  9.997240  3.519450 -2.101372  2.685431  7.707040
+##  [8]  7.275527  9.215878  8.444488
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.400252957  1.898352339 -1.809944334 -0.203074589  0.675518908
-##  [6] -0.969519606 -0.547355785 -0.007610332  0.102429108  0.460951334
+##  [1] -0.6418111 -0.7981957  1.2343560 -0.4097054 -1.8362688 -0.6213794
+##  [7]  0.6531038  0.5435860  1.0360466  0.8402680
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 21.3732
+## [1] 15.5245
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 21.3732
+## [1] 15.5245
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 21.3732
+## [1] 15.5245
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 19.23588
+## [1] 13.97205
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -6798,7 +6798,7 @@ GOPIT\strut
 Turnout x Republican Incumbent\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.05\columnwidth}\raggedright\strut
-DemVoteShare2\textasciitilde{}A\strut
+DemVoteShare2\_3MA\strut
 \end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright\strut
 Partisan composition measure = 3 election moving avg. of Dem Vote
 Share\strut
@@ -7284,10 +7284,13 @@ Gas price (dollars per thousand cubic feet for gas.)\strut
 
 \chapter{Exercise 4 (Problem Set 5)}\label{exercise-4-problem-set-5}
 
+\textbf{Important: Still under construction. I will make an announcement
+once it is ready.}
+
 \begin{itemize}
 \tightlist
 \item
-  Due date: July 8th (Tue) 11pm.
+  Due date: July 9th (Tue) 11pm.
 \item
   This is the last problem set!
 \end{itemize}
@@ -7319,7 +7322,7 @@ APSR)}\label{question-1-hansford-and-gomez-2010-apsr}
 \begin{itemize}
 \tightlist
 \item
-  This problem set is based on THOMAS G. HANSFORD and BRAD T. GOMEZ
+  This problem set is based on Thomas Hansford and Brad Gomez
   ``Estimating the Electoral Effects of Voter Turnout'' The American
   Political Science Review Vol. 104, No. 2 (May 2010), pp.~268-288
 
@@ -7330,42 +7333,66 @@ APSR)}\label{question-1-hansford-and-gomez-2010-apsr}
     \url{https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C}
   \end{itemize}
 \item
-  You will use the same dataset as I introduced in the chapter for
-  instrumental variable estimation.
+  Use the same dataset I introduced in the chapter for instrumental
+  variable estimation.
 \end{itemize}
 
 \section{Questions}\label{questions-2}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
-  What is the research question of this paper? Provide a summary up to
-  2-3 sentences.
+  What is the research question of this paper? Provide a summary in one
+  paragraph.
 \item
-  What is the difficulty of the analysis? Provide a summary up to 2-3
-  sentences.
+  What is the difficulty of the analysis? Provide a summary in one
+  paragraph.
 \item
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \setcounter{enumii}{2}
-  \tightlist
-  \item
-    What is the research design, i.e., how do authors overcome the
-    issue?
-  \end{enumerate}
+  What is the research design, i.e., how do authors overcome the issue?
+  Provide a summary in one paragraph.
 \item
-  Summarize four hypothesis the authors are trying to test.
-\item
-  Replicate the first three columns of Table A1 to the best of your
-  ability.
+  Replicate the first three columns of Table A1 (1st stage regression in
+  Table 1) to the best of your ability.
 \item
   Replicate Table 1 to the best of your ability.
 \item
-  Interpret the results from Table 1 in terms of those three hypotheses.
+  Briefly discuss the results from Table 1 in light of the first three
+  hypotheses (Partisan Effect Hypothesis, Two-Effects Hypothesis, and
+  Anti-Imcumbent Hypothesis).
 \end{enumerate}
 
-\textbf{Note} Do not worry about the standard errors in replication
-exercise.
+\textbf{Note}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Do not too much worry about the standard errors in the replication
+  exercise. Focus on the replication of the point estimates.
+\item
+  In Table A1, you do not have to replicate ``F test (all covariates)''
+  and ``R2''.\\
+\item
+  In Table 1, you do not have to replicate the last five rows (i.e., the
+  row ``F test, all covariates'' and below. )
+\item
+  Ignore a star \texttt{*}. Though this used to be convention, some
+  journals recently started to require authors NOT to put any
+  \emph{stars} in regression tables. For a more discussion on this
+  matter, see the followings:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Brodeur et al (2016) ``Star Wars: The Empirics Strike Back''
+    AEJ-Applied
+    \url{https://www.aeaweb.org/articles?id=10.1257/app.20150044}
+  \item
+    AER Style Guide for Accepted Articles
+    \url{https://www.aeaweb.org/journals/aer/submissions/accepted-articles/styleguide}
+  \end{itemize}
+\end{enumerate}
 
 \chapter{Panel Data}\label{panel-data}
 
@@ -7468,10 +7495,10 @@ exercise.
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    \(u_{it}\) is uncorrelated with \((X_{i1},\cdots, X_{iT})\), that is
-    \(E[u_{it}|X_{i1},\cdots, X_{iT} ] = 0\)
+    \(u_{it}\) is uncorrelated with \((x_{i1},\cdots, x_{iT})\), that is
+    \(E[u_{it}|x_{i1},\cdots, x_{iT} ] = 0\)
   \item
-    \((Y_{it}, X_{it})\) are independent across individual \(i\).
+    \((Y_{it}, x_{it})\) are independent across individual \(i\).
   \item
     No outliers
   \item
@@ -7531,7 +7558,7 @@ transformation)}\label{estimation-within-transformation}
 \item
   Define the new variable \(\tilde{Y}_{it}\) as \[
   \tilde{Y}_{it} = Y_{it} - \bar{Y}_i
-  \] where \(\bar{Y}_i = \sum_{t=1}^T Y_{it}\).
+  \] where \(\bar{Y}_i = \frac{1}{T} \sum_{t=1}^T Y_{it}\).
 \item
   Why is this useful? By applying the within transformation to the
   regression model, we can eliminate the unit fixed effect \(\alpha_i\)
@@ -8115,6 +8142,107 @@ Variables}\label{panel-data-with-instrumental-variables}
 ## ===================================================================================
 ## Note:                                                   *p<0.1; **p<0.05; ***p<0.01
 \end{verbatim}
+
+\section{\texorpdfstring{Some tips in \texttt{felm}
+command}{Some tips in felm command}}\label{some-tips-in-felm-command}
+
+\subsection{\texorpdfstring{How to report heteroskedasticity robust
+standard error in
+\texttt{stargazer}}{How to report heteroskedasticity robust standard error in stargazer}}\label{how-to-report-heteroskedasticity-robust-standard-error-in-stargazer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Run felm command without specifying cluster.}
+\NormalTok{result_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( }\KeywordTok{log}\NormalTok{(packs) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(rprice) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(rincome)  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+\CommentTok{# `result_1$rse` contains heteroskedasticity robust standard error.  Put this into `se` option in `stargazer`.}
+\NormalTok{stargazer}\OperatorTok{::}\KeywordTok{stargazer}\NormalTok{(result_}\DecValTok{1}\NormalTok{, }\DataTypeTok{type =} \StringTok{"text"}\NormalTok{, }
+                     \DataTypeTok{se =} \KeywordTok{list}\NormalTok{(result_}\DecValTok{1}\OperatorTok{$}\NormalTok{rse ) ) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ===============================================
+##                         Dependent variable:    
+##                     ---------------------------
+##                             log(packs)         
+## -----------------------------------------------
+## log(rprice)                  -1.334***         
+##                               (0.154)          
+##                                                
+## log(rincome)                  0.318**          
+##                               (0.154)          
+##                                                
+## Constant                     10.067***         
+##                               (0.502)          
+##                                                
+## -----------------------------------------------
+## Observations                    96             
+## R2                             0.552           
+## Adjusted R2                    0.542           
+## Residual Std. Error       0.165 (df = 93)      
+## ===============================================
+## Note:               *p<0.1; **p<0.05; ***p<0.01
+\end{verbatim}
+
+\subsection{\texorpdfstring{How to conduct F test after
+\texttt{felm}}{How to conduct F test after felm}}\label{how-to-conduct-f-test-after-felm}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Run felm command without specifying cluster.}
+\NormalTok{result_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( packs }\OperatorTok{~}\StringTok{ }\NormalTok{rprice }\OperatorTok{+}\StringTok{ }\NormalTok{rincome  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+
+
+\CommentTok{# The following tests H0: _b[rincome] = 0 & _b[rprice] = 0 }
+\NormalTok{ftest1 =}\StringTok{ }\KeywordTok{waldtest}\NormalTok{(result_}\DecValTok{1}\NormalTok{, }\OperatorTok{~}\StringTok{ }\NormalTok{rincome }\OperatorTok{|}\StringTok{ }\NormalTok{rprice  )}
+\NormalTok{ftest1 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            p                         chi2 
+##  0.0000000000000000008465984 83.2261209162241897274725488 
+##                          df1                          p.F 
+##  2.0000000000000000000000000  0.0000000000397094809714199 
+##                            F                          df2 
+## 41.6130604581120948637362744 47.0000000000000000000000000 
+## attr(,"formula")
+## ~rincome | rprice
+## <environment: 0x00000000223959e0>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ftest[5] corresponds to F-value}
+\NormalTok{fval1 =}\StringTok{ }\NormalTok{ftest1[}\DecValTok{5}\NormalTok{]}
+
+
+\CommentTok{# The following tests H0: _b[rincome] - 1 = 0 & _b[rprice] = 0 }
+\NormalTok{ftest2 =}\StringTok{ }\KeywordTok{waldtest}\NormalTok{(result_}\DecValTok{1}\NormalTok{, }\OperatorTok{~}\StringTok{ }\NormalTok{rincome }\OperatorTok{-}\StringTok{ }\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{rprice  )}
+\NormalTok{ftest2 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                              p                           chi2 
+##  0.000000000000000000001015456 96.677898116431165931317082141 
+##                            df1                            p.F 
+##  2.000000000000000000000000000  0.000000000003941263397955757 
+##                              F                            df2 
+## 48.338949058215582965658541070 47.000000000000000000000000000 
+## attr(,"formula")
+## ~rincome - 1 | rprice
+## <environment: 0x00000000225be3a8>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ftest[5] corresponds to F-value}
+\NormalTok{fval2 =}\StringTok{ }\NormalTok{ftest1[}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Introduction to Causal
 Inference}\label{introduction-to-causal-inference}

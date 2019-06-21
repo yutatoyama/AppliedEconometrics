@@ -264,6 +264,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#preliminary"><i class="fa fa-check"></i><b>17.1</b> Preliminary:</a></li>
 <li class="chapter" data-level="17.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-regression"><i class="fa fa-check"></i><b>17.2</b> Panel Data Regression</a></li>
 <li class="chapter" data-level="17.3" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#panel-data-with-instrumental-variables"><i class="fa fa-check"></i><b>17.3</b> Panel Data with Instrumental Variables</a></li>
+<li class="chapter" data-level="17.4" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#some-tips-in-felm-command"><i class="fa fa-check"></i><b>17.4</b> Some tips in <code>felm</code> command</a><ul>
+<li class="chapter" data-level="17.4.1" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-report-heteroskedasticity-robust-standard-error-in-stargazer"><i class="fa fa-check"></i><b>17.4.1</b> How to report heteroskedasticity robust standard error in <code>stargazer</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="panel-data-2-implementation-in-r.html"><a href="panel-data-2-implementation-in-r.html#how-to-conduct-f-test-after-felm"><i class="fa fa-check"></i><b>17.4.2</b> How to conduct F test after <code>felm</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html"><i class="fa fa-check"></i><b>18</b> Introduction to Causal Inference</a><ul>
 <li class="chapter" data-level="18.1" data-path="introduction-to-causal-inference.html"><a href="introduction-to-causal-inference.html#introduction-3"><i class="fa fa-check"></i><b>18.1</b> Introduction:</a></li>
@@ -300,8 +304,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="exercise-4-problem-set-5" class="section level1">
 <h1><span class="header-section-number">15</span> Exercise 4 (Problem Set 5)</h1>
+<p><strong>Important: Still under construction. I will make an announcement once it is ready.</strong></p>
 <ul>
-<li>Due date: July 8th (Tue) 11pm.</li>
+<li>Due date: July 9th (Tue) 11pm.</li>
 <li>This is the last problem set!</li>
 </ul>
 <div id="rules-2" class="section level2">
@@ -317,27 +322,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="question-1-hansford-and-gomez-2010-apsr" class="section level2">
 <h2><span class="header-section-number">15.2</span> Question 1: Hansford and Gomez (2010, APSR)</h2>
 <ul>
-<li>This problem set is based on THOMAS G. HANSFORD and BRAD T. GOMEZ “Estimating the Electoral Effects of Voter Turnout” The American Political Science Review Vol. 104, No. 2 (May 2010), pp. 268-288
+<li>This problem set is based on Thomas Hansford and Brad Gomez “Estimating the Electoral Effects of Voter Turnout” The American Political Science Review Vol. 104, No. 2 (May 2010), pp. 268-288
 <ul>
 <li>Link: <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C" class="uri">https://www.cambridge.org/core/journals/american-political-science-review/article/estimating-the-electoral-effects-of-voter-turnout/8A880C28E79BE770A5CA1A9BB6CF933C</a></li>
 </ul></li>
-<li>You will use the same dataset as I introduced in the chapter for instrumental variable estimation.</li>
+<li>Use the same dataset I introduced in the chapter for instrumental variable estimation.</li>
 </ul>
 </div>
 <div id="questions-2" class="section level2">
 <h2><span class="header-section-number">15.3</span> Questions</h2>
 <ol style="list-style-type: decimal">
-<li>What is the research question of this paper? Provide a summary up to 2-3 sentences.</li>
-<li>What is the difficulty of the analysis? Provide a summary up to 2-3 sentences.</li>
-<li><ol start="3" style="list-style-type: decimal">
-<li>What is the research design, i.e., how do authors overcome the issue?</li>
-</ol></li>
-<li>Summarize four hypothesis the authors are trying to test.</li>
-<li>Replicate the first three columns of Table A1 to the best of your ability.</li>
+<li>What is the research question of this paper? Provide a summary in one paragraph.</li>
+<li>What is the difficulty of the analysis? Provide a summary in one paragraph.</li>
+<li>What is the research design, i.e., how do authors overcome the issue? Provide a summary in one paragraph.</li>
+<li>Replicate the first three columns of Table A1 (1st stage regression in Table 1) to the best of your ability.</li>
 <li>Replicate Table 1 to the best of your ability.</li>
-<li>Interpret the results from Table 1 in terms of those three hypotheses.</li>
+<li>Briefly discuss the results from Table 1 in light of the first three hypotheses (Partisan Effect Hypothesis, Two-Effects Hypothesis, and Anti-Imcumbent Hypothesis).</li>
 </ol>
-<p><strong>Note</strong> Do not worry about the standard errors in replication exercise.</p>
+<p><strong>Note</strong></p>
+<ol style="list-style-type: decimal">
+<li>Do not too much worry about the standard errors in the replication exercise. Focus on the replication of the point estimates.</li>
+<li>In Table A1, you do not have to replicate “F test (all covariates)” and “R2”.<br />
+</li>
+<li>In Table 1, you do not have to replicate the last five rows (i.e., the row “F test, all covariates” and below. )</li>
+<li>Ignore a star <code>*</code>. Though this used to be convention, some journals recently started to require authors NOT to put any <em>stars</em> in regression tables. For a more discussion on this matter, see the followings:
+<ul>
+<li>Brodeur et al (2016) “Star Wars: The Empirics Strike Back” AEJ-Applied <a href="https://www.aeaweb.org/articles?id=10.1257/app.20150044" class="uri">https://www.aeaweb.org/articles?id=10.1257/app.20150044</a></li>
+<li>AER Style Guide for Accepted Articles <a href="https://www.aeaweb.org/journals/aer/submissions/accepted-articles/styleguide" class="uri">https://www.aeaweb.org/journals/aer/submissions/accepted-articles/styleguide</a></li>
+</ul></li>
+</ol>
 
 </div>
 </div>

@@ -57,8 +57,8 @@ $$
 y_{it} = \beta' x_{it} + \alpha_i + u_{it}
 $$
 - Assumptions:
-    1. $u_{it}$ is uncorrelated with $(X_{i1},\cdots, X_{iT})$, that is $E[u_{it}|X_{i1},\cdots, X_{iT} ] = 0$
-    2. $(Y_{it}, X_{it})$ are independent across individual $i$.
+    1. $u_{it}$ is uncorrelated with $(x_{i1},\cdots, x_{iT})$, that is $E[u_{it}|x_{i1},\cdots, x_{iT} ] = 0$
+    2. $(Y_{it}, x_{it})$ are independent across individual $i$.
     3. No outliers
     4. No Perfect multicollinarity
 - Let's discuss Assumptions 1, 2, and 4 in detail. 
@@ -84,7 +84,7 @@ where $experience_{it}$ measures how many years worker $i$ has worked before at 
 $$
 \tilde{Y}_{it} = Y_{it} - \bar{Y}_i
 $$
-where $\bar{Y}_i = \sum_{t=1}^T Y_{it}$. 
+where $\bar{Y}_i = \frac{1}{T} \sum_{t=1}^T Y_{it}$. 
 - Why is this useful? By applying the within transformation to the regression model, we can eliminate the unit fixed effect $\alpha_i$
 $$
 \tilde{Y}_{it} = \beta' \tilde{X}_{it} + \tilde{u}_{it}
