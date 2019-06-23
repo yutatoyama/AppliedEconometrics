@@ -2220,8 +2220,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  7.4877839 -3.0794848 10.0598761  7.4491501  4.5896173 12.8517069
-##  [7] -1.5307234 -0.2387279  2.7263075  0.2409325
+##  [1] -2.528516  1.072041  5.899567 -4.710427  3.844150  8.179575 -3.401586
+##  [8]  3.740605  2.809933  2.301030
 \end{verbatim}
 
 \begin{Shaded}
@@ -2231,8 +2231,8 @@ flow-}\label{programming-basics--control-flow-}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.6462069 -1.3434095  1.1304831  0.6389329  0.1005371  1.6561320
-##  [7] -1.0518071 -0.8085488 -0.2502888 -0.7182378
+##  [1] -1.0226936 -0.1561053  1.0057922 -1.5478398  0.5110908  1.5545484
+##  [7] -1.2328257  0.4861695  0.2621736  0.1396899
 \end{verbatim}
 
 \begin{itemize}
@@ -2387,7 +2387,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 28.20894
+## [1] 17.2629
 \end{verbatim}
 
 \begin{Shaded}
@@ -2397,7 +2397,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 28.20894
+## [1] 17.2629
 \end{verbatim}
 
 \begin{Shaded}
@@ -2407,7 +2407,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 28.20894
+## [1] 17.2629
 \end{verbatim}
 
 \begin{itemize}
@@ -2426,7 +2426,7 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 25.38805
+## [1] 15.53661
 \end{verbatim}
 
 \chapter{Data frame}\label{data-frame}
@@ -8189,7 +8189,7 @@ standard error in
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Run felm command without specifying cluster.}
-\NormalTok{result_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( packs }\OperatorTok{~}\StringTok{ }\NormalTok{rprice }\OperatorTok{+}\StringTok{ }\NormalTok{rincome  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{state, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
+\NormalTok{result_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{felm}\NormalTok{( packs }\OperatorTok{~}\StringTok{ }\NormalTok{rprice }\OperatorTok{+}\StringTok{ }\NormalTok{rincome  }\OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\DecValTok{0}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ Cigdata )}
 
 
 \CommentTok{# The following tests H0: _b[rincome] = 0 & _b[rprice] = 0 }
@@ -8199,15 +8199,15 @@ standard error in
 \end{Shaded}
 
 \begin{verbatim}
-##                            p                         chi2 
-##  0.0000000000000000008465984 83.2261209162241897274725488 
-##                          df1                          p.F 
-##  2.0000000000000000000000000  0.0000000000397094809714199 
-##                            F                          df2 
-## 41.6130604581120948637362744 47.0000000000000000000000000 
+##                               p                            chi2 
+##  0.0000000000000000000004180596 98.4528366392834328735261806287 
+##                             df1                             p.F 
+##  2.0000000000000000000000000000  0.0000000000000026217009797120 
+##                               F                             df2 
+## 49.2264183196417164367630903143 93.0000000000000000000000000000 
 ## attr(,"formula")
 ## ~rincome | rprice
-## <environment: 0x0000000021a4ebe0>
+## <environment: 0x0000000021a26868>
 \end{verbatim}
 
 \begin{Shaded}
@@ -8223,15 +8223,15 @@ standard error in
 \end{Shaded}
 
 \begin{verbatim}
-##                              p                           chi2 
-##  0.000000000000000000001015456 96.677898116431165931317082141 
-##                            df1                            p.F 
-##  2.000000000000000000000000000  0.000000000003941263397955757 
-##                              F                            df2 
-## 48.338949058215582965658541070 47.000000000000000000000000000 
+##                                  p                               chi2 
+##   0.000000000000000000000002048665 109.089707794080325697905209381133 
+##                                df1                                p.F 
+##   2.000000000000000000000000000000   0.000000000000000212154377173804 
+##                                  F                                df2 
+##  54.544853897040162848952604690567  93.000000000000000000000000000000 
 ## attr(,"formula")
 ## ~rincome - 1 | rprice
-## <environment: 0x0000000021c774f8>
+## <environment: 0x0000000021c48af8>
 \end{verbatim}
 
 \begin{Shaded}

@@ -168,7 +168,7 @@ stargazer::stargazer(result_1, type = "text",
 ```{r}
 
 # Run felm command without specifying cluster.
-result_1 <- felm( packs ~ rprice + rincome  | 0 | 0 | state, data = Cigdata )
+result_1 <- felm( packs ~ rprice + rincome  | 0 | 0 | 0, data = Cigdata )
 
 
 # The following tests H0: _b[rincome] = 0 & _b[rprice] = 0 

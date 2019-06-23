@@ -1436,11 +1436,11 @@ x</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_sample =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)
 test_sample</code></pre></div>
-<pre><code>##  [1]  5.85440807  7.10993346  5.83381647 11.23755962  3.06523513
-##  [6] -5.22753642  5.75764736 -1.20691201  5.08494528  0.05478508</code></pre>
+<pre><code>##  [1]  5.2648909  3.8382797  2.0030269 -1.7582945  9.5762556 10.3398409
+##  [7]  1.3681455  4.3405405  0.9537302  6.4195386</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">standardize</span>(<span class="dt">x =</span> test_sample)</code></pre></div>
-<pre><code>##  [1]  0.4436988  0.7092230  0.4393440  1.5821523 -0.1461682 -1.8999614
-##  [7]  0.4232354 -1.0496614  0.2809693 -0.7828319</code></pre>
+<pre><code>##  [1]  0.26934731 -0.10360772 -0.58339281 -1.56670468  1.39645548
+##  [6]  1.59607748 -0.74936808  0.02769692 -0.85770755  0.57120365</code></pre>
 <ul>
 <li>The same function can be written more simply.</li>
 </ul>
@@ -1497,16 +1497,16 @@ s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x - \bar{x})^2
   (<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.3585</code></pre>
+<pre><code>## [1] 14.63182</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] 22.3585</code></pre>
+<pre><code>## [1] 14.63182</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(test_sample)</code></pre></div>
-<pre><code>## [1] 22.3585</code></pre>
+<pre><code>## [1] 14.63182</code></pre>
 <ul>
 <li>We see the function is working as expected, and when returning the unbiased estimate it matches <code>R</code>’s built in function <code>var()</code>. Finally, let’s examine the biased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var</span>(test_sample, <span class="dt">unbiased =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] 20.12265</code></pre>
+<pre><code>## [1] 13.16864</code></pre>
 
 </div>
 </div>
