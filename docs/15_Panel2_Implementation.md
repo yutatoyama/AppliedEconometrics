@@ -467,7 +467,7 @@ ftest1
 ## 41.6130604581120948637362744 47.0000000000000000000000000 
 ## attr(,"formula")
 ## ~rincome | rprice
-## <environment: 0x000000002311bd38>
+## <environment: 0x0000000022fdbd80>
 ```
 
 ```r
@@ -489,7 +489,7 @@ ftest2
 ## 48.338949058215582965658541070 47.000000000000000000000000000 
 ## attr(,"formula")
 ## ~rincome - 1 | rprice
-## <environment: 0x000000001cfb9e00>
+## <environment: 0x000000001ce79748>
 ```
 
 ```r

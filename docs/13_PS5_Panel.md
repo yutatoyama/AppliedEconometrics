@@ -6,8 +6,6 @@ output:
 
 # Exercise 4 (Problem Set 5) 
 
-**Important: Still under construction. I will make an announcement once it is ready.**
-
 * Due date: July 9th (Tue) 11pm.
 * This is the last problem set!
 
